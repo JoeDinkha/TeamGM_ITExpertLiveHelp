@@ -2,5 +2,5 @@
 
 Reached out to Joe Goree
 Setup iMacs with software (Android Studio, Windows VM, Xamarin)
-Setup Slack with integrations (GitHub, Google Drive/Calendar)
+Setup Slack with integrations (GitHub, Google Drive/Calendar) - Tested
 Setting up meeting times for the semester
