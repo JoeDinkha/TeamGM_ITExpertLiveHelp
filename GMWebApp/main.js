@@ -21,4 +21,13 @@ $(document).ready( function() {
         type: 'compact'     // if this is set to 'select' then the select style toggle will be used
     });
 
+
+    function alertStatus() {
+        if($('#availabilityToggle').on(true)) {
+            alert("You are now online!!!!!");
+        }
+    }
+
+    alertStatus();
+
 });
