@@ -1,0 +1,104 @@
+
+/****** Globals ******/
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+div, p {
+    font-size: 18px;
+}
+
+div.container {
+    width: 100%;
+    margin: auto;
+    background: ghostwhite;
+}
+
+
+/****** Profile Page ******/
+header {
+    padding: 30px 0;
+    text-align: center;
+}
+
+header img {
+    width: 80px;
+    height: auto;
+}
+
+header h1 {
+    display: inline-block;
+    padding-left: 20px;
+    vertical-align: top;
+}
+
+div#profileBox {
+    height: 900px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+div#profile {
+    width: 20%;
+    height: 800px;
+    display: inline-block;
+    margin: 20px 0 0 0;
+    text-align: center;
+    background: white;
+    border-radius: 10px;
+    vertical-align: top;
+
+    border: 1px solid rgba(34, 85, 158, .3);
+    /*-webkit-box-shadow: 0 0 8px rgba(20,20,20,.2);*/
+    /*-moz-box-shadow: 0 0 8px rgba(20,20,20,.2);*/
+    /*box-shadow: 0 0 8px rgba(20,20,20,.2);*/
+}
+
+div#profile img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+div#otherBlock {
+    width: 50%;
+    height: 800px;
+    display: inline-block;
+}
+
+div#otherBlock div#calendar,
+div#otherBlock div#issue,
+div#otherBlock div#feedback {
+    padding: 40px;
+    margin: 20px;
+    background: white;
+    border-radius: 10px;
+
+    border: 1px solid rgba(34, 85, 158, .3);
+    /*-webkit-box-shadow: 0 0 8px rgba(20,20,20,.2);*/
+    /*-moz-box-shadow: 0 0 8px rgba(20,20,20,.2);*/
+    /*box-shadow: 0 0 8px rgba(20,20,20,.2);*/
+}
+
+div#otherBlock div#calendar {
+    height: 140px;
+}
+
+div#otherBlock div#feedback {
+    height: 240px;
+}
+
+footer {
+    width: 100%;
+    padding: 20px 0;
+    margin-top: 80px;
+    color: white;
+    text-align: center;
+    background: #22559E;
+
+    border: 1px solid rgba(20, 20, 20, .4);
+    /*-webkit-box-shadow: 0 0 8px black;*/
+    /*-moz-box-shadow: 0 0 8px black;*/
+    /*box-shadow: 0 0 8px black;*/
+}
