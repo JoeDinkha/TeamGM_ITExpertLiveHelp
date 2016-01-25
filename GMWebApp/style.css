@@ -60,9 +60,17 @@ div#profile {
 }
 
 div#profile img {
-    width: 100%;
+    width: 85%;
     height: auto;
+    margin-top: 17px;
     border-radius: 10px;
+    border: 1px solid rgba(20, 20, 20, .7);
+}
+
+div#profile h2#name {
+}
+
+div#profile div#availabilityToggle {
 }
 
 div#otherBlock {
@@ -86,11 +94,11 @@ div#otherBlock div#feedback {
 }
 
 div#otherBlock div#calendar {
-    height: 140px;
+    height: 250px;
 }
 
 div#otherBlock div#feedback {
-    height: 240px;
+    height: 300px;
 }
 
 footer {

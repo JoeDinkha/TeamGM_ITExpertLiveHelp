@@ -52,9 +52,4 @@
 .toggle-modern .toggle-blob:hover {
     background-image: -webkit-linear-gradient(#a1a9af, #a1a9af);
     background-image: linear-gradient(#a1a9af, #a1a9af);
-    -webkit-transition: all 0.5s ease-out;
-    -moz-transition: all 0.1s ease-out;
-    -ms-transition: all 0.1s ease-out;
-    -o-transition: all 0.1s ease-out;
-    transition: all 0.5s ease-out;
 }

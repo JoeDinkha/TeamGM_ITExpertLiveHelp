@@ -22,12 +22,15 @@ $(document).ready( function() {
     });
 
 
-    function alertStatus() {
-        if($('#availabilityToggle').on(true)) {
-            alert("You are now online!!!!!");
+    // Getting notified of changes, and the new state:
+    $('#availabilityToggle').on('toggle', function(e, active) {
+        if (active) {
+            alert('You are now online and available to help others.');
         }
-    }
 
-    alertStatus();
+        else {
+            alert('You are now offline and not available to help others.');
+        }
+    });
 
 });
