@@ -39,6 +39,10 @@ div#profileBox {
     text-align: center;
 }
 
+div#profileBox div#availabilityToggle {
+    display: inline-block;
+}
+
 div#profile {
     width: 20%;
     height: 800px;
