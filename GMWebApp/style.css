@@ -45,7 +45,7 @@ div#profileBox div#availabilityToggle {
 
 div#profile {
     width: 20%;
-    height: 800px;
+    height: 732px;
     display: inline-block;
     margin: 20px 0 0 0;
     text-align: center;
@@ -99,6 +99,18 @@ div#otherBlock div#calendar {
 
 div#otherBlock div#feedback {
     height: 300px;
+}
+
+header {
+    width: 100%;
+    color: white;
+    text-align: center;
+    background: #22559E;
+
+    border: 1px solid rgba(20, 20, 20, .4);
+    /*-webkit-box-shadow: 0 0 8px black;*/
+    /*-moz-box-shadow: 0 0 8px black;*/
+    /*box-shadow: 0 0 8px black;*/
 }
 
 footer {
