@@ -39,6 +39,10 @@ div#profileBox {
     text-align: center;
 }
 
+div#profileBox hr {
+    width: 85%;
+}
+
 div#profileBox div#availabilityToggle {
     display: inline-block;
 }
@@ -67,7 +71,14 @@ div#profile img {
     border: 1px solid rgba(20, 20, 20, .7);
 }
 
+div#rating img {
+    margin: 0 0 0 0;
+    border: none;
+}
+
 div#profile h2#name {
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 div#profile div#availabilityToggle {
@@ -101,6 +112,24 @@ div#otherBlock div#feedback {
     height: 300px;
 }
 
+div hr {
+    border: 1px solid rgba(34, 85, 158, .3);
+}
+
+div#skillform {
+    font-weight: 600;
+    font-size: small;
+    text-align: justify;
+    vertical-align: middle;
+    margin-left: 90px;
+}
+
+#submit input {
+    margin-left: 50px;
+    font-weight: bold;
+    font-size: medium;
+}
+
 header {
     width: 100%;
     color: white;
@@ -120,6 +149,7 @@ footer {
     color: white;
     text-align: center;
     background: #22559E;
+    font-weight: bold;
 
     border: 1px solid rgba(20, 20, 20, .4);
     /*-webkit-box-shadow: 0 0 8px black;*/
