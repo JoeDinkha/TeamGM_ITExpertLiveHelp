@@ -71,6 +71,10 @@ div#profile img {
     border: 1px solid rgba(20, 20, 20, .7);
 }
 
+div#rating h2 {
+    margin-bottom: 15px;
+}
+
 div#rating img {
     margin: 0 0 0 0;
     border: none;
@@ -119,13 +123,17 @@ div hr {
 div#skillform {
     font-weight: 600;
     font-size: small;
-    text-align: justify;
+    text-align: left;
     vertical-align: middle;
     margin-left: 90px;
 }
 
+div #skillset h2 {
+    margin-bottom: 15px;
+}
+
 #submit input {
-    margin-left: 50px;
+    margin-left: 65px;
     font-weight: bold;
     font-size: medium;
 }
