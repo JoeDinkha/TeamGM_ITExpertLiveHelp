@@ -126,8 +126,8 @@ form#skillForm input {
 }
 
 form#skillForm input[type=checkbox] {
-    width: 15px;
-    height: 15px;
+    width: 17px;
+    height: 17px;
     cursor: pointer;
 
     -webkit-appearance: none;
@@ -139,13 +139,15 @@ form#skillForm input[type=checkbox] {
     outline: none;
 }
 
-form#skillForm input[type=checkbox]:checked {
-    background: image("images/checkmark.png");
+form#skillForm input[type=checkbox]:checked,
+form#skillForm input[type=checkbox]::-ms-check {
+    background: ghostwhite url("images/checkmark.png") no-repeat center 10px;
+    background-size: 10px;
 }
 
 form#skillForm label {
     padding-left: 5px;
-    vertical-align: 9px;
+    vertical-align: 10px;
 }
 
 div#skillset h2 {
