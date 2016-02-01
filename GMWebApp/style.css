@@ -53,7 +53,6 @@ div#profileBox {
 
 div#profile {
     width: 20%;
-    height: 732px;
     display: inline-block;
     margin: 20px 0 0 0;
     text-align: center;
@@ -112,7 +111,7 @@ div#otherBlock div#calendar {
 }
 
 div#otherBlock div#feedback {
-    height: 300px;
+    height: 325px;
 }
 
 
