@@ -33,23 +33,30 @@
                 <h2 id="name">Team GM | Expert Profile</h2>
                 <div id="availabilityToggle" class="toggle-modern"></div>
                 <hr>
+
                 <div id="rating" >
                 <h2>Current Rating</h2>
-                    <img src="images/5StarRank.png" alt ="Rating" />
+                    <img src="images/5StarRank.png" width="1600" height="306" alt ="Star Rating" />
                 </div>
                 <hr>
+
                 <div id="skillset">
                     <h2>Skills</h2>
-                        <div id="skillform">
-                            <form action="" method="get">
-                                <input type="checkbox" name="outlook" value="Outlook" checked>  Microsoft Office<br><br>
-                                <input type="checkbox" name="ie" value="Internet Explorer" checked>  Internet Explorer<br><br>
-                                <input type="checkbox" name="skype" value="Skype for Business" checked>  Skype for Business<br><br>
-                                <div id="submit">
-                                <input type="submit" name="submit" value="Save">
-                                </div>
-                            </form>
-                        </div>
+                    <form id="skillForm" action="" method="get">
+                        <input type="checkbox" id="office" value="Microsoft Office" checked />
+                        <label for="office">Microsoft Office</label>
+                        <br/>
+
+                        <input type="checkbox" id="IE" value="Internet Explorer" checked />
+                        <label for="IE">Internet Explorer</label>
+                        <br/>
+
+                        <input type="checkbox" id="skype" value="Skype for Business" checked />
+                        <label for="skype">Skype for Business</label>
+                        <br/>
+
+                        <input type="submit" name="submit" value="Save" />
+                    </form>
                 </div>
             </div>
 
@@ -58,6 +65,7 @@
                 <div id="calendar"><b>Calendar Sync</b>
                 <hr>
                 </div>
+
                 <div id="feedback"><b>Feedback</b>
                 <hr>
                 </div>

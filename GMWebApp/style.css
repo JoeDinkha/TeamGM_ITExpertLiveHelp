@@ -9,6 +9,11 @@ div, p {
     font-size: 18px;
 }
 
+hr {
+    margin: 20px 10px;
+    background: rgba(34, 85, 158, .3);
+}
+
 div.container {
     width: 100%;
     margin: auto;
@@ -18,8 +23,14 @@ div.container {
 
 /****** Profile Page ******/
 header {
+    width: 100%;
+    margin-bottom: 40px;
     padding: 30px 0;
+
+    color: white;
     text-align: center;
+    background: #22559E;
+    border: 1px solid rgba(20, 20, 20, .4);
 }
 
 header img {
@@ -33,18 +44,11 @@ header h1 {
     vertical-align: top;
 }
 
+/*** Boxes ***/
 div#profileBox {
     height: 900px;
     margin: 0 auto;
     text-align: center;
-}
-
-div#profileBox hr {
-    width: 85%;
-}
-
-div#profileBox div#availabilityToggle {
-    display: inline-block;
 }
 
 div#profile {
@@ -53,14 +57,11 @@ div#profile {
     display: inline-block;
     margin: 20px 0 0 0;
     text-align: center;
+
     background: white;
     border-radius: 10px;
     vertical-align: top;
-
     border: 1px solid rgba(34, 85, 158, .3);
-    /*-webkit-box-shadow: 0 0 8px rgba(20,20,20,.2);*/
-    /*-moz-box-shadow: 0 0 8px rgba(20,20,20,.2);*/
-    /*box-shadow: 0 0 8px rgba(20,20,20,.2);*/
 }
 
 div#profile img {
@@ -71,6 +72,16 @@ div#profile img {
     border: 1px solid rgba(20, 20, 20, .7);
 }
 
+div#profile h2#name {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+div#profileBox div#availabilityToggle {
+    display: inline-block;
+}
+
+/*** Rating ***/
 div#rating h2 {
     margin-bottom: 15px;
 }
@@ -80,32 +91,20 @@ div#rating img {
     border: none;
 }
 
-div#profile h2#name {
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
-div#profile div#availabilityToggle {
-}
-
 div#otherBlock {
     width: 50%;
     height: 800px;
     display: inline-block;
 }
 
+/*** Calendar and Feedback ***/
 div#otherBlock div#calendar,
-div#otherBlock div#issue,
 div#otherBlock div#feedback {
     padding: 40px;
     margin: 20px;
     background: white;
     border-radius: 10px;
-
     border: 1px solid rgba(34, 85, 158, .3);
-    /*-webkit-box-shadow: 0 0 8px rgba(20,20,20,.2);*/
-    /*-moz-box-shadow: 0 0 8px rgba(20,20,20,.2);*/
-    /*box-shadow: 0 0 8px rgba(20,20,20,.2);*/
 }
 
 div#otherBlock div#calendar {
@@ -116,51 +115,68 @@ div#otherBlock div#feedback {
     height: 300px;
 }
 
-div hr {
-    border: 1px solid rgba(34, 85, 158, .3);
+
+/*** Skills ***/
+form#skillForm {
+    font-size: 16px;
+    text-align: center;
 }
 
-div#skillform {
-    font-weight: 600;
-    font-size: small;
-    text-align: left;
-    vertical-align: middle;
-    margin-left: 90px;
+form#skillForm input {
+    margin: 8px 0;
 }
 
-div #skillset h2 {
+form#skillForm input[type=checkbox] {
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    background: ghostwhite;
+    border: 1px solid #1A70BE;
+    outline: none;
+}
+
+form#skillForm input[type=checkbox]:checked {
+    background: image("images/checkmark.png");
+}
+
+form#skillForm label {
+    padding-left: 5px;
+    vertical-align: 9px;
+}
+
+div#skillset h2 {
     margin-bottom: 15px;
 }
 
-#submit input {
-    margin-left: 65px;
-    font-weight: bold;
-    font-size: medium;
-}
+form#skillForm input[type=submit] {
+    width: 40%;
+    height: 35px;
+    font-size: 16px;
+    cursor: pointer;
 
-header {
-    width: 100%;
-    color: white;
-    text-align: center;
-    background: #22559E;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
 
-    border: 1px solid rgba(20, 20, 20, .4);
-    /*-webkit-box-shadow: 0 0 8px black;*/
-    /*-moz-box-shadow: 0 0 8px black;*/
-    /*box-shadow: 0 0 8px black;*/
+    background: ghostwhite;
+    border-radius: 10px;
+    border: 1px solid #1A70BE;
+    outline: none;
 }
 
 footer {
     width: 100%;
     padding: 20px 0;
-    margin-top: 80px;
+    margin-top: 40px;
+
     color: white;
     text-align: center;
     background: #22559E;
     font-weight: bold;
-
     border: 1px solid rgba(20, 20, 20, .4);
-    /*-webkit-box-shadow: 0 0 8px black;*/
-    /*-moz-box-shadow: 0 0 8px black;*/
-    /*box-shadow: 0 0 8px black;*/
 }
