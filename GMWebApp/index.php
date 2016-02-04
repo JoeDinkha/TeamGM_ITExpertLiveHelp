@@ -44,29 +44,29 @@
                 <hr/>
 
                 <h3>Skills</h3>
-
                 <form id="skillForm" action="#" method="get">
-                    <input type="checkbox" id="word" value="Microsoft Word" checked="checked" />
+                    <input class="Checkbox" type="checkbox" id="word" value="Microsoft Word" />
                     <label for="word">Microsoft Word</label>
                     <br/>
 
-                    <input type="checkbox" id="outlook" value="Microsoft Outlook" />
+                    <input class="Checkbox" type="checkbox" id="outlook" value="Microsoft Outlook" />
                     <label for="outlook">Microsoft Outlook</label>
                     <br/>
 
-                    <input type="checkbox" id="powerpoint" value="Microsoft PowerPoint" />
+                    <input class="Checkbox" type="checkbox" id="powerpoint" value="Microsoft PowerPoint" />
                     <label for="powerpoint">Microsoft PowerPoint</label>
                     <br/>
 
-                    <input type="checkbox" id="IE" value="Internet Explorer" />
+                    <input class="Checkbox" type="checkbox" id="IE" value="Internet Explorer" />
                     <label for="IE">Internet Explorer</label>
                     <br/>
 
-                    <input type="checkbox" id="skype" value="Skype for Business" />
+                    <input class="Checkbox" type="checkbox" id="skype" value="Skype for Business" />
                     <label for="skype">Skype for Business</label>
                     <br/>
 
                     <input type="submit" id="saveButton" value="Save" />
+
                 </form>
             </div>
 
@@ -90,7 +90,7 @@
                             <br/>
                             <h4>Joe Dinkha</h4>
                             <span class="date">(Jan. 27, 2016)</span>
-                            <p>Thanks for helping me with my browser display issues!</p>
+                            <p>Thanks for helping me with my browser display issues! That was fast.</p>
                         </div>
 
                         <div class="bestReview">
@@ -103,6 +103,19 @@
                             <span class="date">(Jan. 15, 2016)</span>
                             <p>I appreciate you helping me set up my Outlook signature settings.</p>
                         </div>
+
+                        <div class="bestReview">
+                            <img src="images/star.png" width="500" height="472" alt="Star" />
+                            <img src="images/star.png" width="500" height="472" alt="Star" />
+                            <img src="images/star.png" width="500" height="472" alt="Star" />
+                            <img src="images/star.png" width="500" height="472" alt="Star" />
+                            <br/>
+                            <h4>Zack Keith</h4>
+                            <span class="date">(Jan. 15, 2016)</span>
+                            <p>Quick and simple help towards fixing my Skype issues! Thanks again.</p>
+                        </div>
+
+                        <button id="showMoreFeedback">Show More Feedback</button>
                     </div>
 
 
@@ -131,13 +144,13 @@
                         <div class="worstReview">
                             <img src="images/star.png" width="500" height="472" alt="Star" />
                             <br/>
-                            <h4>Zack Keith</h4>
+                            <h4>Dr. D</h4>
                             <span class="date">(Jan. 30, 2016)</span>
-                            <p>I'm still confused on how to manage plugins on Internet Explorer.</p>
+                            <p>You were significantly late on responding in the Skype call.</p>
                         </div>
+                        <button id="showMoreFeedback">Show More Feedback</button>
                     </div>
 
-                    <button id="showMoreFeedback">Show More Feedback</button>
                 </div>
 
             </div>
