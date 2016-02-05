@@ -20,8 +20,15 @@ $conn = sqlsrv_connect($serverName, $connectionInfo);
 $username = $_POST['username'];
 $value = $_POST['availability'];
 
-//update database with given username and availability
-$query_string = "UPDATE dbo.Mocktable1 SET Availability='".$value."' WHERE Username='".$username."'";
+if (isset($value)){
+    //update database with given username and availability
+    $query_string = "UPDATE dbo.Mocktable1 SET Availability='".$value."' WHERE Username='".$username."'";
+
+    //run the query and store results for future use
+    $results = sqlsrv_query($conn,$query_string);
+}
+
+
 
 $word = $_POST['SkillWord'];
 $outlook = $_POST['SkillOutlook'];
@@ -35,8 +42,7 @@ SET SkillWord=".$word.", SkillOutlook=".$outlook.", SkillPowerPoint=".$powerpoin
 , SkillExplorer = ".$explorer.", SkillSkype=".$business."
 WHERE Username='".$username."'";
 
-//run the query and store results for future use
-$results = sqlsrv_query($conn,$query_string);
+
 $results = sqlsrv_query($conn,$query_string2);
 
 ?>
