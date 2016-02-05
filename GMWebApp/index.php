@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="style.css" type="text/css" />
     <link rel="stylesheet" href="jquery-toggles-master/css/toggles.css">
     <link rel="stylesheet" href="jquery-toggles-master/css/themes/toggles-modern.css">
+    <link rel="shortcut icon" href="?\favicon.ico">
 
     <!-- Script Imports -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
