@@ -7,6 +7,8 @@
  * Author: Jacob Price
  */
 
+session_start();
+
 //server details
 $serverName = "35.9.22.109, 1433";
 
@@ -45,10 +47,14 @@ SET SkillWord=".$word.", SkillOutlook=".$outlook.", SkillPowerPoint=".$powerpoin
 , SkillExplorer = ".$explorer.", SkillSkype=".$business."
 WHERE Username='".$username."'";
 
+//run the query and store results for future use
+$results2 = sqlsrv_query($conn,$query_string2);
 
-$results = sqlsrv_query($conn,$query_string2);
 
-
+// Retrieve all data on specific user from database
 $query_string3 = "SELECT * FROM dbo.Mocktable1 WHERE Username='" . $username . "'";
+
+//run the query and store results for future use
+$results3 = sqlsrv_query($conn,$query_string3);
 
 ?>

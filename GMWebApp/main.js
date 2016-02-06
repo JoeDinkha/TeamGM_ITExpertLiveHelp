@@ -64,6 +64,10 @@ $(document).ready( function($) {
             });
             //**********************END******************************
 
+            //availabilityToggle.toggles({
+            //   on: true
+            //});
+
 
             //alert( 'You are now online and available to help others.' );
 
@@ -84,13 +88,28 @@ $(document).ready( function($) {
             });
             //**********************END******************************
 
+            //availabilityToggle.toggles({
+            //    on: false
+            //});
+
             //alert( 'You are now offline and not available to help others.' );
 
         }
     });
 
 
+    console.log( $('div#profilePanel').height );
+    console.log( $('div#calendarFeedbackBox').height() );
 
+    var newHeight = $('div#calendarFeedbackBox').height;
+    $('div#profilePanel').height( newHeight );
+
+
+    //$.ajax({
+    //    type: "GET",
+    //    url: "server.php",
+    //    data: { username: "priceja7", availability: "0" }
+    //});
 
 
 
