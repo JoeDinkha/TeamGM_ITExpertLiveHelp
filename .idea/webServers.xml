@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="b7d36868-c675-431d-bbb3-e0afbb4220d6" name="TeamGM" url="http://35.9.22.109/">
+        <fileTransfer host="35.9.22.109" port="52743" username="sanocki1">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
