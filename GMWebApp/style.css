@@ -90,8 +90,12 @@ div#profilePanel {
     display: inline-block;
     margin: 20px 0 0 0;
     padding: 10px;
-
     text-align: center;
+
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+
     background: white;
     border-radius: 10px;
     vertical-align: top;
@@ -213,54 +217,64 @@ div#calendarFeedbackBox div#calendar {
 
 /************ Feedback ************/
 div#calendarFeedbackBox div#feedbackBox {
+}
+
+div#calendarFeedbackBox div#bestReviews,
+div#calendarFeedbackBox div#worstReviews {
+    width: 48%;
+    display: inline-block;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    text-align: left;
+
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+
     background: white;
     border-radius: 10px;
     border: 1px solid rgba(34, 85, 158, .3);
-}
-
-div#calendarFeedbackBox div#feedbackBox div#bestReviews,
-div#calendarFeedbackBox div#feedbackBox div#worstReviews {
-    width: 45%;
-    display: inline-block;
-    padding: 10px 15px;
-    text-align: left;
     vertical-align: top;
 }
 
+div#calendarFeedbackBox div#bestReviews {
+    margin-right: 20px;
+}
+
 /* Feedback Headings */
-div#calendarFeedbackBox div#feedbackBox div#bestReviews h3,
-div#calendarFeedbackBox div#feedbackBox div#worstReviews h3 {
+div#calendarFeedbackBox div#bestReviews h3,
+div#calendarFeedbackBox div#worstReviews h3 {
     margin-bottom: 25px;
     text-align: center;
     /*text-transform: uppercase;*/
 }
 
 /* Stars */
-div#calendarFeedbackBox div#feedbackBox div#bestReviews div.bestReview img,
-div#calendarFeedbackBox div#feedbackBox div#worstReviews div.worstReview img {
+div#calendarFeedbackBox div#bestReviews div.bestReview img,
+div#calendarFeedbackBox div#worstReviews div.worstReview img {
     width: 40px;
     height: auto;
     margin-bottom: 5px;
 }
 
 /* Names */
-div#calendarFeedbackBox div#feedbackBox div#bestReviews div.bestReview h4,
-div#calendarFeedbackBox div#feedbackBox div#worstReviews div.worstReview h4 {
+div#calendarFeedbackBox div#bestReviews div.bestReview h4,
+div#calendarFeedbackBox div#worstReviews div.worstReview h4 {
     display: inline-block;
     margin: 0;
 }
 
 /* Date */
-div#calendarFeedbackBox div#feedbackBox div#bestReviews div.bestReview span.date,
-div#calendarFeedbackBox div#feedbackBox div#worstReviews div.worstReview span.date {
+div#calendarFeedbackBox div#bestReviews div.bestReview span.date,
+div#calendarFeedbackBox div#worstReviews div.worstReview span.date {
     display: inline-block;
     padding-left: 7px;
     font-size: 14px;
 }
 
 /* Comment */
-div#calendarFeedbackBox div#feedbackBox div#bestReviews div.bestReview p,
-div#calendarFeedbackBox div#feedbackBox div#worstReviews div.worstReview p {
+div#calendarFeedbackBox div#bestReviews div.bestReview p,
+div#calendarFeedbackBox div#worstReviews div.worstReview p {
     margin: 10px 0 25px 0;
     font-style: italic;
 }

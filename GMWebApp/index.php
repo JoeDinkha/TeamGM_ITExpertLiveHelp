@@ -82,7 +82,7 @@
                 </div>
 
 
-                <div id="feedbackBox">
+
                     <div id="bestReviews">
                         <h3>Best Feedback</h3>
 
@@ -155,8 +155,6 @@
                         </div>
                         <button id="showMoreFeedback">Show More Feedback</button>
                     </div>
-
-                </div>
 
             </div>
         </div>
