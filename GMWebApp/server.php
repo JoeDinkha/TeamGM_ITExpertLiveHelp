@@ -18,11 +18,14 @@ $conn = sqlsrv_connect($serverName, $connectionInfo);
 
 //retrieve username and availability
 $username = $_POST['username'];
-$value = $_POST['availability'];
+$username = stripslashes($username);
 
-if (isset($value)){
+$availability = $_POST['availability'];
+$availability = stripslashes($availability);
+
+if (isset($availability)){
     //update database with given username and availability
-    $query_string = "UPDATE dbo.Mocktable1 SET Availability='".$value."' WHERE Username='".$username."'";
+    $query_string = "UPDATE dbo.Mocktable1 SET Availability='".$availability."' WHERE Username='".$username."'";
 
     //run the query and store results for future use
     $results = sqlsrv_query($conn,$query_string);
@@ -44,5 +47,8 @@ WHERE Username='".$username."'";
 
 
 $results = sqlsrv_query($conn,$query_string2);
+
+
+$query_string3 = "SELECT * FROM dbo.Mocktable1 WHERE Username='" . $username . "'";
 
 ?>

@@ -2,7 +2,7 @@ $(document).ready( function($) {
 
     var availabilityToggle = $('#availabilityToggle');
 
-    $('#saveButton').click (function (event) {
+    $('#saveButton').click (function () {
         var inputs = document.getElementsByTagName('input');
         var columns = [];
         for (var i = 0; i < inputs.length-1; i += 1) {
@@ -88,6 +88,9 @@ $(document).ready( function($) {
 
         }
     });
+
+
+
 
 
 
