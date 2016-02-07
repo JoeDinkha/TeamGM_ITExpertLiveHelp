@@ -50,7 +50,6 @@ $(document).ready( function($) {
     availabilityToggle.on( 'toggle', function(e, active) {
         if( active ) {
 
-
             //************ AUTHOR: Jacob Price  *********************
             //Ajax call to post to server.php
             //This function posts the data with the specified username as available
@@ -98,11 +97,29 @@ $(document).ready( function($) {
     });
 
 
-    console.log( $('div#profilePanel').height );
-    console.log( $('div#calendarFeedbackBox').height() );
+    //// Match height of Profile Panel with Feedback boxes ////
+    var newHeight;
 
-    var newHeight = $('div#calendarFeedbackBox').height;
-    $('div#profilePanel').height( newHeight );
+    // Match height (Desktop)
+    if( $(window).width() > 1210 ) {
+        newHeight = $('div#calendarFeedbackBox').innerHeight();
+        $('div#profilePanel').innerHeight( newHeight );
+    }
+
+    // Match height on window resize as well
+    $(window).resize( function() {
+        newHeight = $('div#calendarFeedbackBox').innerHeight();
+
+        // Match height (Desktop)
+        if( $(window).width() > 1210 ) {
+            $('div#profilePanel').innerHeight( newHeight );
+        }
+
+        // Set height back to auto (Mobile)
+        else {
+            $('div#profilePanel').height( 'auto' );
+        }
+    });
 
 
     //$.ajax({
