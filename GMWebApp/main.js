@@ -1,8 +1,10 @@
 $(document).ready( function($) {
 
     var availabilityToggle = $('#availabilityToggle');
+    var username = $('h2')[0].innerHTML;
 
-    $('#saveButton').click (function () {
+
+    $('#saveButton').click (function (event) {
         var inputs = document.getElementsByTagName('input');
         var columns = [];
         for (var i = 0; i < inputs.length-1; i += 1) {
@@ -13,11 +15,12 @@ $(document).ready( function($) {
                 columns.push("0");
             }
         }
+        console.log(username);
         // Post skills to the user profile
         $.ajax({
             type: "POST",
             url: "server.php",
-            data: { username: "priceja7", SkillWord: columns[0], SkillOutlook: columns[1], SkillPowerPoint: columns[2], SkillExplorer: columns[3], SkillSkype: columns[4] }
+            data: { username: username, SkillWord: columns[0], SkillOutlook: columns[1], SkillPowerPoint: columns[2], SkillExplorer: columns[3], SkillSkype: columns[4] }
         });
 
         alert("Your skills have been updated!")
@@ -50,6 +53,7 @@ $(document).ready( function($) {
     availabilityToggle.on( 'toggle', function(e, active) {
         if( active ) {
 
+
             //************ AUTHOR: Jacob Price  *********************
             //Ajax call to post to server.php
             //This function posts the data with the specified username as available
@@ -59,13 +63,9 @@ $(document).ready( function($) {
             $.ajax({
                 type: "POST",
                 url: "server.php",
-                data: { username: "priceja7", availability: "1" }
+                data: { username: username, availability: "1" }
             });
             //**********************END******************************
-
-            //availabilityToggle.toggles({
-            //   on: true
-            //});
 
 
             //alert( 'You are now online and available to help others.' );
@@ -87,46 +87,10 @@ $(document).ready( function($) {
             });
             //**********************END******************************
 
-            //availabilityToggle.toggles({
-            //    on: false
-            //});
-
             //alert( 'You are now offline and not available to help others.' );
 
         }
     });
-
-
-    //// Match height of Profile Panel with Feedback boxes ////
-    var newHeight;
-
-    // Match height (Desktop)
-    if( $(window).width() > 1210 ) {
-        newHeight = $('div#calendarFeedbackBox').innerHeight();
-        $('div#profilePanel').innerHeight( newHeight );
-    }
-
-    // Match height on window resize as well
-    $(window).resize( function() {
-        newHeight = $('div#calendarFeedbackBox').innerHeight();
-
-        // Match height (Desktop)
-        if( $(window).width() > 1210 ) {
-            $('div#profilePanel').innerHeight( newHeight );
-        }
-
-        // Set height back to auto (Mobile)
-        else {
-            $('div#profilePanel').height( 'auto' );
-        }
-    });
-
-
-    //$.ajax({
-    //    type: "GET",
-    //    url: "server.php",
-    //    data: { username: "priceja7", availability: "0" }
-    //});
 
 
 
