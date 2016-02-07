@@ -96,6 +96,18 @@ else{
 
 
                 <div id="availabilityToggle" class="toggle-modern"></div>
+
+                <script type="text/javascript">
+
+                    //toggle availability if the user is available in the database
+                    $(document).ready( function($) {
+                        var availability = "<?php echo $available; ?>";
+                        if (availability == "1"){
+                            $('.toggle-modern').click()
+                        }
+
+                    });
+                </script>
                 <hr/>
 
                 <h3>Skills</h3>

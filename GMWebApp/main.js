@@ -93,7 +93,7 @@ $(document).ready( function($) {
             $.ajax({
                 type: "POST",
                 url: "server.php",
-                data: { username: "priceja7", availability: "0" }
+                data: { username: username, availability: "0" }
             });
             //**********************END******************************
 
