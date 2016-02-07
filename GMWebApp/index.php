@@ -1,10 +1,48 @@
 <?php
+
+/**
+ * Author: Jacob Price
+ */
 session_start();
 if(!isset($_SESSION['user'])){
     header('Location: login.php');
 }
 else{
     $username = $_SESSION['user'];
+
+    //server details
+    $serverName = "35.9.22.109, 1433";
+
+//more server details
+    $connectionInfo = array("Database" => "db", "UID" => "priceja7", "PWD" => "teamgm16");
+
+//establish connection to databse
+    $conn = sqlsrv_connect($serverName, $connectionInfo);
+
+    //Retrieving current values in the database given a user
+    if (isset($username)){
+        //update database with given username and availability
+        $query_string = "SELECT Availability,SkillWord,SkillOutlook,SkillPowerPoint,SkillExplorer,SkillSkype,AverageRating FROM dbo.MockTable1 WHERE Username='".$username."'";
+
+
+
+        //run the query and store results for future use
+        $results = sqlsrv_query($conn,$query_string);
+        $results = sqlsrv_fetch_array($results,SQLSRV_FETCH_ASSOC);
+
+        //grabbing all of these variables for the user and displaying them throughout the page
+        $available = $results['Availability'];
+        $word = $results['SkillWord'];
+        $outlook = $results['SkillOutlook'];
+        $powerpoint = $results['SkillPowerPoint'];
+        $explorer = $results['SkillExplorer'];
+        $skype = $results['SkillSkype'];
+        $avg_rating = $results['AverageRating'];
+
+    }
+
+
+
 }
 
 ?>
@@ -41,38 +79,44 @@ else{
             <div id="profilePanel">
                 <img id="profilePic" src="images/team-photo.jpeg" width="4256" height="2832" alt="Profile Picture" />
 
-                <h2 id="name"><?php echo $username ?></h2>
+                <h2 id="name"><?php echo $username; ?></h2>
 
                 <div id="rating">
-                    <img src="images/star.png" width="500" height="472" alt="Star" />
-                    <img src="images/star.png" width="500" height="472" alt="Star" />
-                    <img src="images/star.png" width="500" height="472" alt="Star" />
-                    <img src="images/star.png" width="500" height="472" alt="Star" />
-                    <img src="images/star.png" width="500" height="472" alt="Star" />
+                    <?php
+
+                    /***Author: Jacob Price***/
+                    //code for displaying the amount of average stars you have, rounded to the nearest integer
+                    for ($x = 0; $x < $avg_rating; $x++) {
+                        echo "<img src=\"images/star.png\" width=\"500\" height=\"472\" alt=\"Star\" />";
+                    }
+                    ?>
+
                 </div>
+
+
 
                 <div id="availabilityToggle" class="toggle-modern"></div>
                 <hr/>
 
                 <h3>Skills</h3>
-                <form id="skillForm" action="#" method="get">
-                    <input class="Checkbox" type="checkbox" id="word" value="Microsoft Word" />
+                <form id="skillForm" action="#">
+                    <input class="Checkbox" type="checkbox" id="word" value="Microsoft Word" name="<?php echo $word; ?>"/>
                     <label for="word">Microsoft Word</label>
                     <br/>
 
-                    <input class="Checkbox" type="checkbox" id="outlook" value="Microsoft Outlook" />
+                    <input class="Checkbox" type="checkbox" id="outlook" value="Microsoft Outlook" name="<?php echo $outlook; ?>"/>
                     <label for="outlook">Microsoft Outlook</label>
                     <br/>
 
-                    <input class="Checkbox" type="checkbox" id="powerpoint" value="Microsoft PowerPoint" />
+                    <input class="Checkbox" type="checkbox" id="powerpoint" value="Microsoft PowerPoint" name="<?php echo $powerpoint; ?>"/>
                     <label for="powerpoint">Microsoft PowerPoint</label>
                     <br/>
 
-                    <input class="Checkbox" type="checkbox" id="IE" value="Internet Explorer" />
+                    <input class="Checkbox" type="checkbox" id="IE" value="Internet Explorer" name="<?php echo $explorer; ?>"/>
                     <label for="IE">Internet Explorer</label>
                     <br/>
 
-                    <input class="Checkbox" type="checkbox" id="skype" value="Skype for Business" />
+                    <input class="Checkbox" type="checkbox" id="skype" value="Skype for Business" name="<?php echo $skype; ?>"/>
                     <label for="skype">Skype for Business</label>
                     <br/>
 

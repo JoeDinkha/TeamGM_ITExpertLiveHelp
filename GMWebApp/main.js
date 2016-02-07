@@ -3,6 +3,16 @@ $(document).ready( function($) {
     var availabilityToggle = $('#availabilityToggle');
     var username = $('h2')[0].innerHTML;
 
+    var global_inputs = document.getElementsByTagName('input');
+
+    for (var x=0; x < global_inputs.length-1; x += 1){
+        console.log(global_inputs[x].checked);
+        if (global_inputs[x].name == "1"){
+            global_inputs[x].checked = true;
+        }
+    }
+
+
 
     $('#saveButton').click (function (event) {
         var inputs = document.getElementsByTagName('input');
