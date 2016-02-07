@@ -36,7 +36,12 @@
             </form>
 
             <form action="index.php" method="post">
+                <?php
+                    session_start();
+                    $_SESSION['user'] = "Team GM Developer";
+                ?>
                 <input id="developerMode" type="submit" value="Developer Mode" />
+
             </form>
         </div> <!-- end div.content -->
 
