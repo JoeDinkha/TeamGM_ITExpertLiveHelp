@@ -82,7 +82,7 @@ else{
                     /***Author: Jacob Price***/
                     //code for displaying the amount of average stars you have, rounded to the nearest integer
                     for ($x = 0; $x < $avg_rating; $x++) {
-                        echo "<img src=\"images/star.png\" width=\"500\" height=\"472\" alt=\"Star\" />";
+                        echo "<img src='images/star.png' width='500' height='472' alt='Star' />";
                     }
                     ?>
                 </div>
@@ -131,7 +131,8 @@ else{
 
             <div id="calendarFeedbackBox">
                 <div id="calendar">
-                    <h3>Calendar Sync</h3>
+                    <h3>Calendar</h3>
+                    <button>Add Office Hours</button>
                 </div>
 
 
@@ -203,7 +204,7 @@ else{
                         <br/>
                         <h4>Dr. D</h4>
                         <span class="date">(Jan. 30, 2016)</span>
-                        <p>You were significantly late on responding in the Skype call.</p>
+                        <p>You were significantly late in responding to the Skype call. My problem is unresolved.</p>
                     </div>
                     <button id="showMoreFeedback">Show More Feedback</button>
                 </div>
