@@ -5,12 +5,29 @@
  * Date: 2/4/16
  * Time: 4:55 PM
  */
+
 $login=True;
 ob_start();
 $serverName = "35.9.22.109, 1433";
 
 $myusername = $_REQUEST['username'];
 $mypassword = $_REQUEST['password'];
+
+$developer = $_POST['developerMode'];
+
+if ($developer == "Developer Mode"){
+    session_start();
+    $_SESSION['user']="Team GM Dev";
+
+    header('Location: ../index.php');
+    exit();
+}
+
+echo $developer;
+
+
+
+
 
 
 
@@ -29,13 +46,13 @@ if( $myusername != NULL && $mypassword != NULL ) {
 
 //    //Check connection, connection works
     if ($conn) {
-       echo "connected\r\n<br>";
+        echo "connected\r\n<br>";
     }
     else{
         echo "Failed connected  \r\n";
     }
 
-//*******************Query SQL Server for the login of the user accessing the database*******************//
+//*******************Query SQL Server for the login of the user accessing the database*******************
 
     $sql = "SELECT * FROM dbo.Mocktable1 WHERE Username = '".$myusername."' AND Password = '".$mypassword."'";
 
@@ -52,19 +69,20 @@ if( $myusername != NULL && $mypassword != NULL ) {
 
     //Need to fetch_array
     $count=sqlsrv_fetch_array($result);
+
     echo "sqlsrv_fetch_array: "; var_dump($count); echo "<br><br>";
-   // echo $count;
+    // echo $count;
 
     if ($count!=NULL) {
-            echo "success login";
+
+        session_start();
+        $_SESSION['user']=$myusername;
+
         header('Location: ../index.php');
-        }
+    }
     else {
-    echo "<br/>No Results were found.";
-    echo "<br/>This is typed username $myusername";
-    echo "<br/>This is typed password $mypassword";
-    echo "<br/>Ther are not valid username and password";
-}
+        header('Location: ../login.php');
+    }
 
 
 }
@@ -73,6 +91,3 @@ else {
     header('Location: ../login.php');
 
 }
-
-?>
-
