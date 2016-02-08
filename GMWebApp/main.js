@@ -1,41 +1,7 @@
 $(document).ready( function($) {
 
+    //// Initialize availability toggle ////
     var availabilityToggle = $('#availabilityToggle');
-    var username = $('h2')[0].innerHTML;
-
-    var global_inputs = document.getElementsByTagName('input');
-
-    for (var x=0; x < global_inputs.length-1; x += 1){
-        console.log(global_inputs[x].checked);
-        if (global_inputs[x].name == "1"){
-            global_inputs[x].checked = true;
-        }
-    }
-
-
-
-    $('#saveButton').click (function (event) {
-        var inputs = document.getElementsByTagName('input');
-        var columns = [];
-        for (var i = 0; i < inputs.length-1; i += 1) {
-            if(inputs[i].checked) {
-                columns.push("1");
-            }
-            else {
-                columns.push("0");
-            }
-        }
-        console.log(username);
-        // Post skills to the user profile
-        $.ajax({
-            type: "POST",
-            url: "server.php",
-            data: { username: username, SkillWord: columns[0], SkillOutlook: columns[1], SkillPowerPoint: columns[2], SkillExplorer: columns[3], SkillSkype: columns[4] }
-        });
-
-        alert("Your skills have been updated!")
-    });
-
 
     availabilityToggle.toggles({
         drag: true,         // allow dragging the toggle between positions
@@ -59,10 +25,50 @@ $(document).ready( function($) {
     });
 
 
-    // Notification of changes and new state
+    var username = $('h2')[0].innerHTML;
+
+    //// Update skill checkboxes ////
+    var global_inputs = $('input');
+
+    for (var x=0; x < global_inputs.length-1; x++){
+        console.log(global_inputs[x].checked);
+
+        if (global_inputs[x].name == "1"){
+            global_inputs[x].checked = true;
+        }
+    }
+
+
+    //// Update skills and push to database ////
+    $('input#saveSkills').click (function (event) {
+        var inputs = $('input');
+        var columns = [];
+
+        for (var i = 0; i < inputs.length-1; i++) {
+            if(inputs[i].checked) {
+                columns.push("1");
+            }
+            else {
+                columns.push("0");
+            }
+        }
+        console.log(username);
+
+        // Post skills to the user profile
+        $.ajax({
+            type: "POST",
+            url: "server.php",
+            data: { username: username, SkillWord: columns[0], SkillOutlook: columns[1],
+                    SkillPowerPoint: columns[2], SkillExplorer: columns[3], SkillSkype: columns[4] }
+        });
+
+        alert("Your skills have been updated!")
+    });
+
+
+    //// Notification of changes and new state ////
     availabilityToggle.on( 'toggle', function(e, active) {
         if( active ) {
-
 
             //************ AUTHOR: Jacob Price  *********************
             //Ajax call to post to server.php
@@ -77,9 +83,7 @@ $(document).ready( function($) {
             });
             //**********************END******************************
 
-
             //alert( 'You are now online and available to help others.' );
-
         }
 
         else {
@@ -98,10 +102,7 @@ $(document).ready( function($) {
             //**********************END******************************
 
             //alert( 'You are now offline and not available to help others.' );
-
         }
     });
-
-
 
 });

@@ -4,27 +4,27 @@
  * Author: Jacob Price
  */
 session_start();
-if(!isset($_SESSION['user'])){
+
+if( !isset($_SESSION['user']) ){
     header('Location: login.php');
 }
+
 else{
     $username = $_SESSION['user'];
 
     //server details
     $serverName = "35.9.22.109, 1433";
 
-//more server details
+    //more server details
     $connectionInfo = array("Database" => "db", "UID" => "priceja7", "PWD" => "teamgm16");
 
-//establish connection to databse
+    //establish connection to database
     $conn = sqlsrv_connect($serverName, $connectionInfo);
 
     //Retrieving current values in the database given a user
     if (isset($username)){
         //update database with given username and availability
         $query_string = "SELECT Availability,SkillWord,SkillOutlook,SkillPowerPoint,SkillExplorer,SkillSkype,AverageRating FROM dbo.MockTable1 WHERE Username='".$username."'";
-
-
 
         //run the query and store results for future use
         $results = sqlsrv_query($conn,$query_string);
@@ -38,13 +38,8 @@ else{
         $explorer = $results['SkillExplorer'];
         $skype = $results['SkillSkype'];
         $avg_rating = $results['AverageRating'];
-
     }
-
-
-
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -90,28 +85,23 @@ else{
                         echo "<img src=\"images/star.png\" width=\"500\" height=\"472\" alt=\"Star\" />";
                     }
                     ?>
-
                 </div>
-
-
 
                 <div id="availabilityToggle" class="toggle-modern"></div>
 
                 <script type="text/javascript">
-
                     //toggle availability if the user is available in the database
                     $(document).ready( function($) {
                         var availability = "<?php echo $available; ?>";
                         if (availability == "1"){
-                            $('.toggle-modern').click()
+                            $('.toggle-modern').click();
                         }
-
                     });
                 </script>
-                <hr/>
 
                 <h3>Skills</h3>
-                <form id="skillForm" action="#">
+
+                <form id="skillForm" action="" method="post">
                     <input class="Checkbox" type="checkbox" id="word" value="Microsoft Word" name="<?php echo $word; ?>"/>
                     <label for="word">Microsoft Word</label>
                     <br/>
@@ -132,9 +122,10 @@ else{
                     <label for="skype">Skype for Business</label>
                     <br/>
 
-                    <input type="submit" id="saveButton" value="Save" />
-
+                    <input type="submit" id="saveSkills" value="Save" />
                 </form>
+
+                <button id="logOut">Log Out</button>
             </div>
 
 
@@ -144,80 +135,77 @@ else{
                 </div>
 
 
-                <div id="feedbackBox">
-                    <div id="bestReviews">
-                        <h3>Best Feedback</h3>
+                <div id="bestReviews">
+                    <h3>Best Feedback</h3>
 
-                        <div class="bestReview">
-                            <img src="images/star.png" width="500" height="472" alt="Star" />
-                            <img src="images/star.png" width="500" height="472" alt="Star" />
-                            <img src="images/star.png" width="500" height="472" alt="Star" />
-                            <img src="images/star.png" width="500" height="472" alt="Star" />
-                            <img src="images/star.png" width="500" height="472" alt="Star" />
-                            <br/>
-                            <h4>Joe Dinkha</h4>
-                            <span class="date">(Jan. 27, 2016)</span>
-                            <p>Thanks for helping me with my browser display issues! That was fast.</p>
-                        </div>
-
-                        <div class="bestReview">
-                            <img src="images/star.png" width="500" height="472" alt="Star" />
-                            <img src="images/star.png" width="500" height="472" alt="Star" />
-                            <img src="images/star.png" width="500" height="472" alt="Star" />
-                            <img src="images/star.png" width="500" height="472" alt="Star" />
-                            <br/>
-                            <h4>Jenna Sanocki</h4>
-                            <span class="date">(Jan. 15, 2016)</span>
-                            <p>I appreciate you helping me set up my Outlook signature settings.</p>
-                        </div>
-
-                        <div class="bestReview">
-                            <img src="images/star.png" width="500" height="472" alt="Star" />
-                            <img src="images/star.png" width="500" height="472" alt="Star" />
-                            <img src="images/star.png" width="500" height="472" alt="Star" />
-                            <img src="images/star.png" width="500" height="472" alt="Star" />
-                            <br/>
-                            <h4>Zack Keith</h4>
-                            <span class="date">(Jan. 15, 2016)</span>
-                            <p>Quick and simple help towards fixing my Skype issues! Thanks again.</p>
-                        </div>
-
-                        <button id="showMoreFeedback">Show More Feedback</button>
+                    <div class="bestReview">
+                        <img src="images/star.png" width="500" height="472" alt="Star" />
+                        <img src="images/star.png" width="500" height="472" alt="Star" />
+                        <img src="images/star.png" width="500" height="472" alt="Star" />
+                        <img src="images/star.png" width="500" height="472" alt="Star" />
+                        <img src="images/star.png" width="500" height="472" alt="Star" />
+                        <br/>
+                        <h4>Joe Dinkha</h4>
+                        <span class="date">(Jan. 27, 2016)</span>
+                        <p>Thanks for helping me with my browser display issues! That was fast.</p>
                     </div>
 
-
-                    <div id="worstReviews">
-                        <h3>Worst Feedback</h3>
-
-                        <div class="worstReview">
-                            <img src="images/star.png" width="500" height="472" alt="Star" />
-                            <img src="images/star.png" width="500" height="472" alt="Star" />
-                            <img src="images/star.png" width="500" height="472" alt="Star" />
-                            <br/>
-                            <h4>Shuhao Zhang</h4>
-                            <span class="date">(Feb. 1, 2016)</span>
-                            <p>You weren't as knowledgeable with Skype as I thought you'd be...</p>
-                        </div>
-
-                        <div class="worstReview">
-                            <img src="images/star.png" width="500" height="472" alt="Star" />
-                            <img src="images/star.png" width="500" height="472" alt="Star" />
-                            <br/>
-                            <h4>Jake Price</h4>
-                            <span class="date">(Jan. 6, 2016)</span>
-                            <p>You weren't able to help me fix the issue I was having with Microsoft Word.</p>
-                        </div>
-
-                        <div class="worstReview">
-                            <img src="images/star.png" width="500" height="472" alt="Star" />
-                            <br/>
-                            <h4>Dr. D</h4>
-                            <span class="date">(Jan. 30, 2016)</span>
-                            <p>You were significantly late on responding in the Skype call.</p>
-                        </div>
-                        <button id="showMoreFeedback">Show More Feedback</button>
+                    <div class="bestReview">
+                        <img src="images/star.png" width="500" height="472" alt="Star" />
+                        <img src="images/star.png" width="500" height="472" alt="Star" />
+                        <img src="images/star.png" width="500" height="472" alt="Star" />
+                        <img src="images/star.png" width="500" height="472" alt="Star" />
+                        <br/>
+                        <h4>Jenna Sanocki</h4>
+                        <span class="date">(Jan. 15, 2016)</span>
+                        <p>I appreciate you helping me set up my Outlook signature settings.</p>
                     </div>
 
+                    <div class="bestReview">
+                        <img src="images/star.png" width="500" height="472" alt="Star" />
+                        <img src="images/star.png" width="500" height="472" alt="Star" />
+                        <img src="images/star.png" width="500" height="472" alt="Star" />
+                        <img src="images/star.png" width="500" height="472" alt="Star" />
+                        <br/>
+                        <h4>Zack Keith</h4>
+                        <span class="date">(Jan. 15, 2016)</span>
+                        <p>Quick and simple help towards fixing my Skype issues! Thanks again.</p>
+                    </div>
+
+                    <button id="showMoreFeedback">Show More Feedback</button>
+                </div>
+
+
+                <div id="worstReviews">
+                    <h3>Worst Feedback</h3>
+
+                    <div class="worstReview">
+                        <img src="images/star.png" width="500" height="472" alt="Star" />
+                        <img src="images/star.png" width="500" height="472" alt="Star" />
+                        <img src="images/star.png" width="500" height="472" alt="Star" />
+                        <br/>
+                        <h4>Shuhao Zhang</h4>
+                        <span class="date">(Feb. 1, 2016)</span>
+                        <p>You weren't as knowledgeable with Skype as I thought you'd be...</p>
+                    </div>
+
+                    <div class="worstReview">
+                        <img src="images/star.png" width="500" height="472" alt="Star" />
+                        <img src="images/star.png" width="500" height="472" alt="Star" />
+                        <br/>
+                        <h4>Jake Price</h4>
+                        <span class="date">(Jan. 6, 2016)</span>
+                        <p>You weren't able to help me fix the issue I was having with Microsoft Word.</p>
+                    </div>
+
+                    <div class="worstReview">
+                        <img src="images/star.png" width="500" height="472" alt="Star" />
+                        <br/>
+                        <h4>Dr. D</h4>
+                        <span class="date">(Jan. 30, 2016)</span>
+                        <p>You were significantly late on responding in the Skype call.</p>
+                    </div>
+                    <button id="showMoreFeedback">Show More Feedback</button>
                 </div>
 
             </div>
