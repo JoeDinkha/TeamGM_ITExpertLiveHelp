@@ -116,7 +116,10 @@ else{
                     $(document).ready( function($) {
                         var availability = "<?php echo $available; ?>";
                         if (availability == "1"){
-                            $('.toggle-modern').click();
+                            $('.toggle-modern').toggles({on: true, text: {on:'Online', off:'Offline'}});
+                        }
+                        else if(availability == "0") {
+                            $('.toggle-modern').toggles({on: false, text: {on:'Online', off:'Offline'}});
                         }
 
                         $('#logOut').click (function (event) {
@@ -127,7 +130,7 @@ else{
 
                 <h3>Skills</h3>
 
-                <form id="skillForm" action="" method="post">
+                <form id="skillForm" action="" method="">
                     <input class="Checkbox" type="checkbox" id="word" value="Microsoft Word" name="<?php echo $word; ?>"/>
                     <label for="word">Microsoft Word</label>
                     <br/>
@@ -238,6 +241,9 @@ else{
             </div>
         </div>
 
+        <form id="refreshForm">
+        <input type="hidden" name="visited" value="" />
+        </form>
 
         <footer>
             <p>&copy; Team GM - Spring 2016</p>
