@@ -4,8 +4,15 @@
 
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GM | IT Expert Live Help - Login</title>
-    <link rel="stylesheet" type="text/css" href="style.css" />
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="style.css" type="text/css" />
+
+    <!-- Script Imports -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script src="login.js" type="text/javascript"></script>
 
     <!-- Favicons -->
     <link rel="shortcut icon" href="favicons/favicon.ico">
@@ -32,39 +39,36 @@
 
 
 <body>
-    <div class="container">
+    <div class="container" id="login">
         <header>
-            <img src="images/Logo_of_General_Motors.png" width="100" height="100" alt="General Motors Logo"/>
+            <img src="images/Logo_of_General_Motors.png" width="100" height="100" alt="General Motors Logo" />
             <h1>IT Expert Live Help - Login</h1>
         </header>
 
 
         <div id="content" class="login">
-            <form role="form" method="post" action="post/login-post.php" autocomplete="off" id="slick-login">
-                <input class="form-control input-lg" type="text" name="username" id="username" placeholder="User Name"
-                       value="<?php if (isset($error)) {
-                           echo $_POST['username'];
-                       } ?>" autofocus />
+            <form id="slick-login" method="post" action="post/login-post.php" autocomplete="off">
+                <input type="text" name="username" id="username" placeholder="User Name"
+                       value="<?php if (isset($error)) { echo $_POST['username']; } ?>"
+                       autofocus />
                 <br/>
 
-                <input class="form-control input-lg" type="password" name="password" id="password" placeholder="Password"
-                       value="<?php if (isset($error)) {
-                           echo $_POST['password'];
-                       } ?>"/>
+                <input type="password" name="password" id="password" placeholder="Password"
+                       value="<?php if (isset($error)) { echo $_POST['password']; } ?>" />
                 <br/>
 
-                <input type="submit" value="Log In" />
+                <input type="submit" id="logIn" value="Log In" />
             </form>
 
             <form action="post/login-post.php" method="post">
-                <input id="developerMode" type="submit" value="Developer Mode" name="developerMode"/>
+                <input type="submit" name="developerMode" id="developerMode" value="Developer Mode" />
             </form>
-        </div> <!-- end div.content -->
+        </div><!-- end div.content -->
 
 
         <footer>
             <p>&copy; Team GM - Spring 2016</p>
         </footer>
-    </div> <!-- end div.container -->
+    </div><!-- end div.container -->
 </body>
 </html>

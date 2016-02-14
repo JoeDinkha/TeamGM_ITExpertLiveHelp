@@ -1,10 +1,12 @@
 $(document).ready( function($) {
 
-    //// Initialize availability toggle ////
+    //// Global Vars ////
+    var username = $('h2#name')[0].innerHTML;
     var availabilityToggle = $('#availabilityToggle');
+    var inputs = $('input');
 
 
-    // Toggle default values
+    //// Initialize availability toggle ////
     availabilityToggle.toggles({
         drag: true,         // allow dragging the toggle between positions
         click: true,        // allow clicking on the toggle
@@ -27,27 +29,20 @@ $(document).ready( function($) {
     });
 
 
-
-    //
-    var username = $('h2')[0].innerHTML;
-
-    //// Update skill checkboxes ////
-    var global_inputs = $('input');
-
-    for (var x=0; x < global_inputs.length-1; x++){
-        //console.log(global_inputs[x].checked);
-
-        if (global_inputs[x].name == "1"){
-            global_inputs[x].checked = true;
+    //// Update skill checkboxes' 'checked' state ////
+    for (var x=0; x < inputs.length-1; x++){
+        if (inputs[x].name == "1") {
+            inputs[x].checked = true;
         }
     }
 
 
-    //// Update skills and push to database ////
+    //// Push skill updates to database ////
     var form = $('#skillForm');
-    form.submit(function (event) {
 
-        var inputs = $('input');
+    form.submit( function (event) {
+        event.preventDefault();
+
         var columns = [];
 
         for (var i = 0; i < inputs.length-1; i++) {
@@ -58,9 +53,6 @@ $(document).ready( function($) {
                 columns.push("0");
             }
         }
-        //console.log(username);
-
-        event.preventDefault();
 
         // Post skills to the user profile
         $.ajax({
@@ -69,7 +61,8 @@ $(document).ready( function($) {
             data: { username: username, SkillWord: columns[0], SkillOutlook: columns[1],
                     SkillPowerPoint: columns[2], SkillExplorer: columns[3], SkillSkype: columns[4] }
         });
-        //alert("Your skills have been updated!")
+
+        //alert("Your skills have been updated!");
     });
 
 
@@ -112,50 +105,50 @@ $(document).ready( function($) {
         }
     });
 
+
+    //function checkRefresh()
+    //{
+    //    if( $('#refreshForm').visited = "")
+    //    {
+    //        // This is a fresh page load
+    //        $('#refreshForm').visited = "1"
+    //
+    //        // You may want to add code here special for
+    //        // fresh page loads
+    //        if(availabilityToggle.on)
+    //        {
+    //            availabilityToggle.toggle({easing: linear, animate: 0});
+    //            availabilityToggle.toggle({text: {on:'Online', off:'Offline'}});
+    //        }
+    //        else
+    //        {
+    //            availabilityToggle.toggle({easing: linear, animate: 0});
+    //            availabilityToggle.toggle({text: {on:'Online', off:'Offline'}});
+    //        }
+    //
+    //    }
+    //    else
+    //    {
+    //        // This is a page refresh
+    //
+    //        // Insert code here representing what to do on
+    //        // a refresh
+    //
+    //        if(availabilityToggle.on)
+    //        {
+    //            availabilityToggle.toggle({easing: linear, animate: 0});
+    //            availabilityToggle.toggle({text: {on:'Online', off:'Offline'}});
+    //        }
+    //        else
+    //        {
+    //            availabilityToggle.toggle({easing: linear, animate: 0});
+    //            availabilityToggle.toggle({text: {on:'Online', off:'Offline'}});
+    //        }
+    //    }
+    //}
+    //
+    //$(window).preload = function(event) {
+    //    checkRefresh();
+    //};
+
 });
-
-
-//function checkRefresh()
-//{
-//    if( $('#refreshForm').visited = "")
-//    {
-//        // This is a fresh page load
-//        $('#refreshForm').visited = "1"
-//
-//        // You may want to add code here special for
-//        // fresh page loads
-//        if(availabilityToggle.on)
-//        {
-//            availabilityToggle.toggle({easing: linear, animate: 0});
-//            availabilityToggle.toggle({text: {on:'Online', off:'Offline'}});
-//        }
-//        else
-//        {
-//            availabilityToggle.toggle({easing: linear, animate: 0});
-//            availabilityToggle.toggle({text: {on:'Online', off:'Offline'}});
-//        }
-//
-//    }
-//    else
-//    {
-//        // This is a page refresh
-//
-//        // Insert code here representing what to do on
-//        // a refresh
-//
-//        if(availabilityToggle.on)
-//        {
-//            availabilityToggle.toggle({easing: linear, animate: 0});
-//            availabilityToggle.toggle({text: {on:'Online', off:'Offline'}});
-//        }
-//        else
-//        {
-//            availabilityToggle.toggle({easing: linear, animate: 0});
-//            availabilityToggle.toggle({text: {on:'Online', off:'Offline'}});
-//        }
-//    }
-//}
-//
-//$(window).preload = function(event) {
-//    checkRefresh();
-//};

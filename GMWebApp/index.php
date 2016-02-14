@@ -48,6 +48,7 @@ else{
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GM | IT Expert Live Help</title>
 
     <!-- Stylesheets -->
@@ -100,14 +101,15 @@ else{
 
                 <div id="rating">
                     <?php
-
                     /***Author: Jacob Price***/
-                    //code for displaying the amount of average stars you have, rounded to the nearest integer
+                    //code for displaying the amount of average stars you have,
+                    //rounded to the nearest integer
                     for ($x = 0; $x < $avg_rating; $x++) {
                         echo "<img src='images/star.png' width='500' height='472' alt='Star' />";
                     }
                     ?>
                 </div>
+
 
                 <div id="availabilityToggle" class="toggle-modern"></div>
 
@@ -115,22 +117,31 @@ else{
                     //toggle availability if the user is available in the database
                     $(document).ready( function($) {
                         var availability = "<?php echo $available; ?>";
+
                         if (availability == "1"){
-                            $('.toggle-modern').toggles({on: true, text: {on:'Online', off:'Offline'}});
-                        }
-                        else if(availability == "0") {
-                            $('.toggle-modern').toggles({on: false, text: {on:'Online', off:'Offline'}});
+                            $('.toggle-modern').toggles({
+                                on: true,
+                                text: {on:'Online', off:'Offline'}
+                            });
                         }
 
-                        $('#logOut').click (function (event) {
+                        else if(availability == "0") {
+                            $('.toggle-modern').toggles({
+                                on: false,
+                                text: {on:'Online', off:'Offline'}
+                            });
+                        }
+
+                        $('#logOut').click (function() {
                             window.location.href = 'post/logout-post.php';
                         });
                     });
                 </script>
 
+
                 <h3>Skills</h3>
 
-                <form id="skillForm" action="" method="">
+                <form id="skillForm" action="" method="post">
                     <input class="Checkbox" type="checkbox" id="word" value="Microsoft Word" name="<?php echo $word; ?>"/>
                     <label for="word">Microsoft Word</label>
                     <br/>
@@ -241,8 +252,9 @@ else{
             </div>
         </div>
 
+
         <form id="refreshForm">
-        <input type="hidden" name="visited" value="" />
+            <input type="hidden" name="visited" value="" />
         </form>
 
         <footer>
