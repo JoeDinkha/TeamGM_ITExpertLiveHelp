@@ -53,13 +53,15 @@ else{
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="style.css" type="text/css" />
-    <link rel="stylesheet" href="jquery-toggles-master/css/toggles.css">
-    <link rel="stylesheet" href="jquery-toggles-master/css/themes/toggles-modern.css">
+    <link rel="stylesheet" href="jquery-toggles-master/css/toggles.css" type="text/css" />
+    <link rel="stylesheet" href="jquery-toggles-master/css/themes/toggles-modern.css" type="text/css" />
+    <link rel="stylesheet" href="chosen_v1.5.0/chosen.css" type="text/css" />
 
     <!-- Script Imports -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <script src="main.js" type="text/javascript"></script>
-    <script src="jquery-toggles-master/toggles.js" type="text/javascript"></script>
+    <script src="jquery-toggles-master/toggles.min.js" type="text/javascript"></script>
+    <script src="chosen_v1.5.0/chosen.jquery.min.js" type="text/javascript"></script>
 
     <!-- Favicons -->
     <link rel="shortcut icon" href="favicons/favicon.ico">
@@ -142,25 +144,46 @@ else{
                 <h3>Skills</h3>
 
                 <form id="skillForm" action="" method="post">
-                    <input class="Checkbox" type="checkbox" id="word" value="Microsoft Word" name="<?php echo $word; ?>"/>
+                    <label for="skillSelect" hidden>Select Your Skills</label>
+
+                    <select id="skillSelect" name="skillSelect" data-placeholder="Select Your Skills" multiple>
+                        <option value="selectAll">SELECT ALL</option>
+                        <option value="word">Microsoft Word</option>
+                        <option value="outlook">Microsoft Outlook</option>
+                        <option value="powerpoint">Microsoft PowerPoint</option>
+                        <option value="IE">Internet Explorer</option>
+                        <option value="skype">Skype for Business</option>
+                        <option value="skill">Skill</option>
+                        <option value="skill">Skill</option>
+                        <option value="skill">Skill</option>
+                        <option value="skill">Skill</option>
+                        <option value="skill">Skill</option>
+                        <option value="skill">Skill</option>
+                        <option value="skill">Skill</option>
+                        <option value="skill">Skill</option>
+                        <option value="skill">Skill</option>
+                        <option value="skill">Skill</option>
+                    </select>
+
+                    <!--<input class="Checkbox" type="checkbox" id="word" value="Microsoft Word" name="<?php //echo $word; ?>"/>
                     <label for="word">Microsoft Word</label>
                     <br/>
 
-                    <input class="Checkbox" type="checkbox" id="outlook" value="Microsoft Outlook" name="<?php echo $outlook; ?>"/>
+                    <input class="Checkbox" type="checkbox" id="outlook" value="Microsoft Outlook" name="<?php //echo $outlook; ?>"/>
                     <label for="outlook">Microsoft Outlook</label>
                     <br/>
 
-                    <input class="Checkbox" type="checkbox" id="powerpoint" value="Microsoft PowerPoint" name="<?php echo $powerpoint; ?>"/>
+                    <input class="Checkbox" type="checkbox" id="powerpoint" value="Microsoft PowerPoint" name="<?php //echo $powerpoint; ?>"/>
                     <label for="powerpoint">Microsoft PowerPoint</label>
                     <br/>
 
-                    <input class="Checkbox" type="checkbox" id="IE" value="Internet Explorer" name="<?php echo $explorer; ?>"/>
+                    <input class="Checkbox" type="checkbox" id="IE" value="Internet Explorer" name="<?php //echo $explorer; ?>"/>
                     <label for="IE">Internet Explorer</label>
                     <br/>
 
-                    <input class="Checkbox" type="checkbox" id="skype" value="Skype for Business" name="<?php echo $skype; ?>"/>
+                    <input class="Checkbox" type="checkbox" id="skype" value="Skype for Business" name="<?php //echo $skype; ?>"/>
                     <label for="skype">Skype for Business</label>
-                    <br/>
+                    <br/>-->
 
                     <input type="submit" id="saveSkills" value="Save" />
                 </form>

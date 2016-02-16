@@ -135,6 +135,7 @@ div#availabilityToggle {
 /******************* Skills *******************/
 div#profilePanel h3 {
     padding-top: 30px;
+    margin-bottom: 20px;
     border-top: 1px solid rgba(34, 85, 158, .3);
 }
 

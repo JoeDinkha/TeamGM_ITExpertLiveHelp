@@ -4,6 +4,7 @@ $(document).ready( function($) {
     var username = $('h2#name')[0].innerHTML;
     var availabilityToggle = $('#availabilityToggle');
     var inputs = $('input');
+    var skillSelect = $('select#skillSelect').chosen();
 
 
     //// Initialize availability toggle ////
