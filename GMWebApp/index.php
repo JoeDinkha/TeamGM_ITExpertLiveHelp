@@ -95,7 +95,7 @@ else{
         </header>
 
 
-        <div id="content">
+        <div class="content">
             <div id="profilePanel">
                 <img id="profilePic" src="images/team-photo.jpeg" width="4256" height="2832" alt="Profile Picture" />
 
@@ -188,6 +188,7 @@ else{
                     <input type="submit" id="saveSkills" value="Save" />
                 </form>
 
+                <button id="leaderboards">Leaderboards</button>
                 <button id="logOut">Log Out</button>
             </div>
 

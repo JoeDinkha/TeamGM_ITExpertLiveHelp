@@ -1,18 +1,57 @@
+<?php
+
+/**
+ * Author: Jacob Price
+ */
+session_start();
+
+if( !isset($_SESSION['user']) ){
+    header('Location: login.php');
+}
+
+else{
+    $username = $_SESSION['user'];
+
+    //server details
+    $serverName = "35.9.22.109, 1433";
+
+    //more server details
+    $connectionInfo = array("Database" => "db", "UID" => "priceja7", "PWD" => "teamgm16");
+
+    //establish connection to database
+    $conn = sqlsrv_connect($serverName, $connectionInfo);
+
+    //Retrieving current values in the database given a user
+    if (isset($username)){
+        //update database with given username and availability
+        $query_string = "SELECT Username, AverageRating FROM dbo.MockTable1";
+
+        //run the query and store results for future use
+        $results = sqlsrv_query($conn,$query_string);
+        $results = sqlsrv_fetch_array($results,SQLSRV_FETCH_ASSOC);
+
+        //grabbing the average rating of the user and displaying them throughout the page
+        $username = $results['Username'];
+        $avg_rating = $results['AverageRating'];
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GM | IT Expert Live Help - Login</title>
+    <title>GM | IT Expert Live Help - Leaderboard</title>
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="style.css" type="text/css" />
 
     <!-- Script Imports -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-    <script src="login.js" type="text/javascript"></script>
+    <script src="leaderboard.js" type="text/javascript"></script>
 
     <!-- Favicons -->
     <link rel="shortcut icon" href="favicons/favicon.ico">
@@ -39,36 +78,35 @@
 
 
 <body>
-    <div class="container" id="login">
+    <div class="container">
         <header>
-            <img src="images/Logo_of_General_Motors.png" width="100" height="100" alt="General Motors Logo" />
-            <h1>IT Expert Live Help - Login</h1>
+            <img src="images/Logo_of_General_Motors.png" width="2000" height="1989" alt="General Motors Logo" />
+            <h1>IT Expert Live Help - Leaderboard</h1>
         </header>
 
 
-        <div id="login" class="content">
-            <form id="slick-login" method="post" action="post/login-post.php" autocomplete="off">
-                <input type="text" name="username" id="username" placeholder="User Name"
-                       value="<?php if (isset($error)) { echo $_POST['username']; } ?>"
-                       autofocus />
-                <br/>
+        <div class="content" id="leaderboard">
+            <h2>Leaderboard</h2>
 
-                <input type="password" name="password" id="password" placeholder="Password"
-                       value="<?php if (isset($error)) { echo $_POST['password']; } ?>" />
-                <br/>
+            <table>
+                <tr>
+                    <th>Rank</th>
+                    <th>Username</th>
+                    <th>Rating</th>
+                </tr>
 
-                <input type="submit" id="logIn" value="Log In" />
-            </form>
-
-            <form action="post/login-post.php" method="post">
-                <input type="submit" name="developerMode" id="developerMode" value="Developer Mode" />
-            </form>
-        </div><!-- end div.content -->
+                <tr>
+                    <td>1</td>
+                    <td><?php echo $username; ?></td>
+                    <td><?php echo $avg_rating; ?></td>
+                </tr>
+            </table>
+        </div>
 
 
         <footer>
             <p>&copy; Team GM - Spring 2016</p>
         </footer>
-    </div><!-- end div.container -->
+    </div>
 </body>
 </html>

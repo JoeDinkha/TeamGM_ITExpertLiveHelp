@@ -55,7 +55,7 @@ div.container {
     background: ghostwhite;
 }
 
-div#content {
+div.content {
     max-width: 1200px;
     margin: 0 auto;
     padding: 60px 15px 260px 15px;
@@ -180,9 +180,16 @@ form#skillForm input[type=submit] {
     margin: 20px auto 10px auto;
 }
 
+/* Leaderboards */
+button#leaderboards {
+    min-width: 220px;
+    margin: 20px auto 0 auto;
+}
+
 /* Log Out */
 button#logOut {
     min-width: 220px;
+    margin-top: 20px;
 }
 
 
@@ -293,7 +300,7 @@ footer {
 /*****************************************
 *************** Login Page ***************
 ******************************************/
-div#content.login {
+div#login.content {
     padding: 150px 15px 15px 15px;
 }
 
@@ -320,6 +327,26 @@ input#developerMode {
     padding: 15px 20px;
     margin-top: 20px;
     font-size: 18px;
+}
+
+
+/*****************************************
+*************** Leaderboard Page ***************
+******************************************/
+div#leaderboard.content {
+    padding: 0 15px 150px 15px;
+}
+
+div#leaderboard.content table {
+    width: 100%;
+    background: white;
+    border-radius: 4px;
+    border: 1px solid rgba(34, 85, 158, .3);
+}
+
+div#leaderboard.content table th,
+div#leaderboard.content table td {
+    padding: 20px 40px;
 }
 
 
@@ -464,7 +491,7 @@ input#developerMode {
         width: 60px;
     }
 
-    div#content.login {
+    div#login.content {
         padding: 15% 15px 38% 15px;
     }
 
@@ -475,7 +502,7 @@ input#developerMode {
 
 /*** Mobile - Landscape Orientation ***/
 @media( max-width: 740px ) and ( orientation: landscape ) {
-    div#content.login {
+    div#login.content {
         padding: 10% 15px 28% 15px;
     }
 }

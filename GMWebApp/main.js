@@ -107,6 +107,12 @@ $(document).ready( function($) {
     });
 
 
+    //// Leaderboard button re-directs to Leaderboard page ////
+    $('button#leaderboards').click( function() {
+        window.location.href = window.location.origin + "/GMWebApp/leaderboard.php";
+    });
+
+
     //function checkRefresh()
     //{
     //    if( $('#refreshForm').visited = "")
