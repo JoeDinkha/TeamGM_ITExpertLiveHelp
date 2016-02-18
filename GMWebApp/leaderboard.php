@@ -111,7 +111,7 @@ else{
 
                 <?php
 
-                    //php script to write our query results to the page
+                    //php script to write our query results to the pagee
                     for ($x=1; $x<=count($usernames); $x++){
                         $name = $usernames[$x-1];
                         if ($name == $username){
