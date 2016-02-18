@@ -5,6 +5,7 @@
  * Date: 2/8/16
  * Time: 6:11 PM
  */
+session_start();
 unset($_SESSION['user']);
 session_destroy();
 
