@@ -62,7 +62,6 @@ else{
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GM | IT Expert Live Help - Leaderboard</title>
 
@@ -122,8 +121,9 @@ else{
 
             //php script to write our query results to the page
             for ($x=1; $x<=count($usernames); $x++){
-                echo '<tr>';
-                echo '<td>'.$usernames[$x-1].'</td>';
+                $name = $usernames[$x-1];
+                echo "<tr id='..'>";
+                echo '<td>'.$name.'</td>';
                 echo '<td>'.$passwords[$x-1].'</td>';
                 echo '<td>'.$skypenames[$x-1].'</td>';
                 echo '<td>'.$average_ratings[$x-1].'</td>';

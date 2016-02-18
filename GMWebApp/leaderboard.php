@@ -113,7 +113,14 @@ else{
 
                     //php script to write our query results to the page
                     for ($x=1; $x<=count($usernames); $x++){
-                        echo '<tr>';
+                        $name = $usernames[$x-1];
+                        if ($name == $username){
+                            echo "<tr id='current_user_leaderboard'>";
+                        }
+                        else{
+                            echo "<tr>";
+                        }
+
                         echo '<td>'.$x.'</td>';
                         echo '<td>'.$usernames[$x-1].'</td>';
                         echo '<td>'.$average_ratings[$x-1].'</td>';
