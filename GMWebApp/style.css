@@ -349,9 +349,9 @@ div#leaderboard.content table td {
     padding: 20px 40px;
 }
 
-/****Jake added this (Feel free to change) *****/
+/** Added by jake, feel free to change */
 tr#current_user_leaderboard {
-    font-size: 1.6em;
+    background-color: cyan;
 }
 
 
