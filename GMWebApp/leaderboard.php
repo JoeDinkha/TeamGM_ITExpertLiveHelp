@@ -91,15 +91,15 @@ else{
 
 
 <body>
-    <div class="container">
+    <div class="container" id="leaderboard">
         <header>
             <img src="images/Logo_of_General_Motors.png" width="2000" height="1989" alt="General Motors Logo" />
             <h1>IT Expert Live Help - Leaderboard</h1>
         </header>
 
 
-        <div class="content" id="leaderboard">
-            <h2>Leaderboard</h2>
+        <div class="content">
+            <!--<h2>Leaderboard</h2>-->
 
             <table>
                 <tr>
@@ -111,19 +111,29 @@ else{
 
                 <?php
 
-                    //php script to write our query results to the pagee
-                    for ($x=1; $x<=count($usernames); $x++){
-                        $name = $usernames[$x-1];
+                    //php script to write our query results to the page
+                    for ($x=0; $x<count($usernames); $x++){
+                        $name = $usernames[$x];
                         if ($name == $username){
-                            echo "<tr id='current_user_leaderboard'>";
+                            echo "<tr id='currentUser'>";
                         }
                         else{
                             echo "<tr>";
                         }
 
-                        echo '<td>'.$x.'</td>';
-                        echo '<td>'.$usernames[$x-1].'</td>';
-                        echo '<td>'.$average_ratings[$x-1].'</td>';
+                        // Rank
+                        echo '<td>'.($x+1).'</td>';
+
+                        // Username
+                        echo '<td>'.$usernames[$x].'</td>';
+
+                        // Rating
+                        echo '<td>';
+                        for( $star = 0; $star < $average_ratings[$x]; $star++ ) {
+                            echo '<img src="images/star.png" width="500" height="472" alt="Star" />';
+                        }
+                        echo '</td>';
+
                         echo '</tr>';
                     }
                 ?>

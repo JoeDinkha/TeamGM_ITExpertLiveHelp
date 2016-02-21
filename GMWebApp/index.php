@@ -3,34 +3,56 @@
  * Author: Jacob Price
  */
 session_start();
-if( !isset($_SESSION['user']) ){
+if( !isset($_SESSION['user']) ) {
     header('Location: login.php');
+    exit;
 }
-else{
-    $username = $_SESSION['user'];
-    //server details
-    $serverName = "35.9.22.109, 1433";
-    //more server details
-    $connectionInfo = array("Database" => "db", "UID" => "priceja7", "PWD" => "teamgm16");
-    //establish connection to database
-    $conn = sqlsrv_connect($serverName, $connectionInfo);
-    //Retrieving current values in the database given a user
-    if (isset($username)){
-        //update database with given username and availability
-        $query_string = "SELECT Availability,SkillWord,SkillOutlook,SkillPowerPoint,SkillExplorer,SkillSkype,AverageRating FROM dbo.MockTable1 WHERE Username='".$username."'";
-        //run the query and store results for future use
-        $results = sqlsrv_query($conn,$query_string);
-        $results = sqlsrv_fetch_array($results,SQLSRV_FETCH_ASSOC);
-        //grabbing all of these variables for the user and displaying them throughout the page
-        $available = $results['Availability'];
-        $word = $results['SkillWord'];
-        $outlook = $results['SkillOutlook'];
-        $powerpoint = $results['SkillPowerPoint'];
-        $explorer = $results['SkillExplorer'];
-        $skype = $results['SkillSkype'];
-        $avg_rating = $results['AverageRating'];
-    }
-}
+
+$username = $_SESSION['user'];
+
+//server details
+$serverName = "35.9.22.109, 1433";
+
+//more server details
+$connectionInfo = array("Database" => "db", "UID" => "priceja7", "PWD" => "teamgm16");
+
+//establish connection to database
+$conn = sqlsrv_connect($serverName, $connectionInfo);
+
+
+//// User Query - Retrieve current values in the database, given a user
+$query_string = "SELECT UID,Availability,SkillWord,SkillOutlook,SkillPowerPoint,SkillExplorer,SkillSkype,AverageRating FROM dbo.MockTable1 WHERE Username='".$username."'";
+
+//run the query and store results for future use
+$results = sqlsrv_query($conn,$query_string);
+$results = sqlsrv_fetch_array($results,SQLSRV_FETCH_ASSOC);
+
+//grabbing all of these variables for the user and displaying them throughout the page
+$userID = $results['UID'];
+$available = $results['Availability'];
+$word = $results['SkillWord'];
+$outlook = $results['SkillOutlook'];
+$powerpoint = $results['SkillPowerPoint'];
+$explorer = $results['SkillExplorer'];
+$skype = $results['SkillSkype'];
+$avg_rating = $results['AverageRating'];
+
+
+//// Feedback Query - Retrieve feedback for a user
+$query_string2 = "SELECT Username, Date, Feedback, Rating FROM dbo.FeedbackTable"; //WHERE UID=".$userID;
+
+// Run query and store results
+$results2 = sqlsrv_query( $conn, $query_string2 );
+$results2 = sqlsrv_fetch_array( $results2, SQLSRV_FETCH_ASSOC );
+
+// Store result variables
+$fUsername = $results2['Username'];
+$fDate = $results2['Date'];
+$fFeedback = $results2['Feedback'];
+$fRating = $results2['Rating'];
+
+// Format DateTime object
+$fDate = $fDate->format( 'M d, Y' );
 ?>
 
 <!DOCTYPE html>
@@ -110,6 +132,7 @@ else{
                 //toggle availability if the user is available in the database
                 $(document).ready( function($) {
                     var availability = "<?php echo $available; ?>";
+
                     if (availability == "1"){
                         $('.toggle-modern').toggles({
                             on: true,
@@ -122,6 +145,7 @@ else{
                             text: {on:'Online', off:'Offline'}
                         });
                     }
+
                     $('#logOut').click (function() {
                         window.location.href = 'post/logout-post.php';
                     });
@@ -188,15 +212,18 @@ else{
                 <h3>Best Feedback</h3>
 
                 <div class="bestReview">
-                    <img src="images/star.png" width="500" height="472" alt="Star" />
-                    <img src="images/star.png" width="500" height="472" alt="Star" />
-                    <img src="images/star.png" width="500" height="472" alt="Star" />
-                    <img src="images/star.png" width="500" height="472" alt="Star" />
-                    <img src="images/star.png" width="500" height="472" alt="Star" />
+                    <?php
+                        // Test for getting feedback data from database - working!
+                        for( $i = 1; $i <= $fRating; $i++ ) {
+                            //echo $fRating;
+                            echo '<img src="images/star.png" width="500" height="472" alt="Star" />';
+                        }
+                    ?>
                     <br/>
-                    <h4>Joe Dinkha</h4>
-                    <span class="date">(Jan. 27, 2016)</span>
-                    <p>Thanks for helping me with my browser display issues! That was fast.</p>
+
+                    <h4><?php echo $fUsername; ?></h4>
+                    <span class="date">(<?php echo $fDate; ?>)</span>
+                    <p><?php echo $fFeedback; ?></p>
                 </div>
 
                 <div class="bestReview">

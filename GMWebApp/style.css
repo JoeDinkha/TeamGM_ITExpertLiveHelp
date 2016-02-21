@@ -3,6 +3,7 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
+    color: #191919;
 }
 
 h2 {
@@ -11,7 +12,6 @@ h2 {
 
 h3 {
     font-weight: bold;
-    /*text-transform: uppercase;*/
 }
 
 p {
@@ -213,7 +213,6 @@ div#calendarFeedbackBox div#calendar {
 }
 
 div#calendarFeedbackBox div#calendar h3 {
-    width: 15%;
     padding-bottom: 10px;
     margin: 15px auto 25px auto;
     border-bottom: 1px solid rgba(34, 85, 158, .3);
@@ -300,7 +299,7 @@ footer {
 /*****************************************
 *************** Login Page ***************
 ******************************************/
-div#content.login {
+div#login.container div.content {
     padding: 250px 0 310px 0;
 }
 
@@ -330,28 +329,39 @@ input#developerMode {
 }
 
 
-/*****************************************
+/***********************************************
 *************** Leaderboard Page ***************
-******************************************/
-div#leaderboard.content {
-    padding: 0 15px 150px 15px;
+************************************************/
+div#leaderboard.container div.content {
+    padding: 100px 15px 250px 15px;
 }
 
-div#leaderboard.content table {
+div#leaderboard.container table {
     width: 100%;
     background: white;
     border-radius: 4px;
     border: 1px solid rgba(34, 85, 158, .3);
+    border-collapse: collapse;
 }
 
-div#leaderboard.content table th,
-div#leaderboard.content table td {
-    padding: 20px 40px;
+div#leaderboard.container table th,
+div#leaderboard.container table td {
+    padding: 25px 40px;
+    border: 1px solid rgba(34, 85, 158, .3);
 }
 
-/** Added by jake, feel free to change */
-tr#current_user_leaderboard {
-    background-color: cyan;
+/* Stars */
+div#leaderboard.container table td img {
+    width: 40px;
+    height: auto;
+    padding: 0 2px;
+}
+
+/* Logged In User */
+div#leaderboard.container table tr#currentUser,
+div#leaderboard.container table tr#currentUser td {
+    background: ghostwhite;
+    border: 1px solid #22559E;
 }
 
 

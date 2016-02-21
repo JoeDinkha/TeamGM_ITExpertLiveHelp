@@ -46,7 +46,7 @@
         </header>
 
 
-        <div id="login" class="content">
+        <div class="content">
             <form id="slick-login" method="post" action="post/login-post.php" autocomplete="off">
                 <input type="text" name="username" id="username" placeholder="User Name"
                        value="<?php if (isset($error)) { echo $_POST['username']; } ?>"
