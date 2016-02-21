@@ -107,7 +107,7 @@ else{
             <div id="availabilityToggle" class="toggle-modern"></div>
 
             <script type="text/javascript">
-                //toggle availability if the user is available in the database or not
+                //toggle availability if the user is available in the database
                 $(document).ready( function($) {
                     var availability = "<?php echo $available; ?>";
                     if (availability == "1"){
@@ -173,7 +173,7 @@ else{
             </form>
 
             <button id="leaderboards">Leaderboards</button>
-            <button id="logOut" >Log Out</button>
+            <button id="logOut">Log Out</button>
         </div>
 
 

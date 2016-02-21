@@ -300,8 +300,8 @@ footer {
 /*****************************************
 *************** Login Page ***************
 ******************************************/
-div#login.content {
-    padding: 150px 15px 15px 15px;
+div#content.login {
+    padding: 250px 0 310px 0;
 }
 
 form#slick-login input[type="text"],
@@ -311,9 +311,9 @@ form#slick-login input[type="password"] {
     margin-top: 10px;
 
     font-size: 16px;
-    border-radius: 4px;
-    border: 1px solid rgba(34, 85, 158, .3);
     outline: none;
+    border: 1px solid rgba(34, 85, 158, .3);
+    border-radius: 4px;
 }
 
 form#slick-login input[type="text"]:focus,
