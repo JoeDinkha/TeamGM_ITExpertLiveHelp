@@ -38,7 +38,7 @@ $(document).ready( function($) {
     //    }
     //}
 
-    var inputsLength;
+    var inputsLength=0;
 
     $('div.chosen-container').click( function() {
         inputsLength = $('ul.chosen-results li').length;
@@ -51,8 +51,13 @@ $(document).ready( function($) {
 
     form.submit( function (event) {
         event.preventDefault();
-
         var columns = [];
+
+        if (inputsLength == 0){
+            for (var x=0; x<5; x++){
+                columns.push("0");
+            }
+        }
 
         for (var i = 1; i <= inputsLength; i++) {
             if($('ul.chosen-results li:nth-child(' + i + ')').hasClass("result-selected")) {
@@ -74,6 +79,8 @@ $(document).ready( function($) {
         }
 
         console.log( "Available = " + availability );
+
+        console.log(columns);
 
         // Post skills to the user profile
         $.ajax({
