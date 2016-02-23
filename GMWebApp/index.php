@@ -159,22 +159,12 @@ $fDate = $fDate->format( 'M d, Y' );
                 <label for="skillSelect" hidden>Select Your Skills</label>
 
                 <select id="skillSelect" name="skillSelect" data-placeholder="Select Your Skills" multiple>
-                    <option value="selectAll">SELECT ALL</option>
                     <option value="word">Microsoft Word</option>
                     <option value="outlook">Microsoft Outlook</option>
                     <option value="powerpoint">Microsoft PowerPoint</option>
                     <option value="IE">Internet Explorer</option>
                     <option value="skype">Skype for Business</option>
-                    <option value="skill">Skill</option>
-                    <option value="skill">Skill</option>
-                    <option value="skill">Skill</option>
-                    <option value="skill">Skill</option>
-                    <option value="skill">Skill</option>
-                    <option value="skill">Skill</option>
-                    <option value="skill">Skill</option>
-                    <option value="skill">Skill</option>
-                    <option value="skill">Skill</option>
-                    <option value="skill">Skill</option>
+
                 </select>
 
                 <!--<input class="Checkbox" type="checkbox" id="word" value="Microsoft Word" name="<?php //echo $word; ?>"/>

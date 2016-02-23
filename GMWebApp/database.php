@@ -35,14 +35,24 @@ else{
         $skypenames = array();
         $average_ratings = array();
         $availabilities = array();
+        $skillwords = array();
+        $skilloutlooks = array();
+        $skillpowerpoints = array();
+        $skillexplorers = array();
+        $skillskypes = array();
 
         //push each username,average_rating pair into database
         while ($row = sqlsrv_fetch_array($results, SQLSRV_FETCH_ASSOC)){
-            array_push($usernames,$row['Username']);
+            array_push($usernames,$row['Username']) ;
             array_push($passwords,$row['Password']);
             array_push($skypenames,$row['SkypeName']);
             array_push($average_ratings,$row['AverageRating']);
             array_push($availabilities,$row['Availability']);
+            array_push($skillwords,$row['SkillWord']);
+            array_push($skilloutlooks,$row['SkillOutlook']);
+            array_push($skillpowerpoints,$row['SkillPowerPoint']);
+            array_push($skillexplorers,$row['SkillExplorer']);
+            array_push($skillskypes,$row['SkillSkype']);
         }
 
 
@@ -114,6 +124,11 @@ else{
                 <th>Skype Name</th>
                 <th>Rating</th>
                 <th>Availability</th>
+                <th>Word</th>
+                <th>Outlook</th>
+                <th>PowerPoint</th>
+                <th>Explorer</th>
+                <th>Skype</th>
             </tr>
 
 
@@ -128,6 +143,11 @@ else{
                 echo '<td>'.$skypenames[$x-1].'</td>';
                 echo '<td>'.$average_ratings[$x-1].'</td>';
                 echo '<td>'.$availabilities[$x-1].'</td>';
+                echo '<td>'.$skillwords[$x-1].'</td>';
+                echo '<td>'.$skilloutlooks[$x-1].'</td>';
+                echo '<td>'.$skillpowerpoints[$x-1].'</td>';
+                echo '<td>'.$skillexplorers[$x-1].'</td>';
+                echo '<td>'.$skillskypes[$x-1].'</td>';
                 echo '</tr>';
             }
             ?>

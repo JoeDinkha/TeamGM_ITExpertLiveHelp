@@ -2,8 +2,9 @@ $(document).ready( function($) {
 
     //// Global Vars ////
     var username = $('h2#name')[0].innerHTML;
+    var availability;
     var availabilityToggle = $('#availabilityToggle');
-    var inputs = $('input');
+    var inputs = $('ul.chosen-results li');
     var skillSelect = $('select#skillSelect').chosen();
 
 
@@ -31,11 +32,18 @@ $(document).ready( function($) {
 
 
     //// Update skill checkboxes' 'checked' state ////
-    for (var x=0; x < inputs.length-1; x++){
-        if (inputs[x].name == "1") {
-            inputs[x].checked = true;
-        }
-    }
+    //for (var x=0; x < inputs.length; x++){
+    //    if (inputs[x].hasClass("result-selected")) {
+    //        //inputs[x].addClass("result-selected");
+    //    }
+    //}
+
+    var inputsLength;
+
+    $('div.chosen-container').click( function() {
+        inputsLength = $('ul.chosen-results li').length;
+        console.log(inputsLength);
+    });
 
 
     //// Push skill updates to database ////
@@ -46,22 +54,35 @@ $(document).ready( function($) {
 
         var columns = [];
 
-        for (var i = 0; i < inputs.length-1; i++) {
-            if(inputs[i].checked) {
+        for (var i = 1; i <= inputsLength; i++) {
+            if($('ul.chosen-results li:nth-child(' + i + ')').hasClass("result-selected")) {
                 columns.push("1");
+                console.log(i + " - True");
             }
             else {
                 columns.push("0");
+                console.log( i + " - False");
             }
         }
+
+        //// Notification of changes and new state ////
+        if($(".toggle-on").hasClass("active")) {
+            availability = 1;
+        }
+        else {
+            availability = 0;
+        }
+
+        console.log( "Available = " + availability );
 
         // Post skills to the user profile
         $.ajax({
             type: "POST",
             url: "server.php",
-            data: { username: username, SkillWord: columns[0], SkillOutlook: columns[1],
+            data: { username: username, availability: availability, SkillWord: columns[0], SkillOutlook: columns[1],
                     SkillPowerPoint: columns[2], SkillExplorer: columns[3], SkillSkype: columns[4] }
         });
+
 
         //alert("Your skills have been updated!");
     });
