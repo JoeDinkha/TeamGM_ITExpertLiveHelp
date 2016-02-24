@@ -131,8 +131,43 @@ $fDate = $fDate->format( 'M d, Y' );
             <script type="text/javascript">
                 //toggle availability if the user is available in the database
                 $(document).ready( function($) {
-                    var availability = "<?php echo $available; ?>";
 
+                    var li = document.createElement('li');
+                    var li_search = document.createElement('li');
+
+
+
+                    li.className = 'search-choice';
+                    li_search.className = 'search-field';
+                    li.innerHTML = '<span>Microsoft Word</span><a class="search-choice-close" data-option-array-index="0"></a>';
+                    li_search.innerHTML = '<input type="text" value="Select Your Skills" class autocomplete="off" style="width: 150px;">';
+
+                    //$('.chosen-choices').empty();
+                    //$('.chosen-choices').append(li);
+                    //$('.chosen-choices').append(li_search);
+
+                    //('li.active-result').click();
+
+
+
+
+
+                    var word = "<?php echo $word; ?>";
+                    var outlook = "<?php echo $outlook; ?>";
+                    var powerpoint = "<?php echo $powerpoint; ?>";
+                    var explorer = "<?php echo $explorer; ?>";
+                    var skype = "<?php echo $skype; ?>";
+
+                    //console.log(word);
+                    //console.log(outlook);
+                    //console.log(powerpoint);
+                    //console.log(explorer);
+                    //console.log(skype);
+
+
+
+
+                    var availability = "<?php echo $available; ?>";
                     if (availability == "1"){
                         $('.toggle-modern').toggles({
                             on: true,
@@ -159,11 +194,50 @@ $fDate = $fDate->format( 'M d, Y' );
                 <label for="skillSelect" hidden>Select Your Skills</label>
 
                 <select id="skillSelect" name="skillSelect" data-placeholder="Select Your Skills" multiple>
-                    <option value="word">Microsoft Word</option>
-                    <option value="outlook">Microsoft Outlook</option>
-                    <option value="powerpoint">Microsoft PowerPoint</option>
-                    <option value="IE">Internet Explorer</option>
-                    <option value="skype">Skype for Business</option>
+                    <?php
+
+                        //check for word
+                        if ($word == "1"){
+                            echo '<option value="word" selected="selected" >Microsoft Word</option>';
+                        }
+                        else{
+                            echo '<option value="word" >Microsoft Word</option>';
+                        }
+
+                        //check for outlook
+                        if ($outlook == "1"){
+                            echo '<option value="outlook" selected="selected">Microsoft Outlook</option>';
+                        }
+                        else{
+                            echo '<option value="outlook">Microsoft Outlook</option>';
+                        }
+
+                        //check for powerpoint
+                        if ($powerpoint == "1"){
+                            echo '<option value="powerpoint" selected="selected">Microsoft PowerPoint</option>';
+                        }
+                        else{
+                            echo '<option value="powerpoint">Microsoft PowerPoint</option>';
+                        }
+
+                        //check for explorer
+                        if ($explorer == "1"){
+                            echo '<option value="IE" selected="selected">Internet Explorer</option>';
+                        }
+                        else{
+                            echo '<option value="IE">Internet Explorer</option>';
+                        }
+
+                        //check for skype
+                        if ($skype == "1"){
+                            echo '<option value="skype" selected="selected">Skype for Business</option>';
+                        }
+                        else{
+                            echo '<option value="skype">Skype for Business</option>';
+                        }
+
+
+                    ?>;
 
                 </select>
 
