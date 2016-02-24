@@ -341,9 +341,9 @@ $fDate = $fDate->format( 'M d, Y' );
                 <div class="worstReview">
                     <img src="images/star.png" width="500" height="472" alt="Star" />
                     <br/>
-                    <h4>Dr. D</h4>
+                    <h4>UofM Fan</h4>
                     <span class="date">(Jan. 30, 2016)</span>
-                    <p>You were significantly late in responding to the Skype call. My problem is unresolved.</p>
+                    <p>I'm mad that MSU is better at literally everything.</p>
                 </div>
                 <button id="showMoreFeedback">Show More Feedback</button>
             </div>
