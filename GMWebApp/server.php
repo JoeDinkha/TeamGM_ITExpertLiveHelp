@@ -40,11 +40,12 @@ $outlook = $_POST['SkillOutlook'];
 $powerpoint = $_POST['SkillPowerPoint'];
 $explorer = $_POST['SkillExplorer'];
 $business = $_POST['SkillSkype'];
+$expert_skills = $_POST['ExpertSkills'];
+
 
 //$query_string2 = "UPDATE dbo.Mocktable1 SET SkillWord=".$business.", SkillOutlook='1', SkillPowerPoint='1' WHERE Username='priceja7'";
 $query_string2 = "UPDATE dbo.Mocktable1
-SET SkillWord=".$word.", SkillOutlook=".$outlook.", SkillPowerPoint=".$powerpoint."
-, SkillExplorer = ".$explorer.", SkillSkype=".$business."
+SET ExpertSkills='".$expert_skills."'
 WHERE Username='".$username."'";
 
 //run the query and store results for future use

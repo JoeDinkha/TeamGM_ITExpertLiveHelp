@@ -21,7 +21,7 @@ $conn = sqlsrv_connect($serverName, $connectionInfo);
 
 
 //// User Query - Retrieve current values in the database, given a user
-$query_string = "SELECT UID,Availability,SkillWord,SkillOutlook,SkillPowerPoint,SkillExplorer,SkillSkype,AverageRating FROM dbo.MockTable1 WHERE Username='".$username."'";
+$query_string = "SELECT * FROM dbo.MockTable1 WHERE Username='".$username."'";
 
 //run the query and store results for future use
 $results = sqlsrv_query($conn,$query_string);
@@ -36,6 +36,7 @@ $powerpoint = $results['SkillPowerPoint'];
 $explorer = $results['SkillExplorer'];
 $skype = $results['SkillSkype'];
 $avg_rating = $results['AverageRating'];
+$expert_skills = $results['ExpertSkills'];
 
 
 //// Feedback Query - Retrieve feedback for a user
@@ -52,7 +53,19 @@ $fFeedback = $results2['Feedback'];
 $fRating = $results2['Rating'];
 
 // Format DateTime object
-$fDate = $fDate->format( 'M d, Y' );
+//$fDate = $fDate->format( 'M d, Y' );
+
+//****************grab all of the skills dynamically*************//
+$query_string_skills = "SELECT * FROM dbo.SkillTable";
+$skill_results = sqlsrv_query($conn,$query_string_skills);
+$skill_array = array();
+while ($row = sqlsrv_fetch_array($skill_results,SQLSRV_FETCH_ASSOC)){
+    $temp_val = $row['Skills'];
+    array_push($skill_array,$temp_val);
+}
+
+
+//echo $skill_array;
 ?>
 
 <!DOCTYPE html>
@@ -101,7 +114,7 @@ $fDate = $fDate->format( 'M d, Y' );
 
 
 <body>
-<div class="container">
+<div class="container" id="index">
     <header>
         <img src="images/Logo_of_General_Motors.png" width="2000" height="1989" alt="General Motors Logo" />
         <h1>IT Expert Live Help</h1>
@@ -135,22 +148,17 @@ $fDate = $fDate->format( 'M d, Y' );
                     var li = document.createElement('li');
                     var li_search = document.createElement('li');
 
-
-
                     li.className = 'search-choice';
                     li_search.className = 'search-field';
                     li.innerHTML = '<span>Microsoft Word</span><a class="search-choice-close" data-option-array-index="0"></a>';
                     li_search.innerHTML = '<input type="text" value="Select Your Skills" class autocomplete="off" style="width: 150px;">';
+
 
                     //$('.chosen-choices').empty();
                     //$('.chosen-choices').append(li);
                     //$('.chosen-choices').append(li_search);
 
                     //('li.active-result').click();
-
-
-
-
 
                     var word = "<?php echo $word; ?>";
                     var outlook = "<?php echo $outlook; ?>";
@@ -163,8 +171,6 @@ $fDate = $fDate->format( 'M d, Y' );
                     //console.log(powerpoint);
                     //console.log(explorer);
                     //console.log(skype);
-
-
 
 
                     var availability = "<?php echo $available; ?>";
@@ -196,6 +202,7 @@ $fDate = $fDate->format( 'M d, Y' );
                 <select id="skillSelect" name="skillSelect" data-placeholder="Select Your Skills" multiple>
                     <?php
 
+                        /**
                         //check for word
                         if ($word == "1"){
                             echo '<option value="word" selected="selected" >Microsoft Word</option>';
@@ -235,27 +242,20 @@ $fDate = $fDate->format( 'M d, Y' );
                         else{
                             echo '<option value="skype">Skype for Business</option>';
                         }
+                         * **/
+                        for($x=0; $x<= count($skill_array); $x++){
+                            echo "<p>".$x."</p>";
+                            if ($expert_skills[$x] == "1"){
+                                echo '<option value="word" selected="selected" >'.$skill_array[$x].'</option>';
+                            }
+                            else{
+                                echo '<option value="word" >'.$skill_array[$x].'</option>';
 
+                            }
+                        }
 
                     ?>;
-
                 </select>
-
-                <!--<input class="Checkbox" type="checkbox" id="word" value="Microsoft Word" name="<?php //echo $word; ?>"/>
-                    <label for="word">Microsoft Word</label>
-                    <br/>
-                    <input class="Checkbox" type="checkbox" id="outlook" value="Microsoft Outlook" name="<?php //echo $outlook; ?>"/>
-                    <label for="outlook">Microsoft Outlook</label>
-                    <br/>
-                    <input class="Checkbox" type="checkbox" id="powerpoint" value="Microsoft PowerPoint" name="<?php //echo $powerpoint; ?>"/>
-                    <label for="powerpoint">Microsoft PowerPoint</label>
-                    <br/>
-                    <input class="Checkbox" type="checkbox" id="IE" value="Internet Explorer" name="<?php //echo $explorer; ?>"/>
-                    <label for="IE">Internet Explorer</label>
-                    <br/>
-                    <input class="Checkbox" type="checkbox" id="skype" value="Skype for Business" name="<?php //echo $skype; ?>"/>
-                    <label for="skype">Skype for Business</label>
-                    <br/>-->
 
                 <input type="submit" id="saveSkills" value="Save" />
             </form>

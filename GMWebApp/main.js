@@ -52,6 +52,8 @@ $(document).ready( function($) {
     form.submit( function (event) {
         event.preventDefault();
         var columns = [];
+        inputsLength = $('#skillSelect option').length;
+        console.log('length: ',inputsLength);
 
         if (inputsLength == 0){
             for (var x=0; x<5; x++){
@@ -59,10 +61,10 @@ $(document).ready( function($) {
             }
         }
 
-        for (var i = 1; i <= inputsLength; i++) {
-            if($('ul.chosen-results li:nth-child(' + i + ')').hasClass("result-selected")) {
+        console.log(inputsLength);
+        for (var i = 1; i <= inputsLength-1; i++) {
+            if ($('#skillSelect option:nth-child('+i+')').is(':selected')){
                 columns.push("1");
-                console.log(i + " - True");
             }
             else {
                 columns.push("0");
@@ -81,13 +83,18 @@ $(document).ready( function($) {
         console.log( "Available = " + availability );
 
         console.log(columns);
+        var experts = '';
+
+        for(var y =0; y<columns.length;y++){
+            experts = experts.concat(columns[y]);
+        }
+        console.log(experts);
 
         // Post skills to the user profile
         $.ajax({
             type: "POST",
             url: "server.php",
-            data: { username: username, availability: availability, SkillWord: columns[0], SkillOutlook: columns[1],
-                    SkillPowerPoint: columns[2], SkillExplorer: columns[3], SkillSkype: columns[4] }
+            data: { username: username, availability: availability, ExpertSkills: experts }
         });
 
 
