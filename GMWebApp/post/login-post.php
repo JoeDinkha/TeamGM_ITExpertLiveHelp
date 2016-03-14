@@ -54,10 +54,11 @@ if( $myusername != NULL && $mypassword != NULL ) {
 
 //*******************Query SQL Server for the login of the user accessing the database*******************
 
-    $sql = "SELECT * FROM dbo.Mocktable1 WHERE Username = '".$myusername."' AND Password = '".$mypassword."'";
+    $sql = "SELECT * FROM dbo.Mocktable1 WHERE Username = ? AND Password = ?";
 
+    $params = array($myusername, $mypassword);
     //query is a resource ID
-    $result =  sqlsrv_query($conn,$sql);
+    $result =  sqlsrv_query($conn,$sql,$params);
 
     //get database name
 //    $name = sqlsrv_get_field($result, 1);

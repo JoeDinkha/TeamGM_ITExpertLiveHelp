@@ -54,6 +54,7 @@ $(document).ready( function($) {
         var columns = [];
         inputsLength = $('#skillSelect option').length;
         console.log('length: ',inputsLength);
+        alert("Your skills have been updated.")
 
         if (inputsLength == 0){
             for (var x=0; x<5; x++){
@@ -104,6 +105,37 @@ $(document).ready( function($) {
 
     //// Notification of changes and new state ////
     availabilityToggle.on( 'toggle', function(e, active) {
+        var columns = [];
+        inputsLength = $('#skillSelect option').length;
+        console.log('length: ',inputsLength);
+
+        if (inputsLength == 0){
+            for (var x=0; x<5; x++){
+                columns.push("0");
+            }
+        }
+
+        console.log(inputsLength);
+        for (var i = 1; i <= inputsLength-1; i++) {
+            if ($('#skillSelect option:nth-child('+i+')').is(':selected')){
+                columns.push("1");
+            }
+            else {
+                columns.push("0");
+                console.log( i + " - False");
+            }
+        }
+
+
+        console.log( "Available = " + availability );
+
+        console.log(columns);
+        var experts = '';
+
+        for(var y =0; y<columns.length;y++){
+            experts = experts.concat(columns[y]);
+        }
+
         if( active ) {
 
             //************ AUTHOR: Jacob Price  *********************
@@ -115,7 +147,7 @@ $(document).ready( function($) {
             $.ajax({
                 type: "POST",
                 url: "server.php",
-                data: { username: username, availability: "1" }
+                data: { username: username, availability: "1", ExpertSkills: experts }
             });
             //**********************END******************************
 
@@ -133,7 +165,7 @@ $(document).ready( function($) {
             $.ajax({
                 type: "POST",
                 url: "server.php",
-                data: { username: username, availability: "0" }
+                data: { username: username, availability: "0", ExpertSkills: experts }
             });
             //**********************END******************************
 

@@ -3,7 +3,7 @@
   <component name="WebServers">
     <option name="servers">
       <webServer id="b7d36868-c675-431d-bbb3-e0afbb4220d6" name="TeamGM" url="http://35.9.22.109/">
-        <fileTransfer host="35.9.22.109" port="52743" password="dfdedfcfdfcbdfc7dfcddfc7df9bdf9c" username="dinkhajo">
+        <fileTransfer explicitFtps="false" host="35.9.22.109" port="52743" password="dfdedfcfdfcbdfc7dfcddfc7df9bdf9c" username="dinkhajo">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" passiveMode="true" />
           </advancedOptions>
