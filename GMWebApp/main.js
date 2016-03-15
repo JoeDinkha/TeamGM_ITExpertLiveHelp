@@ -4,8 +4,8 @@ $(document).ready( function($) {
     var username = $('h2#name')[0].innerHTML;
     var availability;
     var availabilityToggle = $('#availabilityToggle');
-    var inputs = $('ul.chosen-results li');
     var skillSelect = $('select#skillSelect').chosen();
+    var inputs = $('ul.chosen-results li');
 
 
     //// Initialize availability toggle ////
@@ -31,18 +31,10 @@ $(document).ready( function($) {
     });
 
 
-    //// Update skill checkboxes' 'checked' state ////
-    //for (var x=0; x < inputs.length; x++){
-    //    if (inputs[x].hasClass("result-selected")) {
-    //        //inputs[x].addClass("result-selected");
-    //    }
-    //}
-
-    var inputsLength=0;
+    var inputsLength = 0;
 
     $('div.chosen-container').click( function() {
         inputsLength = $('ul.chosen-results li').length;
-        console.log(inputsLength);
     });
 
 
@@ -53,25 +45,6 @@ $(document).ready( function($) {
         event.preventDefault();
         var columns = [];
         inputsLength = $('#skillSelect option').length;
-        console.log('length: ',inputsLength);
-        alert("Your skills have been updated.")
-
-        if (inputsLength == 0){
-            for (var x=0; x<5; x++){
-                columns.push("0");
-            }
-        }
-
-        console.log(inputsLength);
-        for (var i = 1; i <= inputsLength-1; i++) {
-            if ($('#skillSelect option:nth-child('+i+')').is(':selected')){
-                columns.push("1");
-            }
-            else {
-                columns.push("0");
-                console.log( i + " - False");
-            }
-        }
 
         //// Notification of changes and new state ////
         if($(".toggle-on").hasClass("active")) {
@@ -81,94 +54,40 @@ $(document).ready( function($) {
             availability = 0;
         }
 
-        console.log( "Available = " + availability );
-
-        console.log(columns);
-        var experts = '';
-
-        for(var y =0; y<columns.length;y++){
-            experts = experts.concat(columns[y]);
-        }
-        console.log(experts);
+        var expertSkills = getExpertSkills();
 
         // Post skills to the user profile
         $.ajax({
             type: "POST",
             url: "server.php",
-            data: { username: username, availability: availability, ExpertSkills: experts }
+            data: { username: username, availability: availability, ExpertSkills: expertSkills }
         });
 
 
-        //alert("Your skills have been updated!");
+        alert("Your skills have been updated.");
     });
 
 
     //// Notification of changes and new state ////
     availabilityToggle.on( 'toggle', function(e, active) {
-        var columns = [];
-        inputsLength = $('#skillSelect option').length;
-        console.log('length: ',inputsLength);
 
-        if (inputsLength == 0){
-            for (var x=0; x<5; x++){
-                columns.push("0");
-            }
-        }
-
-        console.log(inputsLength);
-        for (var i = 1; i <= inputsLength-1; i++) {
-            if ($('#skillSelect option:nth-child('+i+')').is(':selected')){
-                columns.push("1");
-            }
-            else {
-                columns.push("0");
-                console.log( i + " - False");
-            }
-        }
-
-
-        console.log( "Available = " + availability );
-
-        console.log(columns);
-        var experts = '';
-
-        for(var y =0; y<columns.length;y++){
-            experts = experts.concat(columns[y]);
-        }
+        var expertSkills = getExpertSkils();
 
         if( active ) {
-
-            //************ AUTHOR: Jacob Price  *********************
-            //Ajax call to post to server.php
-            //This function posts the data with the specified username as available
-            //username is hardcoded for now
-            //or not available
-            //if available, set flag in database to 1 (true)
             $.ajax({
                 type: "POST",
                 url: "server.php",
-                data: { username: username, availability: "1", ExpertSkills: experts }
+                data: { username: username, availability: "1", ExpertSkills: expertSkills }
             });
-            //**********************END******************************
-
             //alert( 'You are now online and available to help others.' );
         }
 
         else {
-
-            //************ AUTHOR: Jacob Price  *********************
-            //Ajax call to post to server.php
-            //This function posts the data with the specified username as available
-            //username is hardcoded for now
-            //or not available
-            //if available, set flag in database to 0 (false)
             $.ajax({
                 type: "POST",
                 url: "server.php",
-                data: { username: username, availability: "0", ExpertSkills: experts }
+                data: { username: username, availability: "0", ExpertSkills: expertSkills }
             });
-            //**********************END******************************
-
             //alert( 'You are now offline and not available to help others.' );
         }
     });
@@ -179,6 +98,43 @@ $(document).ready( function($) {
         window.location.href = window.location.origin + "/GMWebApp/leaderboard.php";
     });
 
+
+
+    function getExpertSkills() {
+        var columns = [];
+        inputsLength = $('#skillSelect option').length;
+
+        if (inputsLength == 0){
+            for (var x=0; x<5; x++){
+                columns.push("0");
+            }
+        }
+
+        for (var i = 1; i <= inputsLength-1; i++) {
+            if ($('#skillSelect option:nth-child('+i+')').is(':selected')){
+                columns.push("1");
+            }
+            else {
+                columns.push("0");
+            }
+        }
+
+        var expertSkills = '';
+
+        for(var y =0; y<columns.length;y++){
+            expertSkills = expertSkills.concat(columns[y]);
+        }
+
+        return expertSkills;
+    }
+
+});
+    //// Update skill checkboxes' 'checked' state ////
+    //for (var x=0; x < inputs.length; x++){
+    //    if (inputs[x].hasClass("result-selected")) {
+    //        //inputs[x].addClass("result-selected");
+    //    }
+    //}
 
     //function checkRefresh()
     //{
@@ -225,4 +181,4 @@ $(document).ready( function($) {
     //    checkRefresh();
     //};
 
-});
+
