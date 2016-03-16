@@ -1,14 +1,15 @@
-$(document).ready( function($) {
+$(document).ready(function($) {
 
-    //// Global Vars ////
+    // Globals
     var username = $('h2#name')[0].innerHTML;
     var availability;
     var availabilityToggle = $('#availabilityToggle');
     var skillSelect = $('select#skillSelect').chosen();
-    var inputs = $('ul.chosen-results li');
+    var form = $('#skillForm');
+    var inputsLength = 0;
 
 
-    //// Initialize availability toggle ////
+    // Initialize availability toggle
     availabilityToggle.toggles({
         drag: true,         // allow dragging the toggle between positions
         click: true,        // allow clicking on the toggle
@@ -31,75 +32,57 @@ $(document).ready( function($) {
     });
 
 
-    var inputsLength = 0;
-
+    // Update the input length variable by number of selected skills
     $('div.chosen-container').click( function() {
         inputsLength = $('ul.chosen-results li').length;
     });
 
 
-    //// Push skill updates to database ////
-    var form = $('#skillForm');
-
+    // Push skill updates to the database
     form.submit( function (event) {
         event.preventDefault();
-        var columns = [];
-        inputsLength = $('#skillSelect option').length;
-
-        //// Notification of changes and new state ////
-        if($(".toggle-on").hasClass("active")) {
-            availability = 1;
-        }
-        else {
-            availability = 0;
-        }
-
-        var expertSkills = getExpertSkills();
+        var experts = getExpertSkills();
 
         // Post skills to the user profile
         $.ajax({
             type: "POST",
             url: "server.php",
-            data: { username: username, availability: availability, ExpertSkills: expertSkills }
+            data: { username: username, availability: availability, ExpertSkills: experts }
         });
-
 
         alert("Your skills have been updated.");
     });
 
 
-    //// Notification of changes and new state ////
+    // Availability status changing
     availabilityToggle.on( 'toggle', function(e, active) {
+        var experts = getExpertSkills();
 
-        var expertSkills = getExpertSkils();
-
-        if( active ) {
+        if (active) {
             $.ajax({
                 type: "POST",
                 url: "server.php",
-                data: { username: username, availability: "1", ExpertSkills: expertSkills }
+                data: { username: username, availability: "1", ExpertSkills: experts }
             });
-            //alert( 'You are now online and available to help others.' );
         }
 
         else {
             $.ajax({
                 type: "POST",
                 url: "server.php",
-                data: { username: username, availability: "0", ExpertSkills: expertSkills }
+                data: { username: username, availability: "0", ExpertSkills: experts }
             });
-            //alert( 'You are now offline and not available to help others.' );
         }
     });
 
 
-    //// Leaderboard button re-directs to Leaderboard page ////
-    $('button#leaderboards').click( function() {
+    // Leaderboard button redirects to its page
+    $('button#leaderboards').click(function() {
         window.location.href = window.location.origin + "/GMWebApp/leaderboard.php";
     });
 
 
-
+    // Retrieve expert skills
     function getExpertSkills() {
         var columns = [];
         inputsLength = $('#skillSelect option').length;
@@ -119,66 +102,20 @@ $(document).ready( function($) {
             }
         }
 
-        var expertSkills = '';
-
-        for(var y =0; y<columns.length;y++){
-            expertSkills = expertSkills.concat(columns[y]);
+        // Notification of changes and new state ////
+        if($(".toggle-on").hasClass("active")) {
+            availability = 1;
+        }
+        else {
+            availability = 0;
         }
 
-        return expertSkills;
+        var experts = '';
+
+        for(var y =0; y<columns.length;y++){
+            experts = experts.concat(columns[y]);
+        }
+
+        return experts
     }
-
 });
-    //// Update skill checkboxes' 'checked' state ////
-    //for (var x=0; x < inputs.length; x++){
-    //    if (inputs[x].hasClass("result-selected")) {
-    //        //inputs[x].addClass("result-selected");
-    //    }
-    //}
-
-    //function checkRefresh()
-    //{
-    //    if( $('#refreshForm').visited = "")
-    //    {
-    //        // This is a fresh page load
-    //        $('#refreshForm').visited = "1"
-    //
-    //        // You may want to add code here special for
-    //        // fresh page loads
-    //        if(availabilityToggle.on)
-    //        {
-    //            availabilityToggle.toggle({easing: linear, animate: 0});
-    //            availabilityToggle.toggle({text: {on:'Online', off:'Offline'}});
-    //        }
-    //        else
-    //        {
-    //            availabilityToggle.toggle({easing: linear, animate: 0});
-    //            availabilityToggle.toggle({text: {on:'Online', off:'Offline'}});
-    //        }
-    //
-    //    }
-    //    else
-    //    {
-    //        // This is a page refresh
-    //
-    //        // Insert code here representing what to do on
-    //        // a refresh
-    //
-    //        if(availabilityToggle.on)
-    //        {
-    //            availabilityToggle.toggle({easing: linear, animate: 0});
-    //            availabilityToggle.toggle({text: {on:'Online', off:'Offline'}});
-    //        }
-    //        else
-    //        {
-    //            availabilityToggle.toggle({easing: linear, animate: 0});
-    //            availabilityToggle.toggle({text: {on:'Online', off:'Offline'}});
-    //        }
-    //    }
-    //}
-    //
-    //$(window).preload = function(event) {
-    //    checkRefresh();
-    //};
-
-
