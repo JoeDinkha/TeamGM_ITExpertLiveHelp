@@ -56,7 +56,7 @@ $fRating = $results2['Rating'];
 //$fDate = $fDate->format( 'M d, Y' );
 
 //****************grab all of the skills dynamically*************//
-$query_string_skills = "SELECT * FROM dbo.SkillTable";
+$query_string_skills = "SELECT * FROM dbo.SkillTable ORDER BY IndexPosition";
 $skill_results = sqlsrv_query($conn,$query_string_skills);
 $skill_array = array();
 while ($row = sqlsrv_fetch_array($skill_results,SQLSRV_FETCH_ASSOC)){
