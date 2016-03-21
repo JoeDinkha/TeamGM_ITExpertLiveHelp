@@ -42,7 +42,7 @@
     <div class="container" id="login">
         <header>
             <img src="images/Logo_of_General_Motors.png" width="100" height="100" alt="General Motors Logo" />
-            <h1>IT Expert Live Help - Login</h1>
+            <h1>IT Expert Live Help | Login</h1>
         </header>
 
 

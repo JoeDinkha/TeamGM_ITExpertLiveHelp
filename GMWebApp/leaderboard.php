@@ -94,7 +94,7 @@ else{
     <div class="container" id="leaderboard">
         <header>
             <img src="images/Logo_of_General_Motors.png" width="2000" height="1989" alt="General Motors Logo" />
-            <h1>IT Expert Live Help - Leaderboard</h1>
+            <h1>IT Expert Live Help | Leaderboard</h1>
         </header>
 
 
@@ -108,10 +108,8 @@ else{
                     <th>Rating</th>
                 </tr>
 
-
                 <?php
-
-                    //php script to write our query results to the page
+                    // All tds retrieved from database
                     for ($x=0; $x<count($usernames); $x++){
                         $name = $usernames[$x];
                         if ($name == $username){
@@ -137,7 +135,6 @@ else{
                         echo '</tr>';
                     }
                 ?>
-
             </table>
         </div>
 

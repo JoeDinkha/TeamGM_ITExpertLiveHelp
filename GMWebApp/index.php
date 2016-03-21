@@ -286,7 +286,7 @@ while ($row = sqlsrv_fetch_array($skill_results,SQLSRV_FETCH_ASSOC)){
                     <br/>
 
                     <h4><?php echo $fUsername; ?></h4>
-                    <span class="date">(<?php echo $fDate; ?>)</span>
+                    <span class="date"><?php echo $fDate; ?></span>
                     <p><?php echo $fFeedback; ?></p>
                 </div>
 
@@ -297,7 +297,7 @@ while ($row = sqlsrv_fetch_array($skill_results,SQLSRV_FETCH_ASSOC)){
                     <img src="images/star.png" width="500" height="472" alt="Star" />
                     <br/>
                     <h4>Jenna Sanocki</h4>
-                    <span class="date">(Jan. 15, 2016)</span>
+                    <span class="date">Jan. 15, 2016</span>
                     <p>I appreciate you helping me set up my Outlook signature settings.</p>
                 </div>
 
@@ -308,11 +308,34 @@ while ($row = sqlsrv_fetch_array($skill_results,SQLSRV_FETCH_ASSOC)){
                     <img src="images/star.png" width="500" height="472" alt="Star" />
                     <br/>
                     <h4>Zack Keith</h4>
-                    <span class="date">(Jan. 15, 2016)</span>
+                    <span class="date">Jan. 15, 2016</span>
                     <p>Quick and simple help towards fixing my Skype issues! Thanks again.</p>
                 </div>
 
-                <button id="showMoreFeedback">Show More Feedback</button>
+                <div class="bestReview">
+                    <img src="images/star.png" width="500" height="472" alt="Star" />
+                    <img src="images/star.png" width="500" height="472" alt="Star" />
+                    <img src="images/star.png" width="500" height="472" alt="Star" />
+                    <img src="images/star.png" width="500" height="472" alt="Star" />
+                    <img src="images/star.png" width="500" height="472" alt="Star" />
+                    <br/>
+                    <h4>Dr. Dyksen</h4>
+                    <span class="date">Mar. 10, 2016</span>
+                    <p>You were the best! Thank you so much! :D</p>
+                </div>
+
+                <div class="bestReview">
+                    <img src="images/star.png" width="500" height="472" alt="Star" />
+                    <img src="images/star.png" width="500" height="472" alt="Star" />
+                    <img src="images/star.png" width="500" height="472" alt="Star" />
+                    <img src="images/star.png" width="500" height="472" alt="Star" />
+                    <br/>
+                    <h4>Angie</h4>
+                    <span class="date">Mar. 12, 2016</span>
+                    <p>99%</p>
+                </div>
+
+                <button id="showMoreBestFeedback">Show More Feedback</button>
             </div>
 
 
@@ -325,7 +348,7 @@ while ($row = sqlsrv_fetch_array($skill_results,SQLSRV_FETCH_ASSOC)){
                     <img src="images/star.png" width="500" height="472" alt="Star" />
                     <br/>
                     <h4>Shuhao Zhang</h4>
-                    <span class="date">(Feb. 1, 2016)</span>
+                    <span class="date">Feb. 1, 2016</span>
                     <p>You weren't as knowledgeable with Skype as I thought you'd be...</p>
                 </div>
 
@@ -334,7 +357,7 @@ while ($row = sqlsrv_fetch_array($skill_results,SQLSRV_FETCH_ASSOC)){
                     <img src="images/star.png" width="500" height="472" alt="Star" />
                     <br/>
                     <h4>Jake Price</h4>
-                    <span class="date">(Jan. 6, 2016)</span>
+                    <span class="date">Jan. 6, 2016</span>
                     <p>You weren't able to help me fix the issue I was having with Microsoft Word.</p>
                 </div>
 
@@ -342,10 +365,28 @@ while ($row = sqlsrv_fetch_array($skill_results,SQLSRV_FETCH_ASSOC)){
                     <img src="images/star.png" width="500" height="472" alt="Star" />
                     <br/>
                     <h4>UofM Fan</h4>
-                    <span class="date">(Jan. 30, 2016)</span>
+                    <span class="date">Jan. 30, 2016</span>
                     <p>I'm mad that MSU is better at literally everything.</p>
                 </div>
-                <button id="showMoreFeedback">Show More Feedback</button>
+
+                <div class="worstReview">
+                    <img src="images/star.png" width="500" height="472" alt="Star" />
+                    <img src="images/star.png" width="500" height="472" alt="Star" />
+                    <br/>
+                    <h4>Fox</h4>
+                    <span class="date">Mar. 10, 2016</span>
+                    <p>Needs more foxes</p>
+                </div>
+
+                <div class="worstReview">
+                    <img src="images/star.png" width="500" height="472" alt="Star" />
+                    <br/>
+                    <h4>Cat</h4>
+                    <span class="date">Mar. 12, 2016</span>
+                    <p>I want to sleep...</p>
+                </div>
+
+                <button id="showMoreWorstFeedback">Show More Feedback</button>
             </div>
 
         </div>

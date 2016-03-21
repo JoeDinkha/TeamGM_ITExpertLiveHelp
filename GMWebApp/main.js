@@ -82,6 +82,44 @@ $(document).ready(function($) {
     });
 
 
+    // 'Show More Best Feedback' button functionality
+    $('button#showMoreBestFeedback').click( function() {
+        // Hide button
+        $(this).css({
+            display: 'none'
+        });
+
+        // Make scrollable
+        $('div#calendarFeedbackBox div#bestReviews').css({
+            overflow: 'auto'
+        });
+
+        // Display other feedback
+        $('div#calendarFeedbackBox div#bestReviews div.bestReview:nth-child(n+5)').css({
+            display: 'block'
+        })
+    });
+
+
+    // 'Show More Worst Feedback' button functionality
+    $('button#showMoreWorstFeedback').click( function() {
+        // Hide button
+        $(this).css({
+            display: 'none'
+        });
+
+        // Make scrollable
+        $('div#calendarFeedbackBox div#worstReviews').css({
+            overflow: 'auto'
+        });
+
+        // Display other feedback
+        $('div#calendarFeedbackBox div#worstReviews div.worstReview:nth-child(n+5)').css({
+            display: 'block'
+        })
+    });
+
+
     // Retrieve expert skills
     function getExpertSkills() {
         var columns = [];
