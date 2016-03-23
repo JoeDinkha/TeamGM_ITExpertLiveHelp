@@ -16,7 +16,7 @@ $serverName = "35.9.22.109, 1433"; //serverName\instanceName
 // The connection will be attempted using Windows Authentication.
 $connectionInfo = array("Database" => "db","UID"=>"priceja7","PWD"=>"teamgm16");
 $conn = sqlsrv_connect( $serverName, $connectionInfo);
-$query_string = "SELECT Skills FROM dbo.SkillTable";
+$query_string = "SELECT Skills FROM dbo.SkillTable ORDER BY IndexPosition";
 
 $results = sqlsrv_query($conn,$query_string);
 
@@ -29,7 +29,8 @@ while ($array = sqlsrv_fetch_array($results,SQLSRV_FETCH_ASSOC)){
 //echo array_search($expertise,$skillArray);
 $index = array_search($expertise,$skillArray)+1;
 
-$query_expert = "SELECT SkypeName FROM dbo.Mocktable1 WHERE SUBSTRING(ExpertSkills,".$index.",1) = '1' AND Availability='1' ORDER BY IndexPosition";
+
+$query_expert = "SELECT SkypeName FROM dbo.Mocktable1 WHERE SUBSTRING(ExpertSkills,".$index.",1) = '1' AND Availability='1'";
 
 $values = sqlsrv_query($conn,$query_expert);
 
