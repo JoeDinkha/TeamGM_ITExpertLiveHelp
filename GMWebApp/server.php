@@ -27,7 +27,7 @@ $availability = stripslashes($availability);
 
 if (isset($availability)){
     //update database with given username and availability
-    $query_string = "UPDATE dbo.Mocktable1 SET Availability='".$availability."' WHERE Username='".$username."'";
+    $query_string = "UPDATE dbo.Mocktable1 SET Availability='".$availability."' WHERE FullName='".$username."'";
 
     //run the query and store results for future use
     $results = sqlsrv_query($conn,$query_string);
@@ -46,14 +46,14 @@ $expert_skills = $_POST['ExpertSkills'];
 //$query_string2 = "UPDATE dbo.Mocktable1 SET SkillWord=".$business.", SkillOutlook='1', SkillPowerPoint='1' WHERE Username='priceja7'";
 $query_string2 = "UPDATE dbo.Mocktable1
 SET ExpertSkills='".$expert_skills."'
-WHERE Username='".$username."'";
+WHERE FullName='".$username."'";
 
 //run the query and store results for future use
 $results2 = sqlsrv_query($conn,$query_string2);
 
 
 // Retrieve all data on specific user from database
-$query_string3 = "SELECT * FROM dbo.Mocktable1 WHERE Username='" . $username . "'";
+$query_string3 = "SELECT * FROM dbo.Mocktable1 WHERE FullName='" . $username . "'";
 
 //run the query and store results for future use
 $results3 = sqlsrv_query($conn,$query_string3);
