@@ -35,22 +35,44 @@ $outlook = $results['SkillOutlook'];
 $powerpoint = $results['SkillPowerPoint'];
 $explorer = $results['SkillExplorer'];
 $skype = $results['SkillSkype'];
-$avg_rating = $results['AverageRating'];
 $expert_skills = $results['ExpertSkills'];
+$userSkype = $results['SkypeName'];
 
 
-//// Feedback Query - Retrieve feedback for a user
-$query_string2 = "SELECT Username, Date, Feedback, Rating FROM dbo.FeedbackTable"; //WHERE UID=".$userID;
+
+/****** Code to calculate average rating *******/
+$query_stringCalc = "SELECT Author,StarCount,Comment,Date FROM dbo.Feedback WHERE Expert=";
+$query_stringCalc=$query_stringCalc."'".$userSkype."' ORDER By StarCount DESC";
+
 
 // Run query and store results
-$results2 = sqlsrv_query( $conn, $query_string2 );
-$results2 = sqlsrv_fetch_array( $results2, SQLSRV_FETCH_ASSOC );
+$totalStars = 0;
+$numFeedback = 0;
+$results3_query = sqlsrv_query( $conn, $query_stringCalc );
+
+while ($results3= sqlsrv_fetch_array($results3_query,SQLSRV_FETCH_ASSOC)) {
+    $fRating = $results3['StarCount'];
+    $totalStars = $totalStars + $fRating;
+    $numFeedback += 1;
+
+}
+$avg_rating = floor($totalStars/$numFeedback);
+
+//// Feedback Query - Retrieve feedback for a user
+//$query_string2 = "SELECT Username, Date, Feedback, Rating FROM dbo.FeedbackTable"; //WHERE UID=".$userID;
+//$query_string2 = "SELECT Author,StarCount,Comment,Date FROM dbo.Feedback WHERE Expert=";
+//$query_string2=$query_string2."'".$userSkype."'";
+
+
+// Run query and store results
+//$results2_query = sqlsrv_query( $conn, $query_string2 );
+//$results2 = sqlsrv_fetch_array( $results2, SQLSRV_FETCH_ASSOC );
 
 // Store result variables
-$fUsername = $results2['Username'];
-$fDate = $results2['Date'];
-$fFeedback = $results2['Feedback'];
-$fRating = $results2['Rating'];
+//$fUsername = $results2['Author'];
+//$fDate = $results2['Date'];
+//$fFeedback = $results2['Comment'];
+//$fRating = $results2['StarCount'];
 
 // Format DateTime object
 //$fDate = $fDate->format( 'M d, Y' );
@@ -275,65 +297,53 @@ while ($row = sqlsrv_fetch_array($skill_results,SQLSRV_FETCH_ASSOC)){
             <div id="bestReviews">
                 <h3>Best Feedback</h3>
 
-                <div class="bestReview">
-                    <?php
-                        // Test for getting feedback data from database - working!
-                        for( $i = 1; $i <= $fRating; $i++ ) {
-                            //echo $fRating;
-                            echo '<img src="images/star.png" width="500" height="472" alt="Star" />';
+                <?php
+
+                    $query_string2 = "SELECT Author,StarCount,Comment,Date FROM dbo.Feedback WHERE Expert=";
+                    $query_string2=$query_string2."'".$userSkype."' ORDER By StarCount DESC";
+
+
+                    // Run query and store results
+                    $results2_query = sqlsrv_query( $conn, $query_string2 );
+
+                    while ($results2= sqlsrv_fetch_array($results2_query,SQLSRV_FETCH_ASSOC)){
+                        // Store result variables
+                        $fUsername = $results2['Author'];
+                        $fDate = $results2['Date'];
+                        $fFeedback = $results2['Comment'];
+                        $fRating = $results2['StarCount'];
+                        if ($fDate != NULL){
+                            $fDate = $fDate->format( 'M d, Y' );
                         }
-                    ?>
-                    <br/>
 
-                    <h4><?php echo $fUsername; ?></h4>
-                    <span class="date"><?php echo $fDate; ?></span>
-                    <p><?php echo $fFeedback; ?></p>
-                </div>
+                        if ($fRating > 2){
 
-                <div class="bestReview">
-                    <img src="images/star.png" width="500" height="472" alt="Star" />
-                    <img src="images/star.png" width="500" height="472" alt="Star" />
-                    <img src="images/star.png" width="500" height="472" alt="Star" />
-                    <img src="images/star.png" width="500" height="472" alt="Star" />
-                    <br/>
-                    <h4>Jenna Sanocki</h4>
-                    <span class="date">Jan. 15, 2016</span>
-                    <p>I appreciate you helping me set up my Outlook signature settings.</p>
-                </div>
+                            echo '<div class="bestReview">';
+                            // Test for getting feedback data from database - working!
+                            for( $i = 1; $i <= $fRating; $i++ ) {
+                                //echo $fRating;
+                                echo '<img src="images/star.png" width="500" height="472" alt="Star" />';
+                            }
+                            echo '<br/>';
 
-                <div class="bestReview">
-                    <img src="images/star.png" width="500" height="472" alt="Star" />
-                    <img src="images/star.png" width="500" height="472" alt="Star" />
-                    <img src="images/star.png" width="500" height="472" alt="Star" />
-                    <img src="images/star.png" width="500" height="472" alt="Star" />
-                    <br/>
-                    <h4>Zack Keith</h4>
-                    <span class="date">Jan. 15, 2016</span>
-                    <p>Quick and simple help towards fixing my Skype issues! Thanks again.</p>
-                </div>
+                            echo '<h4>'.$fUsername.'</h4>';
+                            echo '<span class="date">'.$fDate.'</span>';
+                            echo '<p>'.$fFeedback.'</p>';
 
-                <div class="bestReview">
-                    <img src="images/star.png" width="500" height="472" alt="Star" />
-                    <img src="images/star.png" width="500" height="472" alt="Star" />
-                    <img src="images/star.png" width="500" height="472" alt="Star" />
-                    <img src="images/star.png" width="500" height="472" alt="Star" />
-                    <img src="images/star.png" width="500" height="472" alt="Star" />
-                    <br/>
-                    <h4>Dr. Dyksen</h4>
-                    <span class="date">Mar. 10, 2016</span>
-                    <p>You were the best! Thank you so much! :D</p>
-                </div>
+                            echo '</div>';
 
-                <div class="bestReview">
-                    <img src="images/star.png" width="500" height="472" alt="Star" />
-                    <img src="images/star.png" width="500" height="472" alt="Star" />
-                    <img src="images/star.png" width="500" height="472" alt="Star" />
-                    <img src="images/star.png" width="500" height="472" alt="Star" />
-                    <br/>
-                    <h4>Angie</h4>
-                    <span class="date">Mar. 12, 2016</span>
-                    <p>99%</p>
-                </div>
+                        }
+
+
+
+                    }
+
+
+                ?>
+
+
+
+
 
                 <button id="showMoreBestFeedback">Show More Feedback</button>
             </div>
@@ -342,49 +352,51 @@ while ($row = sqlsrv_fetch_array($skill_results,SQLSRV_FETCH_ASSOC)){
             <div id="worstReviews">
                 <h3>Worst Feedback</h3>
 
-                <div class="worstReview">
-                    <img src="images/star.png" width="500" height="472" alt="Star" />
-                    <img src="images/star.png" width="500" height="472" alt="Star" />
-                    <img src="images/star.png" width="500" height="472" alt="Star" />
-                    <br/>
-                    <h4>Shuhao Zhang</h4>
-                    <span class="date">Feb. 1, 2016</span>
-                    <p>You weren't as knowledgeable with Skype as I thought you'd be...</p>
-                </div>
+                <?php
 
-                <div class="worstReview">
-                    <img src="images/star.png" width="500" height="472" alt="Star" />
-                    <img src="images/star.png" width="500" height="472" alt="Star" />
-                    <br/>
-                    <h4>Jake Price</h4>
-                    <span class="date">Jan. 6, 2016</span>
-                    <p>You weren't able to help me fix the issue I was having with Microsoft Word.</p>
-                </div>
+                $query_string2 = "SELECT Author,StarCount,Comment,Date FROM dbo.Feedback WHERE Expert=";
+                $query_string2=$query_string2."'".$userSkype."' ORDER By StarCount";
 
-                <div class="worstReview">
-                    <img src="images/star.png" width="500" height="472" alt="Star" />
-                    <br/>
-                    <h4>UofM Fan</h4>
-                    <span class="date">Jan. 30, 2016</span>
-                    <p>I'm mad that MSU is better at literally everything.</p>
-                </div>
 
-                <div class="worstReview">
-                    <img src="images/star.png" width="500" height="472" alt="Star" />
-                    <img src="images/star.png" width="500" height="472" alt="Star" />
-                    <br/>
-                    <h4>Fox</h4>
-                    <span class="date">Mar. 10, 2016</span>
-                    <p>Needs more foxes</p>
-                </div>
+                // Run query and store results
+                $results2_query = sqlsrv_query( $conn, $query_string2 );
 
-                <div class="worstReview">
-                    <img src="images/star.png" width="500" height="472" alt="Star" />
-                    <br/>
-                    <h4>Cat</h4>
-                    <span class="date">Mar. 12, 2016</span>
-                    <p>I want to sleep...</p>
-                </div>
+                while ($results2= sqlsrv_fetch_array($results2_query,SQLSRV_FETCH_ASSOC)){
+                    // Store result variables
+                    $fUsername = $results2['Author'];
+                    $fDate = $results2['Date'];
+                    $fFeedback = $results2['Comment'];
+                    $fRating = $results2['StarCount'];
+                    if ($fDate != NULL){
+                        $fDate = $fDate->format( 'M d, Y' );
+                    }
+
+                    if ($fRating < 3){
+
+                        echo '<div class="worstReview">';
+                        // Test for getting feedback data from database - working!
+                        for( $i = 1; $i <= $fRating; $i++ ) {
+                            //echo $fRating;
+                            echo '<img src="images/star.png" width="500" height="472" alt="Star" />';
+                        }
+                        echo '<br/>';
+
+                        echo '<h4>'.$fUsername.'</h4>';
+                        echo '<span class="date">'.$fDate.'</span>';
+                        echo '<p>'.$fFeedback.'</p>';
+
+                        echo '</div>';
+
+                    }
+
+
+
+                }
+
+
+                ?>
+
+
 
                 <button id="showMoreWorstFeedback">Show More Feedback</button>
             </div>
