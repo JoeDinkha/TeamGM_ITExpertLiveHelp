@@ -28,7 +28,7 @@ $results = sqlsrv_query($conn,$query_string);
 $results = sqlsrv_fetch_array($results,SQLSRV_FETCH_ASSOC);
 
 //grabbing all of these variables for the user and displaying them throughout the page
-$userID = $results['UID'];
+$username = $results['FullName'];
 $available = $results['Availability'];
 $word = $results['SkillWord'];
 $outlook = $results['SkillOutlook'];
@@ -316,6 +316,17 @@ while ($row = sqlsrv_fetch_array($skill_results,SQLSRV_FETCH_ASSOC)){
                             $fDate = $fDate->format( 'M d, Y' );
                         }
 
+                        /********** Retrieve Actual Names rather than Usernames *********/
+                        //// User Query - Retrieve current values in the database, given a user
+                        $quick_query = "SELECT * FROM dbo.MockTable1 WHERE Username='".$fUsername."'";
+
+                        //run the query and store results for future use
+                        $quick_results = sqlsrv_query($conn,$quick_query);
+                        $quick_results = sqlsrv_fetch_array($quick_results,SQLSRV_FETCH_ASSOC);
+
+                        //grabbing all of these variables for the user and displaying them throughout the page
+                        $fUsername = $quick_results['FullName'];
+
                         if ($fRating > 2){
 
                             echo '<div class="bestReview">';
@@ -370,6 +381,17 @@ while ($row = sqlsrv_fetch_array($skill_results,SQLSRV_FETCH_ASSOC)){
                     if ($fDate != NULL){
                         $fDate = $fDate->format( 'M d, Y' );
                     }
+
+                    /********** Retrieve Actual Names rather than Usernames *********/
+                    //// User Query - Retrieve current values in the database, given a user
+                    $quick_query = "SELECT * FROM dbo.MockTable1 WHERE Username='".$fUsername."'";
+
+                    //run the query and store results for future use
+                    $quick_results = sqlsrv_query($conn,$quick_query);
+                    $quick_results = sqlsrv_fetch_array($quick_results,SQLSRV_FETCH_ASSOC);
+
+                    //grabbing all of these variables for the user and displaying them throughout the page
+                    $fUsername = $quick_results['FullName'];
 
                     if ($fRating < 3){
 
