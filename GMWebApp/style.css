@@ -310,7 +310,7 @@ div#calendarFeedbackBox div#worstReviews div.worstReview h4 {
 /* Date */
 div#calendarFeedbackBox div#bestReviews div.bestReview span.date,
 div#calendarFeedbackBox div#worstReviews div.worstReview span.date {
-    display: inline-block;
+    float:right;
     padding-left: 15px;
     color: #464646;
     font-size: 14px;

@@ -300,7 +300,7 @@ while ($row = sqlsrv_fetch_array($skill_results,SQLSRV_FETCH_ASSOC)){
                 <?php
 
                     $query_string2 = "SELECT Author,StarCount,Comment,Date FROM dbo.Feedback WHERE Expert=";
-                    $query_string2=$query_string2."'".$userSkype."' ORDER By StarCount DESC, Date DESC";
+                    $query_string2=$query_string2."'".$userSkype."' ORDER BY StarCount DESC, Date DESC";
 
 
                     // Run query and store results
