@@ -41,7 +41,7 @@ $userSkype = $results['SkypeName'];
 
 
 /****** Code to calculate average rating *******/
-$query_stringCalc = "SELECT Author,StarCount,Comment,Date FROM dbo.Feedback WHERE Expert=";
+$query_stringCalc = "SELECT Author, StarCount, Comment, Date FROM dbo.Feedback WHERE Expert=";
 $query_stringCalc=$query_stringCalc."'".$userSkype."' ORDER By StarCount DESC";
 
 
@@ -50,7 +50,7 @@ $totalStars = 0;
 $numFeedback = 0;
 $results3_query = sqlsrv_query( $conn, $query_stringCalc );
 
-while ($results3= sqlsrv_fetch_array($results3_query,SQLSRV_FETCH_ASSOC)) {
+while ($results3 = sqlsrv_fetch_array($results3_query, SQLSRV_FETCH_ASSOC)) {
     $fRating = $results3['StarCount'];
     $totalStars = $totalStars + $fRating;
     $numFeedback += 1;

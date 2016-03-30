@@ -24,7 +24,7 @@ else{
     //Retrieving current values in the database given a user
     if (isset($username)){
         //update database with given username and availability
-        $query_string = "SELECT Username, AverageRating FROM dbo.MockTable1 ORDER BY AverageRating DESC";
+        $query_string = "SELECT FullName, AverageRating FROM dbo.MockTable1 ORDER BY AverageRating DESC";
 
         //run the query and store results for future use
         $results = sqlsrv_query($conn,$query_string);
@@ -35,7 +35,7 @@ else{
 
         //push each username,average_rating pair into database
         while ($row = sqlsrv_fetch_array($results, SQLSRV_FETCH_ASSOC)){
-            array_push($usernames,$row['Username']);
+            array_push($usernames,$row['FullName']);
             array_push($average_ratings,$row['AverageRating']);
         }
 
@@ -104,7 +104,7 @@ else{
             <table>
                 <tr>
                     <th>Rank</th>
-                    <th>Username</th>
+                    <th>User</th>
                     <th>Rating</th>
                 </tr>
 
