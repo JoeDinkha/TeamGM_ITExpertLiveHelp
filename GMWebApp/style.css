@@ -89,7 +89,7 @@ div.container {
 }
 
 div.content {
-    max-width: 1200px;
+    max-width: 1255px;
     margin: 0 auto;
     padding: 60px 15px 260px 15px;
     text-align: center;
@@ -335,7 +335,7 @@ div#calendarFeedbackBox div#worstReviews button {
 
 /******************* Footer *******************/
 footer {
-    position: absolute;
+    position: relative;
     bottom: 0;
     left: 0;
     right: 0;
