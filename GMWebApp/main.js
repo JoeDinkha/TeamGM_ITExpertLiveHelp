@@ -1,6 +1,6 @@
 $(document).ready(function($) {
 
-    // Globals
+    //// Globals ////
     var username = $('h2#name')[0].innerHTML;
     var availability;
     var availabilityToggle = $('#availabilityToggle');
@@ -9,7 +9,7 @@ $(document).ready(function($) {
     var inputsLength = 0;
 
 
-    // Initialize availability toggle
+    //// Initialize availability toggle ////
     availabilityToggle.toggles({
         drag: true,         // allow dragging the toggle between positions
         click: true,        // allow clicking on the toggle
@@ -32,13 +32,13 @@ $(document).ready(function($) {
     });
 
 
-    // Update the input length variable by number of selected skills
+    //// Update the input length variable by number of selected skills ////
     $('div.chosen-container').click( function() {
         inputsLength = $('ul.chosen-results li').length;
     });
 
 
-    // Push skill updates to the database
+    //// Push skill updates to the database ////
     form.submit( function (event) {
         event.preventDefault();
         var experts = getExpertSkills();
@@ -54,7 +54,7 @@ $(document).ready(function($) {
     });
 
 
-    // Availability status changing
+    //// Availability status changing ////
     availabilityToggle.on( 'toggle', function(e, active) {
         var experts = getExpertSkills();
 
@@ -76,13 +76,13 @@ $(document).ready(function($) {
     });
 
 
-    // Leaderboard button redirects to its page
+    //// Leaderboard button redirects to its page ////
     $('button#leaderboards').click(function() {
         window.location.href = window.location.origin + "/GMWebApp/leaderboard.php";
     });
 
 
-    // 'Show More Best Feedback' button functionality
+    //// 'Show More Best Feedback' button functionality ////
     $('button#showMoreBestFeedback').click( function() {
         // Hide button
         $(this).css({
@@ -101,7 +101,7 @@ $(document).ready(function($) {
     });
 
 
-    // 'Show More Worst Feedback' button functionality
+    //// 'Show More Worst Feedback' button functionality ////
     $('button#showMoreWorstFeedback').click( function() {
         // Hide button
         $(this).css({
@@ -120,7 +120,7 @@ $(document).ready(function($) {
     });
 
 
-    // Retrieve expert skills
+    //// Retrieve expert skills ////
     function getExpertSkills() {
         var columns = [];
         inputsLength = $('#skillSelect option').length;
@@ -140,7 +140,7 @@ $(document).ready(function($) {
             }
         }
 
-        // Notification of changes and new state ////
+        // Notification of changes and new state
         if($(".toggle-on").hasClass("active")) {
             availability = 1;
         }
@@ -158,7 +158,13 @@ $(document).ready(function($) {
     }
 
 
-    //// Get authorization code ////
+    //// 'Log Out' button functionality ////
+    $('#logOut').click( function() {
+        window.location.href = 'post/logout-post.php';
+    });
+
+
+    //// Get Outlook API authorization code ////
     $.ajax({
         type: "GET",
         url: "https://login.microsoftonline.com/common/oauth2/v2.0/authorize?" +
@@ -168,7 +174,6 @@ $(document).ready(function($) {
              "&scope=openid&20https%3A%2F%2Fgraph.microsoft.com%2Fcalendar.read%20",
         headers: { 'Access-Control-Allow-Origin' : "https://35.9.22.109", 'Access-Control-Allow-Methods' : 'GET',
                    'Access-Control-Allow-Headers' : 'Content-Type' },
-        data: {},
 
         success: function( result ) {
             console.log( result );
@@ -180,7 +185,7 @@ $(document).ready(function($) {
     });
 
 
-    //// Post authorization code ////
+    //// Post Outlook API authorization code ////
     //$.ajax({
     //    type: "POST",
     //    url: "https://login.microsoftonline.com/common/oauth2/v2.0/token",
@@ -217,7 +222,7 @@ $(document).ready(function($) {
 
             // Append calendar data to calendar div
             $('div#calendar').append(
-                "Click here to view your calendar" //'" + result.Name + "'"
+                "Click here to view your calendar"
             );
         },
 

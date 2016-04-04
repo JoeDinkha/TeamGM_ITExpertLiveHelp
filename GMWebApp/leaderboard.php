@@ -4,6 +4,7 @@
  * Author: Jacob Price
  */
 session_start();
+$username = null;
 
 if( !isset($_SESSION['user']) ){
     header('Location: login.php');
@@ -29,11 +30,11 @@ else{
         // query to get username for leaderboard indication
         $queryUsers = "SELECT Username, AverageRating FROM dbo.MockTable1 ORDER BY AverageRating DESC";
 
-        //run the query and store results for future use
+        // run the query and store results for future use
         $results = sqlsrv_query($conn,$query_string);
         $userResults = sqlsrv_query($conn, $queryUsers);
 
-        //initialize arrays to hold usernames and average ratings
+        // initialize arrays to hold usernames and average ratings
         $fullnames = array();
         $average_ratings = array();
         $usernames = array();
@@ -52,8 +53,7 @@ else{
         $results = sqlsrv_fetch_array($results,SQLSRV_FETCH_ASSOC);
 
 
-        //grabbing the average rating of the user and displaying them throughout the page
-
+        // grabbing the average rating of the user and displaying them throughout the page
         $avg_rating = $results['AverageRating'];
     }
 }
@@ -108,8 +108,6 @@ else{
 
 
         <div class="content">
-            <!--<h2>Leaderboard</h2>-->
-
             <table>
                 <tr>
                     <th>Rank</th>
@@ -118,21 +116,16 @@ else{
                 </tr>
 
                 <?php
-//                    for($i=0; $i<count($realusers); $i++){
-//                        if($realusers[$i] == $username){
-//                            $userFound = $realusers[$i];
-//                            break;
-//                        }
-//                    }
-
 
                     // All tds retrieved from database
-                    for ($x=0; $x<count($fullnames); $x++){
+                    for ($x=0; $x<count($fullnames); $x++) {
                         $name = $usernames[$x];
+
                         if ($name == $username){
                             echo "<tr id='currentUser'>";
                         }
-                        else{
+
+                        else {
                             echo "<tr>";
                         }
 
