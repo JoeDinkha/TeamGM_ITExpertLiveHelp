@@ -288,8 +288,13 @@ while ($row = sqlsrv_fetch_array($skill_results,SQLSRV_FETCH_ASSOC)){
 
 
         <div id="calendarFeedbackBox">
-            <div id="calendar">
+            <div id="calendarBox">
                 <h3>Calendar</h3>
+
+                <a target="_blank" href="https://outlook.office365.com/owa/calendar/dce5aa05484042aab235fc5a74a203da@msu.edu/158107a85a4242029ac025c44d2c8aed6510926761061563772/calendar.html">
+                    <div id="calendar"></div>
+                </a>
+
                 <button>Add Office Hours</button>
             </div>
 
