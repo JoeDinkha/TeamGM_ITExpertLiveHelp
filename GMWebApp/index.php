@@ -23,11 +23,11 @@ $conn = sqlsrv_connect($serverName, $connectionInfo);
 //// User Query - Retrieve current values in the database, given a user
 $query_string = "SELECT * FROM dbo.MockTable1 WHERE Username='".$username."'";
 
-//run the query and store results for future use
+// run the query and store results for future use
 $results = sqlsrv_query($conn,$query_string);
 $results = sqlsrv_fetch_array($results,SQLSRV_FETCH_ASSOC);
 
-//grabbing all of these variables for the user and displaying them throughout the page
+// grabbing all of these variables for the user and displaying them throughout the page
 $username = $results['FullName'];
 $available = $results['Availability'];
 $word = $results['SkillWord'];
@@ -42,7 +42,7 @@ $userSkype = $results['SkypeName'];
 
 /****** Code to calculate average rating *******/
 $query_stringCalc = "SELECT Author, StarCount, Comment, Date FROM dbo.Feedback WHERE Expert=";
-$query_stringCalc=$query_stringCalc."'".$userSkype."' ORDER By StarCount DESC";
+$query_stringCalc = $query_stringCalc."'".$userSkype."' ORDER By StarCount DESC";
 
 
 // Run query and store results
@@ -77,7 +77,7 @@ $avg_rating = floor($totalStars/$numFeedback);
 // Format DateTime object
 //$fDate = $fDate->format( 'M d, Y' );
 
-//****************grab all of the skills dynamically*************//
+//**************** Grab all of the skills dynamically *************//
 $query_string_skills = "SELECT * FROM dbo.SkillTable ORDER BY IndexPosition";
 $skill_results = sqlsrv_query($conn,$query_string_skills);
 $skill_array = array();
@@ -188,12 +188,6 @@ while ($row = sqlsrv_fetch_array($skill_results,SQLSRV_FETCH_ASSOC)){
                     var explorer = "<?php echo $explorer; ?>";
                     var skype = "<?php echo $skype; ?>";
 
-                    //console.log(word);
-                    //console.log(outlook);
-                    //console.log(powerpoint);
-                    //console.log(explorer);
-                    //console.log(skype);
-
 
                     var availability = "<?php echo $available; ?>";
                     if (availability == "1"){
@@ -223,48 +217,6 @@ while ($row = sqlsrv_fetch_array($skill_results,SQLSRV_FETCH_ASSOC)){
 
                 <select id="skillSelect" name="skillSelect" data-placeholder="Select Your Skills" multiple>
                     <?php
-
-                        /**
-                        //check for word
-                        if ($word == "1"){
-                            echo '<option value="word" selected="selected" >Microsoft Word</option>';
-                        }
-                        else{
-                            echo '<option value="word" >Microsoft Word</option>';
-                        }
-
-                        //check for outlook
-                        if ($outlook == "1"){
-                            echo '<option value="outlook" selected="selected">Microsoft Outlook</option>';
-                        }
-                        else{
-                            echo '<option value="outlook">Microsoft Outlook</option>';
-                        }
-
-                        //check for powerpoint
-                        if ($powerpoint == "1"){
-                            echo '<option value="powerpoint" selected="selected">Microsoft PowerPoint</option>';
-                        }
-                        else{
-                            echo '<option value="powerpoint">Microsoft PowerPoint</option>';
-                        }
-
-                        //check for explorer
-                        if ($explorer == "1"){
-                            echo '<option value="IE" selected="selected">Internet Explorer</option>';
-                        }
-                        else{
-                            echo '<option value="IE">Internet Explorer</option>';
-                        }
-
-                        //check for skype
-                        if ($skype == "1"){
-                            echo '<option value="skype" selected="selected">Skype for Business</option>';
-                        }
-                        else{
-                            echo '<option value="skype">Skype for Business</option>';
-                        }
-                         * **/
                         for($x=0; $x<= count($skill_array); $x++){
                             echo "<p>".$x."</p>";
                             if ($expert_skills[$x] == "1"){
@@ -294,8 +246,8 @@ while ($row = sqlsrv_fetch_array($skill_results,SQLSRV_FETCH_ASSOC)){
                 <a target="_blank" href="https://outlook.office365.com/owa/calendar/dce5aa05484042aab235fc5a74a203da@msu.edu/158107a85a4242029ac025c44d2c8aed6510926761061563772/calendar.html">
                     <div id="calendar"></div>
                 </a>
-                
-                <button>Add Office Hours</button>
+
+                <button>Set Office Hours</button>
             </div>
 
 

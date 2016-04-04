@@ -12,24 +12,24 @@ if( !isset($_SESSION['user']) ){
 else{
     $username = $_SESSION['user'];
 
-    //server details
+    // server details
     $serverName = "35.9.22.109, 1433";
 
-    //more server details
+    // more server details
     $connectionInfo = array("Database" => "db", "UID" => "priceja7", "PWD" => "teamgm16");
 
-    //establish connection to database
+    // establish connection to database
     $conn = sqlsrv_connect($serverName, $connectionInfo);
 
-    //Retrieving current values in the database given a user
+    // Retrieving current values in the database given a user
     if (isset($username)){
-        //update database with given username and availability
+        // update database with given username and availability
         $query_string = "SELECT * FROM dbo.MockTable1 ORDER BY AverageRating DESC";
 
-        //run the query and store results for future use
+        // run the query and store results for future use
         $results = sqlsrv_query($conn,$query_string);
 
-        //initialize arrays to hold usernames and average ratings
+        // initialize arrays to hold usernames and average ratings
         $usernames = array();
         $passwords = array();
         $skypenames = array();
@@ -41,7 +41,7 @@ else{
         $skillexplorers = array();
         $skillskypes = array();
 
-        //push each username,average_rating pair into database
+        // push each username,average_rating pair into database
         while ($row = sqlsrv_fetch_array($results, SQLSRV_FETCH_ASSOC)){
             array_push($usernames,$row['Username']) ;
             array_push($passwords,$row['Password']);
@@ -59,7 +59,7 @@ else{
         $results = sqlsrv_fetch_array($results,SQLSRV_FETCH_ASSOC);
 
 
-        //grabbing the average rating of the user and displaying them throughout the page
+        // grabbing the average rating of the user and displaying them throughout the page
 
         $avg_rating = $results['AverageRating'];
     }
