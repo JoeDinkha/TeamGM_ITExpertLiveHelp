@@ -288,8 +288,9 @@ while ($row = sqlsrv_fetch_array($skill_results,SQLSRV_FETCH_ASSOC)){
 
 
         <div id="calendarFeedbackBox">
-            <div id="calendar">
+            <div id="calendarBox">
                 <h3>Calendar</h3>
+                <div id="calendar"></div>
                 <button>Add Office Hours</button>
             </div>
 
