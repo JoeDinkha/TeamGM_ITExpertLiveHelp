@@ -56,7 +56,7 @@ while ($results3 = sqlsrv_fetch_array($results3_query, SQLSRV_FETCH_ASSOC)) {
 
 // Update average rating in database
 $avg_rating = null;
-//$query_updateAvgRating = "INSERT INTO dbo.Mocktable1 (AverageRating) VALUES('" . $avg_rating . "') WHERE Username=" . "'" . $username . "'";
+//$query_updateAvgRating = "REPLACE INTO dbo.Mocktable1 (AverageRating) VALUES('" . $avg_rating . "') WHERE Username=" . "'" . $username . "'";
 
 // If user has no feedback, set average rating to 0
 if( $numFeedback <= 0 ) {
@@ -253,9 +253,7 @@ while ($row = sqlsrv_fetch_array($skill_results,SQLSRV_FETCH_ASSOC)){
             <div id="calendarBox">
                 <h3>Calendar</h3>
 
-                <a target="_blank" href="https://outlook.office365.com/owa/calendar/dce5aa05484042aab235fc5a74a203da@msu.edu/158107a85a4242029ac025c44d2c8aed6510926761061563772/calendar.html">
-                    <div id="calendar"></div>
-                </a>
+                <div id="calendar"></div>
 
                 <button>Set Office Hours</button>
             </div>

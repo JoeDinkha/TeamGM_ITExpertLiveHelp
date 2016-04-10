@@ -164,6 +164,11 @@ $(document).ready(function($) {
     });
 
 
+    $('div#calendarBox button').click( function() {
+        window.location.href = 'https://outlook.office.com/owa/?realm=msu.edu&exsvurl=1&ll-cc=1033&modurl=0&path=/calendar/view/Month';
+    });
+
+
     //// Get Outlook API authorization code ////
     $.ajax({
         type: "GET",
@@ -212,7 +217,7 @@ $(document).ready(function($) {
         type: "GET",
         url: "https://outlook.office.com/api/v2.0/me/calendar",
         headers: {
-            Authorization : 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ik1uQ19WWmNBVGZNNXBPWWlKSE1iYTlnb0VLWSIsImtpZCI6Ik1uQ19WWmNBVGZNNXBPWWlKSE1iYTlnb0VLWSJ9.eyJhdWQiOiJodHRwczovL291dGxvb2sub2ZmaWNlLmNvbSIsImlzcyI6Imh0dHBzOi8vc3RzLndpbmRvd3MubmV0LzIyMTc3MTMwLTY0MmYtNDFkOS05MjExLTc0MjM3YWQ1Njg3ZC8iLCJpYXQiOjE0NTk3OTIzNTQsIm5iZiI6MTQ1OTc5MjM1NCwiZXhwIjoxNDU5Nzk2MjU0LCJhY3IiOiIxIiwiYW1yIjpbInB3ZCJdLCJhcHBpZCI6ImRmNWMzZjQzLTg0YjItNDQ0NC1hMGU4LTMwMjJkMzY0ZjUzYiIsImFwcGlkYWNyIjoiMSIsImZhbWlseV9uYW1lIjoiU2Fub2NraSIsImdpdmVuX25hbWUiOiJKZW5uYSBOaWNvbGUiLCJpcGFkZHIiOiIzNS45LjIyLjE1OSIsIm5hbWUiOiJTYW5vY2tpLCBKZW5uYSBOaWNvbGUiLCJvaWQiOiI4YjExMjJiYi1iOWZlLTQwZTItYmQ4ZC00OWMwMWVjODc3NTYiLCJvbnByZW1fc2lkIjoiUy0xLTUtMjEtMTM1NDQ5ODMzLTIzNjUyOTcyMi0xMzAwMzA1NTY1LTEzNTU4MCIsInB1aWQiOiIxMDAzM0ZGRjkyOEY0MDFGIiwic2NwIjoiQ2FsZW5kYXJzLlJlYWQiLCJzdWIiOiIwazRmS09nRlFQTF8yQUlxYkZ4dk40cTctV3VtV3FwTmhtWmY4aTR6SGJJIiwidGlkIjoiMjIxNzcxMzAtNjQyZi00MWQ5LTkyMTEtNzQyMzdhZDU2ODdkIiwidW5pcXVlX25hbWUiOiJzYW5vY2tpMUBtc3UuZWR1IiwidXBuIjoic2Fub2NraTFAbXN1LmVkdSIsInZlciI6IjEuMCJ9.sqrMytDGM32McxeQKacq6fApwwalTbzfJ17URp96kqkdId3mp3kQFw--zkPSELW8VtA5awxU-YD3TUWr-Gwu5GqeimrPIO2a-J2uDQgrg2qStZcL1rw0cKxKaLScO4mLD6LESFBqrCUCNrjZRc7NA6VL4ju_SN2JPbCn72-4IrOHBMOdVElbnofnxC2rdGgT7B6MrFXaDj12_GXQryJwhBbRU2E3zYj5TrwtwY5LkP6a65sOc9JCdu3v4_itFrVg0tf2xWxWcM8CgXY-F1U6_rVN0cXAwXYr-8o42Jexm8xbYBAFSBg6K3FEjiBMFevGTAooJARAipy_k3WYWRH8eA'
+            Authorization : 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ik1uQ19WWmNBVGZNNXBPWWlKSE1iYTlnb0VLWSIsImtpZCI6Ik1uQ19WWmNBVGZNNXBPWWlKSE1iYTlnb0VLWSJ9.eyJhdWQiOiJodHRwczovL291dGxvb2sub2ZmaWNlLmNvbSIsImlzcyI6Imh0dHBzOi8vc3RzLndpbmRvd3MubmV0LzIyMTc3MTMwLTY0MmYtNDFkOS05MjExLTc0MjM3YWQ1Njg3ZC8iLCJpYXQiOjE0NTk5NzM1NzgsIm5iZiI6MTQ1OTk3MzU3OCwiZXhwIjoxNDU5OTc3NDc4LCJhY3IiOiIxIiwiYW1yIjpbInB3ZCJdLCJhcHBpZCI6ImRmNWMzZjQzLTg0YjItNDQ0NC1hMGU4LTMwMjJkMzY0ZjUzYiIsImFwcGlkYWNyIjoiMSIsImZhbWlseV9uYW1lIjoiU2Fub2NraSIsImdpdmVuX25hbWUiOiJKZW5uYSBOaWNvbGUiLCJpcGFkZHIiOiIzNS45LjIyLjE1OSIsIm5hbWUiOiJTYW5vY2tpLCBKZW5uYSBOaWNvbGUiLCJvaWQiOiI4YjExMjJiYi1iOWZlLTQwZTItYmQ4ZC00OWMwMWVjODc3NTYiLCJvbnByZW1fc2lkIjoiUy0xLTUtMjEtMTM1NDQ5ODMzLTIzNjUyOTcyMi0xMzAwMzA1NTY1LTEzNTU4MCIsInB1aWQiOiIxMDAzM0ZGRjkyOEY0MDFGIiwic2NwIjoiQ2FsZW5kYXJzLlJlYWQiLCJzdWIiOiIwazRmS09nRlFQTF8yQUlxYkZ4dk40cTctV3VtV3FwTmhtWmY4aTR6SGJJIiwidGlkIjoiMjIxNzcxMzAtNjQyZi00MWQ5LTkyMTEtNzQyMzdhZDU2ODdkIiwidW5pcXVlX25hbWUiOiJzYW5vY2tpMUBtc3UuZWR1IiwidXBuIjoic2Fub2NraTFAbXN1LmVkdSIsInZlciI6IjEuMCJ9.O9P4aKyxCAsNjvUrYEHW2JlC3m7i6Rfq5UGJwy088VrYS1z1CjxhiaAwbG_o1-XyAubM0R53DGVEYbK6ISSAssWKSBlcncPyOYTDCi1An_X0WEQoGQmsTrwvJg8vKWQLSRoSSxm8oHHt3l1GbgOp-fHQlwPr8NmFsCQZq-399H7IjHhsK_AQoaRyrtpD9R7IE09IavJc7FzmTJ4SiV_0be1gvN2Xf9jzw2lY8oUl3sdpjDqi5_j_RFkb_vA3o0r77P_faZql0CgXmce_-ZNssrIIBjp-EX8Prvzwf_Hhkj6_zdcaz58ryOERQmINdzu3ATLZwVCuDWgxD8Msw7cWJQ'
         },
         dataType: 'json',
 
@@ -221,9 +226,9 @@ $(document).ready(function($) {
             console.log( result );
 
             // Append calendar data to calendar div
-            $('div#calendar').append(
-                "Click here to view your calendar"
-            );
+            //$('div#calendar').append(
+            //    "Success"
+            //);
         },
 
         error: function( error ) {
