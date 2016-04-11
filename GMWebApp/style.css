@@ -501,6 +501,10 @@ div#leaderboard.container table tr#currentUser td {
     border: 1px solid #22559E;
 }
 
+.invisibleLink {
+    display: none;
+}
+
 
 /****************** Responsiveness ******************/
 @media( max-width: 1250px ) {

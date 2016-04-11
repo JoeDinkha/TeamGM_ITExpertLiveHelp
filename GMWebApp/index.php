@@ -1,7 +1,4 @@
 <?php
-/**
- * Author: Jacob Price
- */
 session_start();
 if( !isset($_SESSION['user']) ) {
     header('Location: login.php');
@@ -257,10 +254,6 @@ while ($row = sqlsrv_fetch_array($skill_results,SQLSRV_FETCH_ASSOC)){
             <div id="calendarBox">
                 <h3>Calendar</h3>
 
-                <button id="outlookOnline">
-                    <a target="_blank" href="https://bay02.calendar.live.com/calendar/calendar.aspx?rru=addevent&startdt=20160429T12%3a00%3a00Z&enddt=20160429T14%3a00%3a00Z&summary=Office+Hours&location=https%3A%2F%2F35.9.22.109%2FGMWebApp&description=IT+Expert+Live+Help&allday=false&uid=">Set Office Hours in Outlook Online</a>
-                </button>
-
                 <span class="addtocalendar" data-calendars="Outlook, Outlook Online">
                     <a class="atcb-link">Set Office Hours</a>
 
@@ -268,13 +261,20 @@ while ($row = sqlsrv_fetch_array($skill_results,SQLSRV_FETCH_ASSOC)){
                         <var class="atc_date_start">2016-04-29 12:00:00</var>
                         <var class="atc_date_end">2016-04-29 14:00:00</var>
                         <var class="atc_timezone">America/Detroit</var>
-                        <var class="atc_title">Office Hours</var>
-                        <var class="atc_description">IT Expert Live Help</var>
-                        <var class="atc_location">https://35.9.22.109/GMWebApp</var>
+                        <var class="atc_title">IT Expert Live Help: Office Hours</var>
+                        <var class="atc_description">Availability period to assist others</var>
+                        <var class="atc_location">Online</var>
                         <var class="atc_organizer"><?php echo $username; ?></var>
                         <var class="atc_organizer_email"></var>
                     </var>
                 </span>
+
+                <br>
+                <!-- Allows correct link for Outlook Online to work without being visible
+                     Temp fix until AddToCalendar.com fixes their URI from their end
+                <!--                <button id="outlookOnline">-->
+                <a class="invisibleLink" target="_blank" href="https://bay02.calendar.live.com/calendar/calendar.aspx?rru=addevent&startdt=20160429T12%3a00%3a00Z&enddt=20160429T14%3a00%3a00Z&summary=Office+Hours&location=Online&description=IT+Expert+Live+Help&allday=false&uid=">Outlook Online</a>
+                <!--                </button>-->
             </div>
 
 
