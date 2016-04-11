@@ -176,24 +176,24 @@ $(document).ready(function($) {
 
 
     //// Get Outlook API authorization code ////
-    // $.ajax({
-    //     type: "GET",
-    //     url: "https://login.microsoftonline.com/common/oauth2/v2.0/authorize?" +
-    //          "client_id=df5c3f43-84b2-4444-a0e8-3022d364f53b" +
-    //          "&response_type=code" +
-    //          "&redirect_uri=https%3A%2F%2F35.9.22.109%2FGMWebApp%2Findex.php" +
-    //          "&scope=openid&20https%3A%2F%2Fgraph.microsoft.com%2Fcalendar.read%20",
-    //     headers: { 'Access-Control-Allow-Origin' : "https://35.9.22.109", 'Access-Control-Allow-Methods' : 'GET',
-    //                'Access-Control-Allow-Headers' : 'Content-Type' },
-    //
-    //     success: function( result ) {
-    //         console.log( result );
-    //     },
-    //
-    //     error: function( error ) {
-    //         console.log( error );
-    //     }
-    // });
+    $.ajax({
+        type: "GET",
+        url: "https://login.microsoftonline.com/common/oauth2/v2.0/authorize?" +
+             "client_id=df5c3f43-84b2-4444-a0e8-3022d364f53b" +
+             "&response_type=code" +
+             "&redirect_uri=https%3A%2F%2F35.9.22.109%2FGMWebApp%2Findex.php" +
+             "&scope=https%3A%2F%2Fgraph.microsoft.com%2Fcalendars.read%20openid",
+        headers: { 'Access-Control-Allow-Origin' : "https://35.9.22.109", 'Access-Control-Allow-Methods' : 'GET',
+                   'Access-Control-Allow-Headers' : 'Content-Type' },
+
+        success: function( result ) {
+            console.log( result );
+        },
+
+        error: function( error ) {
+            console.log( error );
+        }
+    });
 
 
     //// Post Outlook API authorization code ////
@@ -218,29 +218,29 @@ $(document).ready(function($) {
     //});
 
 
-    //// Get Outlook calendar ////
-    // $.ajax({
-    //     type: "GET",
-    //     url: "https://outlook.office.com/api/v2.0/me/calendar",
-    //     headers: {
-    //         Authorization : 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ik1uQ19WWmNBVGZNNXBPWWlKSE1iYTlnb0VLWSIsImtpZCI6Ik1uQ19WWmNBVGZNNXBPWWlKSE1iYTlnb0VLWSJ9.eyJhdWQiOiJodHRwczovL291dGxvb2sub2ZmaWNlLmNvbSIsImlzcyI6Imh0dHBzOi8vc3RzLndpbmRvd3MubmV0LzIyMTc3MTMwLTY0MmYtNDFkOS05MjExLTc0MjM3YWQ1Njg3ZC8iLCJpYXQiOjE0NTk5NzM1NzgsIm5iZiI6MTQ1OTk3MzU3OCwiZXhwIjoxNDU5OTc3NDc4LCJhY3IiOiIxIiwiYW1yIjpbInB3ZCJdLCJhcHBpZCI6ImRmNWMzZjQzLTg0YjItNDQ0NC1hMGU4LTMwMjJkMzY0ZjUzYiIsImFwcGlkYWNyIjoiMSIsImZhbWlseV9uYW1lIjoiU2Fub2NraSIsImdpdmVuX25hbWUiOiJKZW5uYSBOaWNvbGUiLCJpcGFkZHIiOiIzNS45LjIyLjE1OSIsIm5hbWUiOiJTYW5vY2tpLCBKZW5uYSBOaWNvbGUiLCJvaWQiOiI4YjExMjJiYi1iOWZlLTQwZTItYmQ4ZC00OWMwMWVjODc3NTYiLCJvbnByZW1fc2lkIjoiUy0xLTUtMjEtMTM1NDQ5ODMzLTIzNjUyOTcyMi0xMzAwMzA1NTY1LTEzNTU4MCIsInB1aWQiOiIxMDAzM0ZGRjkyOEY0MDFGIiwic2NwIjoiQ2FsZW5kYXJzLlJlYWQiLCJzdWIiOiIwazRmS09nRlFQTF8yQUlxYkZ4dk40cTctV3VtV3FwTmhtWmY4aTR6SGJJIiwidGlkIjoiMjIxNzcxMzAtNjQyZi00MWQ5LTkyMTEtNzQyMzdhZDU2ODdkIiwidW5pcXVlX25hbWUiOiJzYW5vY2tpMUBtc3UuZWR1IiwidXBuIjoic2Fub2NraTFAbXN1LmVkdSIsInZlciI6IjEuMCJ9.O9P4aKyxCAsNjvUrYEHW2JlC3m7i6Rfq5UGJwy088VrYS1z1CjxhiaAwbG_o1-XyAubM0R53DGVEYbK6ISSAssWKSBlcncPyOYTDCi1An_X0WEQoGQmsTrwvJg8vKWQLSRoSSxm8oHHt3l1GbgOp-fHQlwPr8NmFsCQZq-399H7IjHhsK_AQoaRyrtpD9R7IE09IavJc7FzmTJ4SiV_0be1gvN2Xf9jzw2lY8oUl3sdpjDqi5_j_RFkb_vA3o0r77P_faZql0CgXmce_-ZNssrIIBjp-EX8Prvzwf_Hhkj6_zdcaz58ryOERQmINdzu3ATLZwVCuDWgxD8Msw7cWJQ'
-    //     },
-    //     dataType: 'json',
-    //
-    //     success: function( result ) {
-    //         console.log( 'Success!' );
-    //         console.log( result );
-    //
-    //         // Append calendar data to calendar div
-    //         //$('div#calendar').append(
-    //         //    "Success"
-    //         //);
-    //     },
-    //
-    //     error: function( error ) {
-    //         console.log( 'Error...' );
-    //         console.log( error );
-    //     }
-    // });
+    //// Get Outlook calendar events ////
+    $.ajax({
+        type: "GET",
+        url: "https://outlook.office.com/api/v2.0/me/calendarview?" +
+             "startDateTime=2016-04-01T01:00:00&endDateTime=2016-05-01T23:00:00",
+        headers: {
+            Authorization : 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ik1uQ19WWmNBVGZNNXBPWWlKSE1iYTlnb0VLWSIsImtpZCI6Ik1uQ19WWmNBVGZNNXBPWWlKSE1iYTlnb0VLWSJ9.eyJhdWQiOiJodHRwczovL291dGxvb2sub2ZmaWNlLmNvbSIsImlzcyI6Imh0dHBzOi8vc3RzLndpbmRvd3MubmV0LzIyMTc3MTMwLTY0MmYtNDFkOS05MjExLTc0MjM3YWQ1Njg3ZC8iLCJpYXQiOjE0NjA0MTA5OTgsIm5iZiI6MTQ2MDQxMDk5OCwiZXhwIjoxNDYwNDE0ODk4LCJhY3IiOiIxIiwiYW1yIjpbInB3ZCJdLCJhcHBpZCI6ImRmNWMzZjQzLTg0YjItNDQ0NC1hMGU4LTMwMjJkMzY0ZjUzYiIsImFwcGlkYWNyIjoiMSIsImZhbWlseV9uYW1lIjoiRGlua2hhIiwiZ2l2ZW5fbmFtZSI6IkpvZSBKb2huIiwiaXBhZGRyIjoiMzUuOS4yMi4xNTkiLCJuYW1lIjoiRGlua2hhLCBKb2UgSm9obiIsIm9pZCI6IjY1YzkwNGEyLTJkMzYtNGFhNi04ZWRlLTQ5MmJiMGNkYWJmNSIsIm9ucHJlbV9zaWQiOiJTLTEtNS0yMS0xMzU0NDk4MzMtMjM2NTI5NzIyLTEzMDAzMDU1NjUtMTEzMjM1IiwicHVpZCI6IjEwMDNCRkZEOTI4NjQ1RTEiLCJzY3AiOiJDYWxlbmRhcnMuUmVhZCIsInN1YiI6IjdvSDRuQVFweDRMWHlpTkpvQXNHdkN1WXlRTW1QWFRlRFlxWmNHTEpVOFkiLCJ0aWQiOiIyMjE3NzEzMC02NDJmLTQxZDktOTIxMS03NDIzN2FkNTY4N2QiLCJ1bmlxdWVfbmFtZSI6ImRpbmtoYWpvQG1zdS5lZHUiLCJ1cG4iOiJkaW5raGFqb0Btc3UuZWR1IiwidmVyIjoiMS4wIn0.suRuiZvmicwz-uMsjgAkszR9vPZBzzk1M7ghHfYXk_5A8xJBF4qOn5OV8_wxoM3kTHdeP6c2bJKmQO6v_SDZkz56ggtKJLiXODbB7zCKCyJkf3e-v1uAtjUtmOWw520r6E32yqMTJZC3BKFcvWRih0mtP4-yAO3-TxFsZE_0fR7QlIvN2QO-PvYObDVcdz27I7okoRxopOMpoqrTSZDfkUabsuokjk77OGCgjWMXeufzg8b9Gve6oRZwSYrbaWH2-dvnL2F_BOVdoAWuQVKGVBlCHwNH20_Sc6N_wu0xvQmIXtC2JXkP65VhnSkO55GFoIcbNSlmSjHlIPGQXD8RUA'
+        },
+        dataType: 'json',
+
+        success: function( result ) {
+            console.log( 'Get Calendar - Success!' );
+            console.log( result );
+
+            console.log( "Subject = " + result.value[0].Subject );
+            console.log( "Start DateTime = " + result.value[0].Start.DateTime );
+            console.log( "End DateTime = " + result.value[0].End.DateTime );
+        },
+
+        error: function( error ) {
+            console.log( 'Get Calendar - Error...' );
+            console.log( error );
+        }
+    });
 
 });

@@ -254,8 +254,8 @@ while ($row = sqlsrv_fetch_array($skill_results,SQLSRV_FETCH_ASSOC)){
             <div id="calendarBox">
                 <h3>Calendar</h3>
 
-                <span class="addtocalendar" data-calendars="Outlook, Outlook Online">
-                    <a class="atcb-link">Set Office Hours</a>
+                <span class="addtocalendar" data-calendars="Outlook">
+                    <a class="atcb-link">Set Office Hours in Outlook</a>
 
                     <var class="atc_event">
                         <var class="atc_date_start">2016-04-29 12:00:00</var>
@@ -269,12 +269,11 @@ while ($row = sqlsrv_fetch_array($skill_results,SQLSRV_FETCH_ASSOC)){
                     </var>
                 </span>
 
-                <br>
-                <!-- Allows correct link for Outlook Online to work without being visible
-                     Temp fix until AddToCalendar.com fixes their URI from their end
-                <!--                <button id="outlookOnline">-->
-                <a class="invisibleLink" target="_blank" href="https://bay02.calendar.live.com/calendar/calendar.aspx?rru=addevent&startdt=20160429T12%3a00%3a00Z&enddt=20160429T14%3a00%3a00Z&summary=Office+Hours&location=Online&description=IT+Expert+Live+Help&allday=false&uid=">Outlook Online</a>
-                <!--                </button>-->
+                <button id="outlookOnline">
+                    <a class="invisibleLink" target="_blank" href="https://bay02.calendar.live.com/calendar/calendar.aspx?rru=addevent&startdt=20160429T12%3a00%3a00Z&enddt=20160429T14%3a00%3a00Z&summary=Office+Hours&location=Online&description=IT+Expert+Live+Help&allday=false&uid=">
+                        Set Office Hours in Outlook Online
+                    </a>
+                </button>
             </div>
 
 

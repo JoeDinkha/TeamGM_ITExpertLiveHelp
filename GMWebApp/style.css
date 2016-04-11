@@ -254,14 +254,20 @@ div#calendarFeedbackBox div#calendarBox h3 {
 /*** Outlook Online Button ***/
 div#calendarFeedbackBox div#calendarBox button#outlookOnline {
     margin-bottom: 0;
+    margin-top: 15px;
 }
 
 div#calendarFeedbackBox div#calendarBox button#outlookOnline a {
     color: white;
+    font-size: 16px;
     text-decoration: none;
 }
 
 /*** "Set Office Hours" Special Button ***/
+div#calendarFeedbackBox div#calendarBox span.addtocalendar {
+    width: 319px;
+}
+
 div#calendarFeedbackBox div#calendarBox span.addtocalendar a.atcb-link {
     padding: 10px 30px;
     margin: 15px auto 0 auto;
@@ -502,7 +508,7 @@ div#leaderboard.container table tr#currentUser td {
 }
 
 .invisibleLink {
-    display: none;
+    /*display: none;*/
 }
 
 
