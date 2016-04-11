@@ -130,12 +130,14 @@ while ($row = sqlsrv_fetch_array($skill_results,SQLSRV_FETCH_ASSOC)){
     <link rel="stylesheet" href="jquery-toggles-master/css/toggles.css" type="text/css" />
     <link rel="stylesheet" href="jquery-toggles-master/css/themes/toggles-modern.css" type="text/css" />
     <link rel="stylesheet" href="chosen_v1.5.0/chosen.css" type="text/css" />
+    <link rel="stylesheet" href="https://addtocalendar.com/atc/1.5/atc-base.css" type="text/css" />
 
     <!-- Script Imports -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <script src="main.js" type="text/javascript"></script>
     <script src="jquery-toggles-master/toggles.min.js" type="text/javascript"></script>
     <script src="chosen_v1.5.0/chosen.jquery.min.js" type="text/javascript"></script>
+    <script src="https://addtocalendar.com/atc/1.5/atc.min.js" type="text/javascript"></script>
 
     <!-- Favicons -->
     <link rel="shortcut icon" href="favicons/favicon.ico">
@@ -171,7 +173,8 @@ while ($row = sqlsrv_fetch_array($skill_results,SQLSRV_FETCH_ASSOC)){
 
     <div class="content">
         <div id="profilePanel">
-            <img id="profilePic" src="images/team-photo.jpeg" width="4256" height="2832" alt="Profile Picture" />
+            <img id="profilePic" src="images/team-photo-resized.png" width="1064" height="708"
+                 alt="<?echo $username; ?>'s Profile Picture" />
 
             <h2 id="name"><?php echo $username; ?></h2>
 
@@ -244,7 +247,8 @@ while ($row = sqlsrv_fetch_array($skill_results,SQLSRV_FETCH_ASSOC)){
                 <input type="submit" id="saveSkills" value="Save" />
             </form>
 
-            <button id="leaderboards">Leaderboards</button>
+
+            <button id="leaderboard">Leaderboard</button>
             <button id="logOut">Log Out</button>
         </div>
 
@@ -253,9 +257,24 @@ while ($row = sqlsrv_fetch_array($skill_results,SQLSRV_FETCH_ASSOC)){
             <div id="calendarBox">
                 <h3>Calendar</h3>
 
-                <div id="calendar"></div>
+                <button id="outlookOnline">
+                    <a target="_blank" href="https://bay02.calendar.live.com/calendar/calendar.aspx?rru=addevent&startdt=20160429T12%3a00%3a00Z&enddt=20160429T14%3a00%3a00Z&summary=Office+Hours&location=https%3A%2F%2F35.9.22.109%2FGMWebApp&description=IT+Expert+Live+Help&allday=false&uid=">Set Office Hours in Outlook Online</a>
+                </button>
 
-                <button>Set Office Hours</button>
+                <span class="addtocalendar" data-calendars="Outlook, Outlook Online">
+                    <a class="atcb-link">Set Office Hours</a>
+
+                    <var class="atc_event">
+                        <var class="atc_date_start">2016-04-29 12:00:00</var>
+                        <var class="atc_date_end">2016-04-29 14:00:00</var>
+                        <var class="atc_timezone">America/Detroit</var>
+                        <var class="atc_title">Office Hours</var>
+                        <var class="atc_description">IT Expert Live Help</var>
+                        <var class="atc_location">https://35.9.22.109/GMWebApp</var>
+                        <var class="atc_organizer"><?php echo $username; ?></var>
+                        <var class="atc_organizer_email"></var>
+                    </var>
+                </span>
             </div>
 
 
@@ -299,11 +318,12 @@ while ($row = sqlsrv_fetch_array($skill_results,SQLSRV_FETCH_ASSOC)){
                             for( $i = 1; $i <= $fRating; $i++ ) {
                                 echo '<img src="images/star.png" width="500" height="472" alt="Star" />';
                             }
-
                             echo '<br/>';
 
                             echo '<h4>'.$fUsername.'</h4>';
                             echo '<span class="date">'.$fDate.'</span>';
+
+                            echo '<span class="skill">Skill: '.'Trolling'.'</span>';
                             echo '<p>'.$fFeedback.'</p>';
 
                             echo '</div>';
@@ -319,61 +339,53 @@ while ($row = sqlsrv_fetch_array($skill_results,SQLSRV_FETCH_ASSOC)){
                 <h3>Worst Feedback</h3>
 
                 <?php
+                    $query_string2 = "SELECT Author,StarCount,Comment,Date FROM dbo.Feedback WHERE Expert=";
+                    $query_string2=$query_string2."'".$userSkype."' ORDER BY StarCount, Date DESC";
 
-                $query_string2 = "SELECT Author,StarCount,Comment,Date FROM dbo.Feedback WHERE Expert=";
-                $query_string2=$query_string2."'".$userSkype."' ORDER BY StarCount, Date DESC";
 
+                    // Run query and store results
+                    $results2_query = sqlsrv_query( $conn, $query_string2 );
 
-                // Run query and store results
-                $results2_query = sqlsrv_query( $conn, $query_string2 );
-
-                while ($results2= sqlsrv_fetch_array($results2_query,SQLSRV_FETCH_ASSOC)){
-                    // Store result variables
-                    $fUsername = $results2['Author'];
-                    $fDate = $results2['Date'];
-                    $fFeedback = $results2['Comment'];
-                    $fRating = $results2['StarCount'];
-                    if ($fDate != NULL){
-                        $fDate = $fDate->format( 'M d, Y' );
-                    }
-
-                    /********** Retrieve Actual Names rather than Usernames *********/
-                    //// User Query - Retrieve current values in the database, given a user
-                    $quick_query = "SELECT * FROM dbo.MockTable1 WHERE Username='".$fUsername."'";
-
-                    //run the query and store results for future use
-                    $quick_results = sqlsrv_query($conn,$quick_query);
-                    $quick_results = sqlsrv_fetch_array($quick_results,SQLSRV_FETCH_ASSOC);
-
-                    //grabbing all of these variables for the user and displaying them throughout the page
-                    $fUsername = $quick_results['FullName'];
-
-                    if ($fRating < 3){
-
-                        echo '<div class="worstReview">';
-                        // Test for getting feedback data from database - working!
-                        for( $i = 1; $i <= $fRating; $i++ ) {
-                            //echo $fRating;
-                            echo '<img src="images/star.png" width="500" height="472" alt="Star" />';
+                    while ($results2= sqlsrv_fetch_array($results2_query,SQLSRV_FETCH_ASSOC)){
+                        // Store result variables
+                        $fUsername = $results2['Author'];
+                        $fDate = $results2['Date'];
+                        $fFeedback = $results2['Comment'];
+                        $fRating = $results2['StarCount'];
+                        if ($fDate != NULL){
+                            $fDate = $fDate->format( 'M d, Y' );
                         }
-                        echo '<br/>';
 
-                        echo '<h4>'.$fUsername.'</h4>';
-                        echo '<span class="date">'.$fDate.'</span>';
-                        echo '<p>'.$fFeedback.'</p>';
+                        /********** Retrieve Actual Names rather than Usernames *********/
+                        //// User Query - Retrieve current values in the database, given a user
+                        $quick_query = "SELECT * FROM dbo.MockTable1 WHERE Username='".$fUsername."'";
 
-                        echo '</div>';
+                        //run the query and store results for future use
+                        $quick_results = sqlsrv_query($conn,$quick_query);
+                        $quick_results = sqlsrv_fetch_array($quick_results,SQLSRV_FETCH_ASSOC);
 
+                        //grabbing all of these variables for the user and displaying them throughout the page
+                        $fUsername = $quick_results['FullName'];
+
+                        if ($fRating < 3){
+                            echo '<div class="worstReview">';
+                            // Test for getting feedback data from database - working!
+                            for( $i = 1; $i <= $fRating; $i++ ) {
+                                //echo $fRating;
+                                echo '<img src="images/star.png" width="500" height="472" alt="Star" />';
+                            }
+                            echo '<br/>';
+
+                            echo '<h4>'.$fUsername.'</h4>';
+                            echo '<span class="date">'.$fDate.'</span>';
+
+                            echo '<span class="skill">Skill: '.'Outlook'.'</span>';
+                            echo '<p>'.$fFeedback.'</p>';
+
+                            echo '</div>';
+                        }
                     }
-
-
-
-                }
-
-
                 ?>
-
-
 
                 <button id="showMoreWorstFeedback">Show More Feedback</button>
             </div>
