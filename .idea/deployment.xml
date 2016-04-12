@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" autoUpload="Always" serverName="TeamGM" filePermissions="420" folderPermissions="493">
+  <component name="PublishConfigData" autoUpload="Always" serverName="TeamGM" promptOnLocalOverwrite="false" filePermissions="420" folderPermissions="493">
     <serverData>
       <paths name="TeamGM">
         <serverdata>
