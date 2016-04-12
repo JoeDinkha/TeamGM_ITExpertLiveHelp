@@ -271,35 +271,35 @@ $(document).ready(function($) {
 
 
     //// Get Outlook calendar events - JS ////
-    // var accessToken = 'EwBwAul3BAAUo4xeBIbHjhBxWOFekj4Xy2fhaGQAAX/SyNL9STSoqltIvbBmuXkOENfy3+o7mEh505d7izOkz9OW3BjjQOHpzzH2Op1n4nZNhwATV2Kb/SakR3wzwU0mQLETPk2NsNr7cxft+zpfVt74J/IPdNPHqUuRZUQaXCUrlzfmH0UKLhO+zewDm5N/t0wUhufg3BUQIzXQdzUFikE9NgckkJEkx4gjerx9B5yHmxkO5DeGJQGC9aZX8tla9v23U0PoXXZPMp6fGZC9Pr7QAr1JT8HU5MMH6Lg4k0g2bUTjSn0HmFMg3sdWd9ScySPIMeP1/6UcniTVri5M2pL/acz2KMmMhhO7Fdv8cH2PL81h+rOh0/nsKpfKVUUDZgAACARZLZ1imET/QAFZYfU7NGQcpt+24gdoK5P4M5e3Pj9Y/Yj8tzultRIXmwn3ORocrhmqjaqDv94x389kOyMcO9PMb9ERmei67+67WriHOnBC+wneXZh5+YfCvVEvkVUF69XfswttNB9Bim5QBgFSd6LYgESHMOpUFj8+UtcJ5BCZbSOFkv9PJSvlcolMNt0kQabVZ6Gys4BAvU+3rfsh9jiQpgHGzIzglG7IDhdV/bHkvjA2ZPft+SEo0CdBXBbGMQt6trY1TtKjFA+LiNUGAKLnqoU99gWOKugSwi8d4zoq9alAMimEwkw4zg7QpIW6VCKiAP7/kdGlXV/d1t80t1zkMJeQD4vYeDcLAgVC0qbyJlMe/4MM0Z6mTc2xrRN/L8JHK5I3AErgNlrdelGRQ8z8lEVl0Ny/19g1YjeBn1GhRCXWLpX2O+zuOGkB';
-    //
-    // $.ajax({
-    //     type: "GET",
-    //     url: "https://outlook.office.com/api/v2.0/me/events?$select=Subject,Organizer,Start,End",
-    //     headers: {
-    //         Authorization: 'Bearer ' + accessToken
-    //     },
-    //     dataType: 'json',
-    //
-    //     success: function( result ) {
-    //         console.log( 'Get Calendar - Success!' );
-    //         console.log( result );
-    //
-    //         for(var i = 0; i < result.value.length; i++) {
-    //             if (result.value[i].Subject == "Office Hours") {
-    //                 console.log("\nSubject = " + result.value[i].Subject);
-    //                 console.log("Start DateTime = " + result.value[i].Start.DateTime);
-    //                 console.log("End DateTime = " + result.value[i].End.DateTime);
-    //
-    //             }
-    //         }
-    //     },
-    //
-    //     error: function( error ) {
-    //         console.log( 'Get Calendar - Error...' );
-    //         console.log( error );
-    //     }
-    // });
+    var accessToken = 'EwBwAul3BAAUo4xeBIbHjhBxWOFekj4Xy2fhaGQAASerWiH7GG5nZlJOR90xhWEhpTe1mIsyYb/K+8AQJ6t5+kORmJWNiKU0vEJE5kfDw3aPUD+DNcAbUmCz+mVywxwaw+WKNxGHNiP76IM2HUfKcYZ7gR3IBcp55sfW/arLxa/f+Shz+9EVTVzLt353MSqvRXjTeS/oXDb1zQJquwGNEdk4eanNaIqqEHNwHNNWd9avcSGZjF0G4NgolIYIGCbSUWWyRa0LAMBu3fv4QFxYPVvETAUUIt2Dkq85wOXKKaAK25IZfUGOEk/TwPkZ1Ebxg7YenE21HL0KWF5jEkLwosrV4gH0bAkA29cRjsiQS7PZZ2SBztD/+zj/rqSr8UIDZgAACADeZSDmWw4SQAF6f0ktd2H3ARDT29OtHqHepEsDaT3Bd12FaRvayhMBwvcGVK8hFLqI8p9O/MawzRcZaZCu/GnnkziDr8esdcM5K31u2+zzm1YBdhVMojbFw0B/2cTqxrIeXORmhF8KjDj7VS9k5RhrjtQzHbdgFRd7RWZm3HNMiO1K/nqQ74sqSLtZD1wMiDhOfuLqRryHtF3vn+E774DtffbmkM5eVO1F+pTNNL0Ryx2TyiwlT7KFMXvskptVa/uPRcm9r0yzSIzdgtLaQVX+WNDprNp+xxu8WBBnEhq5Qa+XlcE3l4vppKbb1L1OmO2EXJnreCdswxD3Th3qksk/PJvfZiLIWkSdSmHaiqY03uAADx8Qz36lAdAtnvC4QE4GRe83F9bh9rBqajM/iCQWjMWip/s6wqcrEx8vG3DygM9RfNE3facZF2kB';
+
+    $.ajax({
+        type: "GET",
+        url: "https://outlook.office.com/api/v2.0/me/events?$select=Subject,Organizer,Start,End",
+        headers: {
+            Authorization: 'Bearer ' + accessToken
+        },
+        dataType: 'json',
+
+        success: function( result ) {
+            console.log( 'Get Calendar - Success!' );
+            console.log( result );
+
+            for(var i = 0; i < result.value.length; i++) {
+                if (result.value[i].Subject == "Office Hours") {
+                    console.log("\nSubject = " + result.value[i].Subject);
+                    console.log("Start DateTime = " + result.value[i].Start.DateTime);
+                    console.log("End DateTime = " + result.value[i].End.DateTime);
+
+                }
+            }
+        },
+
+        error: function( error ) {
+            console.log( 'Get Calendar - Error...' );
+            console.log( error );
+        }
+    });
 
 
     //// Refresh access token - JS ////
@@ -313,7 +313,7 @@ $(document).ready(function($) {
     //         'scope': 'openid https://outlook.office.com/calendars.read offline_access',
     //         'refresh_token': refreshToken,
     //         'redirect_uri': 'https://35.9.22.109/GMWebApp/index.php',
-    //         'grant_type': 'refresh_token', 'client_secret': 'APfpVLBgOLKhNrD7W1SpuXR}'
+    //         'grant_type': 'refresh_token', 'client_secret': 'APfpVLBgOLKhNrD7W1SpuXR'
     //     },
     //
     //     success: function( result ) {
@@ -334,7 +334,6 @@ $(document).ready(function($) {
             url: "refresh_api.php"
         });
     }
-
 
     autoRefresh();
 

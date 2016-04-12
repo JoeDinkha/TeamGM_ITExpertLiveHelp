@@ -27,10 +27,6 @@ echo $developer;
 
 
 
-
-
-
-
 if( $myusername != NULL && $mypassword != NULL ) {
     // To protect MySQL injection (more detail about MySQL injection)
     $myusername = stripslashes($myusername);
