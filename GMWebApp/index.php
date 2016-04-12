@@ -128,6 +128,8 @@ while ($row = sqlsrv_fetch_array($skill_results,SQLSRV_FETCH_ASSOC)){
     <link rel="stylesheet" href="jquery-toggles-master/css/themes/toggles-modern.css" type="text/css" />
     <link rel="stylesheet" href="chosen_v1.5.0/chosen.css" type="text/css" />
     <link rel="stylesheet" href="https://addtocalendar.com/atc/1.5/atc-base.css" type="text/css" />
+    <link rel="stylesheet" href="remodal_v1.0.7/dist/remodal.css" />
+    <link rel="stylesheet" href="remodal_v1.0.7/dist/remodal-default-theme.css" />
 
     <!-- Script Imports -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
@@ -135,6 +137,7 @@ while ($row = sqlsrv_fetch_array($skill_results,SQLSRV_FETCH_ASSOC)){
     <script src="jquery-toggles-master/toggles.min.js" type="text/javascript"></script>
     <script src="chosen_v1.5.0/chosen.jquery.min.js" type="text/javascript"></script>
     <script src="https://addtocalendar.com/atc/1.5/atc.min.js" type="text/javascript"></script>
+    <script src="remodal_v1.0.7/dist/remodal.min.js"></script>
 
     <!-- Favicons -->
     <link rel="shortcut icon" href="favicons/favicon.ico">
@@ -245,6 +248,16 @@ while ($row = sqlsrv_fetch_array($skill_results,SQLSRV_FETCH_ASSOC)){
             </form>
 
 
+            <div class="remodal" data-remodal-id="skillsModal">
+                <button data-remodal-action="close" class="remodal-close"></button>
+
+                <h3>Your skills have been updated!</h3>
+                <br/>
+
+                <button data-remodal-action="confirm" class="remodal-confirm">OK</button>
+            </div>
+
+
             <button id="leaderboard">Leaderboard</button>
             <button id="logOut">Log Out</button>
         </div>
@@ -278,7 +291,7 @@ while ($row = sqlsrv_fetch_array($skill_results,SQLSRV_FETCH_ASSOC)){
 
 
             <div id="bestReviews">
-                <h3>Best Feedback</h3>
+                <h3>Positive Feedback</h3>
 
                 <?php
                     $query_string2 = "SELECT Author,StarCount,Comment,Date FROM dbo.Feedback WHERE Expert=";
@@ -335,7 +348,7 @@ while ($row = sqlsrv_fetch_array($skill_results,SQLSRV_FETCH_ASSOC)){
 
 
             <div id="worstReviews">
-                <h3>Worst Feedback</h3>
+                <h3>Negative Feedback</h3>
 
                 <?php
                     $query_string2 = "SELECT Author,StarCount,Comment,Date FROM dbo.Feedback WHERE Expert=";

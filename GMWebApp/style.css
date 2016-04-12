@@ -55,8 +55,14 @@ button, input[type=submit] {
     transition: all ease 0.3s;
 }
 
-button:hover, input[type=submit]:hover {
+button:hover, input[type=submit]:hover,
+button.remodal-confirm:hover, button.remodal-confirm:focus {
     background: #2271bc;
+}
+
+/* Override Default Button Hover */
+button.remodal-close:hover {
+    background: transparent;
 }
 
 /* Placeholders */
@@ -211,6 +217,38 @@ form#skillForm input[type=checkbox]::-ms-check{
 
 form#skillForm input[type=submit] {
     margin: 20px auto;
+}
+
+/*** Modal ***/
+div.remodal {
+    max-width: 550px;
+    padding: 45px 35px;
+}
+
+/* Ok Button */
+button.remodal-confirm {
+    display: block;
+    padding: 10px 30px;
+    margin: 0 auto;
+    font-size: 16px;
+    cursor: pointer;
+
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    color: white;
+    font-family: "Open Sans", Arial, sans-serif;
+    background: #22559E;
+    border: 1px solid rgba(20, 20, 20, .4);
+    border-radius: 4px;
+    outline: none;
+}
+
+/* Close Button */
+button.remodal-close {
+    left: inherit;
+    right: 0;
 }
 
 /* Leaderboard */
