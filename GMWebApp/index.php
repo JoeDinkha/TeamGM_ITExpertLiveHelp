@@ -1,7 +1,4 @@
 <?php
-/**
- * Author: Jacob Price
- */
 session_start();
 if( !isset($_SESSION['user']) ) {
     header('Location: login.php');
@@ -23,11 +20,11 @@ $conn = sqlsrv_connect($serverName, $connectionInfo);
 //// User Query - Retrieve current values in the database, given a user
 $query_string = "SELECT * FROM dbo.MockTable1 WHERE Username='".$username."'";
 
-//run the query and store results for future use
+// run the query and store results for future use
 $results = sqlsrv_query($conn,$query_string);
 $results = sqlsrv_fetch_array($results,SQLSRV_FETCH_ASSOC);
 
-//grabbing all of these variables for the user and displaying them throughout the page
+// grabbing all of these variables for the user and displaying them throughout the page
 $username = $results['FullName'];
 $available = $results['Availability'];
 $word = $results['SkillWord'];
@@ -39,11 +36,9 @@ $expert_skills = $results['ExpertSkills'];
 $userSkype = $results['SkypeName'];
 
 
-
 /****** Code to calculate average rating *******/
 $query_stringCalc = "SELECT Author, StarCount, Comment, Date FROM dbo.Feedback WHERE Expert=";
-$query_stringCalc=$query_stringCalc."'".$userSkype."' ORDER By StarCount DESC";
-
+$query_stringCalc = $query_stringCalc."'".$userSkype."' ORDER By StarCount DESC";
 
 // Run query and store results
 $totalStars = 0;
@@ -53,16 +48,43 @@ $results3_query = sqlsrv_query( $conn, $query_stringCalc );
 while ($results3 = sqlsrv_fetch_array($results3_query, SQLSRV_FETCH_ASSOC)) {
     $fRating = $results3['StarCount'];
     $totalStars = $totalStars + $fRating;
-    $numFeedback += 1;
-
+    $numFeedback++;
 }
-$avg_rating = floor($totalStars/$numFeedback);
+
+// Update average rating in database
+$avg_rating = null;
+//$query_updateAvgRating = "REPLACE INTO dbo.Mocktable1 (AverageRating) VALUES('" . $avg_rating . "') WHERE Username=" . "'" . $username . "'";
+
+// If user has no feedback, set average rating to 0
+if( $numFeedback <= 0 ) {
+    $avg_rating = 0;
+    //sqlsrv_query( $conn, $query_updateAvgRating );
+}
+
+// Else, calculate average rating
+else {
+    $avg_rating = $totalStars / $numFeedback;       // Example: 5.25
+    $beforeDecimal = floor( $avg_rating );          // Example: 5
+    $afterDecimal = $avg_rating - $beforeDecimal;   // Example: 0.25
+
+    // Round down
+    if( $afterDecimal <= 0.44) {
+        $avg_rating = floor( $avg_rating );
+    }
+
+    // Round up
+    else {
+        $avg_rating = ceil( $avg_rating );
+    }
+
+    //sqlsrv_query( $conn, $query_updateAvgRating );
+}
+
 
 //// Feedback Query - Retrieve feedback for a user
 //$query_string2 = "SELECT Username, Date, Feedback, Rating FROM dbo.FeedbackTable"; //WHERE UID=".$userID;
 //$query_string2 = "SELECT Author,StarCount,Comment,Date FROM dbo.Feedback WHERE Expert=";
 //$query_string2=$query_string2."'".$userSkype."'";
-
 
 // Run query and store results
 //$results2_query = sqlsrv_query( $conn, $query_string2 );
@@ -77,7 +99,8 @@ $avg_rating = floor($totalStars/$numFeedback);
 // Format DateTime object
 //$fDate = $fDate->format( 'M d, Y' );
 
-//****************grab all of the skills dynamically*************//
+
+/**************** Grab all of the skills dynamically *************/
 $query_string_skills = "SELECT * FROM dbo.SkillTable ORDER BY IndexPosition";
 $skill_results = sqlsrv_query($conn,$query_string_skills);
 $skill_array = array();
@@ -104,12 +127,17 @@ while ($row = sqlsrv_fetch_array($skill_results,SQLSRV_FETCH_ASSOC)){
     <link rel="stylesheet" href="jquery-toggles-master/css/toggles.css" type="text/css" />
     <link rel="stylesheet" href="jquery-toggles-master/css/themes/toggles-modern.css" type="text/css" />
     <link rel="stylesheet" href="chosen_v1.5.0/chosen.css" type="text/css" />
+    <link rel="stylesheet" href="https://addtocalendar.com/atc/1.5/atc-base.css" type="text/css" />
+    <link rel="stylesheet" href="remodal_v1.0.7/dist/remodal.css" />
+    <link rel="stylesheet" href="remodal_v1.0.7/dist/remodal-default-theme.css" />
 
     <!-- Script Imports -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <script src="main.js" type="text/javascript"></script>
     <script src="jquery-toggles-master/toggles.min.js" type="text/javascript"></script>
     <script src="chosen_v1.5.0/chosen.jquery.min.js" type="text/javascript"></script>
+    <script src="https://addtocalendar.com/atc/1.5/atc.min.js" type="text/javascript"></script>
+    <script src="remodal_v1.0.7/dist/remodal.min.js"></script>
 
     <!-- Favicons -->
     <link rel="shortcut icon" href="favicons/favicon.ico">
@@ -145,18 +173,19 @@ while ($row = sqlsrv_fetch_array($skill_results,SQLSRV_FETCH_ASSOC)){
 
     <div class="content">
         <div id="profilePanel">
-            <img id="profilePic" src="images/team-photo.jpeg" width="4256" height="2832" alt="Profile Picture" />
+            <img id="profilePic" src="images/team-photo-resized.png" width="1064" height="708"
+                 alt="<?echo $username; ?>'s Profile Picture" />
 
             <h2 id="name"><?php echo $username; ?></h2>
 
             <div id="rating">
                 <?php
-                /***Author: Jacob Price***/
-                //code for displaying the amount of average stars you have,
-                //rounded to the nearest integer
-                for ($x = 0; $x < $avg_rating; $x++) {
-                    echo "<img src='images/star.png' width='500' height='472' alt='Star' />";
-                }
+                    /***Author: Jacob Price***/
+                    //code for displaying the amount of average stars you have,
+                    //rounded to the nearest integer
+                    for ($x = 0; $x < $avg_rating; $x++) {
+                        echo "<img src='images/star.png' width='500' height='472' alt='Star' />";
+                    }
                 ?>
             </div>
 
@@ -175,43 +204,21 @@ while ($row = sqlsrv_fetch_array($skill_results,SQLSRV_FETCH_ASSOC)){
                     li.innerHTML = '<span>Microsoft Word</span><a class="search-choice-close" data-option-array-index="0"></a>';
                     li_search.innerHTML = '<input type="text" value="Select Your Skills" class autocomplete="off" style="width: 150px;">';
 
-
-                    //$('.chosen-choices').empty();
-                    //$('.chosen-choices').append(li);
-                    //$('.chosen-choices').append(li_search);
-
-                    //('li.active-result').click();
-
-                    var word = "<?php echo $word; ?>";
-                    var outlook = "<?php echo $outlook; ?>";
-                    var powerpoint = "<?php echo $powerpoint; ?>";
-                    var explorer = "<?php echo $explorer; ?>";
-                    var skype = "<?php echo $skype; ?>";
-
-                    //console.log(word);
-                    //console.log(outlook);
-                    //console.log(powerpoint);
-                    //console.log(explorer);
-                    //console.log(skype);
-
-
                     var availability = "<?php echo $available; ?>";
+
                     if (availability == "1"){
                         $('.toggle-modern').toggles({
                             on: true,
                             text: {on:'Online', off:'Offline'}
                         });
                     }
+
                     else if(availability == "0") {
                         $('.toggle-modern').toggles({
                             on: false,
                             text: {on:'Online', off:'Offline'}
                         });
                     }
-
-                    $('#logOut').click (function() {
-                        window.location.href = 'post/logout-post.php';
-                    });
                 });
             </script>
 
@@ -223,84 +230,129 @@ while ($row = sqlsrv_fetch_array($skill_results,SQLSRV_FETCH_ASSOC)){
 
                 <select id="skillSelect" name="skillSelect" data-placeholder="Select Your Skills" multiple>
                     <?php
-
-                        /**
-                        //check for word
-                        if ($word == "1"){
-                            echo '<option value="word" selected="selected" >Microsoft Word</option>';
-                        }
-                        else{
-                            echo '<option value="word" >Microsoft Word</option>';
-                        }
-
-                        //check for outlook
-                        if ($outlook == "1"){
-                            echo '<option value="outlook" selected="selected">Microsoft Outlook</option>';
-                        }
-                        else{
-                            echo '<option value="outlook">Microsoft Outlook</option>';
-                        }
-
-                        //check for powerpoint
-                        if ($powerpoint == "1"){
-                            echo '<option value="powerpoint" selected="selected">Microsoft PowerPoint</option>';
-                        }
-                        else{
-                            echo '<option value="powerpoint">Microsoft PowerPoint</option>';
-                        }
-
-                        //check for explorer
-                        if ($explorer == "1"){
-                            echo '<option value="IE" selected="selected">Internet Explorer</option>';
-                        }
-                        else{
-                            echo '<option value="IE">Internet Explorer</option>';
-                        }
-
-                        //check for skype
-                        if ($skype == "1"){
-                            echo '<option value="skype" selected="selected">Skype for Business</option>';
-                        }
-                        else{
-                            echo '<option value="skype">Skype for Business</option>';
-                        }
-                         * **/
                         for($x=0; $x<= count($skill_array); $x++){
                             echo "<p>".$x."</p>";
+
                             if ($expert_skills[$x] == "1"){
                                 echo '<option value="word" selected="selected" >'.$skill_array[$x].'</option>';
                             }
+
                             else{
                                 echo '<option value="word" >'.$skill_array[$x].'</option>';
-
                             }
                         }
-
-                    ?>;
+                    ?>
                 </select>
 
                 <input type="submit" id="saveSkills" value="Save" />
             </form>
 
-            <button id="leaderboards">Leaderboards</button>
+
+            <div class="remodal" data-remodal-id="skillsModal">
+                <button data-remodal-action="close" class="remodal-close"></button>
+
+                <h3>Your skills have been updated!</h3>
+                <br/>
+
+                <button data-remodal-action="confirm" class="remodal-confirm">OK</button>
+            </div>
+
+
+            <button id="leaderboard">Leaderboard</button>
             <button id="logOut">Log Out</button>
         </div>
 
 
         <div id="calendarFeedbackBox">
-            <div id="calendar">
+            <div id="calendarBox">
                 <h3>Calendar</h3>
-                <button>Set Office Hours</button>
+
+                <span class="addtocalendar" data-calendars="Outlook">
+                    <a class="atcb-link">Set Office Hours in Outlook</a>
+
+                    <var class="atc_event">
+                        <var class="atc_date_start">2016-04-29 12:00:00</var>
+                        <var class="atc_date_end">2016-04-29 14:00:00</var>
+                        <var class="atc_timezone">America/Detroit</var>
+                        <var class="atc_title">IT Expert Live Help: Office Hours</var>
+                        <var class="atc_description">Availability period to assist others</var>
+                        <var class="atc_location">Online</var>
+                        <var class="atc_organizer"><?php echo $username; ?></var>
+                        <var class="atc_organizer_email"></var>
+                    </var>
+                </span>
+
+                <button id="outlookOnline">
+                    <a class="invisibleLink" target="_blank" href="https://bay02.calendar.live.com/calendar/calendar.aspx?rru=addevent&startdt=20160429T12%3a00%3a00Z&enddt=20160429T14%3a00%3a00Z&summary=Office+Hours&location=Online&description=IT+Expert+Live+Help&allday=false&uid=">
+                        Set Office Hours in Outlook Online
+                    </a>
+                </button>
             </div>
 
 
             <div id="bestReviews">
-                <h3>Best Feedback</h3>
+                <h3>Positive Feedback</h3>
 
                 <?php
-
                     $query_string2 = "SELECT Author,StarCount,Comment,Date FROM dbo.Feedback WHERE Expert=";
                     $query_string2=$query_string2."'".$userSkype."' ORDER BY StarCount DESC, Date DESC";
+
+
+                    // Run query and store results
+                    $results2_query = sqlsrv_query( $conn, $query_string2 );
+
+                    while ($results2= sqlsrv_fetch_array($results2_query,SQLSRV_FETCH_ASSOC)) {
+                        // Store result variables
+                        $fUsername = $results2['Author'];
+                        $fDate = $results2['Date'];
+                        $fFeedback = $results2['Comment'];
+                        $fRating = $results2['StarCount'];
+
+                        if ($fDate != NULL){
+                            $fDate = $fDate->format( 'M d, Y' );
+                        }
+
+                        /********** Retrieve Actual Names rather than Usernames *********/
+                        //// User Query - Retrieve current values in the database, given a user
+                        $quick_query = "SELECT * FROM dbo.MockTable1 WHERE Username='".$fUsername."'";
+
+                        //run the query and store results for future use
+                        $quick_results = sqlsrv_query($conn,$quick_query);
+                        $quick_results = sqlsrv_fetch_array($quick_results,SQLSRV_FETCH_ASSOC);
+
+                        //grabbing all of these variables for the user and displaying them throughout the page
+                        $fUsername = $quick_results['FullName'];
+
+                        if ($fRating > 2){
+                            echo '<div class="bestReview">';
+
+                            // Test for getting feedback data from database - working!
+                            for( $i = 1; $i <= $fRating; $i++ ) {
+                                echo '<img src="images/star.png" width="500" height="472" alt="Star" />';
+                            }
+                            echo '<br/>';
+
+                            echo '<h4>'.$fUsername.'</h4>';
+                            echo '<span class="date">'.$fDate.'</span>';
+
+                            echo '<span class="skill">Skill: '.'Trolling'.'</span>';
+                            echo '<p>'.$fFeedback.'</p>';
+
+                            echo '</div>';
+                        }
+                    }
+                ?>
+
+                <button id="showMoreBestFeedback">Show More Feedback</button>
+            </div>
+
+
+            <div id="worstReviews">
+                <h3>Negative Feedback</h3>
+
+                <?php
+                    $query_string2 = "SELECT Author,StarCount,Comment,Date FROM dbo.Feedback WHERE Expert=";
+                    $query_string2=$query_string2."'".$userSkype."' ORDER BY StarCount, Date DESC";
 
 
                     // Run query and store results
@@ -327,9 +379,8 @@ while ($row = sqlsrv_fetch_array($skill_results,SQLSRV_FETCH_ASSOC)){
                         //grabbing all of these variables for the user and displaying them throughout the page
                         $fUsername = $quick_results['FullName'];
 
-                        if ($fRating > 2){
-
-                            echo '<div class="bestReview">';
+                        if ($fRating < 3){
+                            echo '<div class="worstReview">';
                             // Test for getting feedback data from database - working!
                             for( $i = 1; $i <= $fRating; $i++ ) {
                                 //echo $fRating;
@@ -339,86 +390,14 @@ while ($row = sqlsrv_fetch_array($skill_results,SQLSRV_FETCH_ASSOC)){
 
                             echo '<h4>'.$fUsername.'</h4>';
                             echo '<span class="date">'.$fDate.'</span>';
+
+                            echo '<span class="skill">Skill: '.'Outlook'.'</span>';
                             echo '<p>'.$fFeedback.'</p>';
 
                             echo '</div>';
-
                         }
-
-
-
                     }
-
-
                 ?>
-
-
-
-
-
-                <button id="showMoreBestFeedback">Show More Feedback</button>
-            </div>
-
-
-            <div id="worstReviews">
-                <h3>Worst Feedback</h3>
-
-                <?php
-
-                $query_string2 = "SELECT Author,StarCount,Comment,Date FROM dbo.Feedback WHERE Expert=";
-                $query_string2=$query_string2."'".$userSkype."' ORDER BY StarCount, Date DESC";
-
-
-                // Run query and store results
-                $results2_query = sqlsrv_query( $conn, $query_string2 );
-
-                while ($results2= sqlsrv_fetch_array($results2_query,SQLSRV_FETCH_ASSOC)){
-                    // Store result variables
-                    $fUsername = $results2['Author'];
-                    $fDate = $results2['Date'];
-                    $fFeedback = $results2['Comment'];
-                    $fRating = $results2['StarCount'];
-                    if ($fDate != NULL){
-                        $fDate = $fDate->format( 'M d, Y' );
-                    }
-
-                    /********** Retrieve Actual Names rather than Usernames *********/
-                    //// User Query - Retrieve current values in the database, given a user
-                    $quick_query = "SELECT * FROM dbo.MockTable1 WHERE Username='".$fUsername."'";
-
-                    //run the query and store results for future use
-                    $quick_results = sqlsrv_query($conn,$quick_query);
-                    $quick_results = sqlsrv_fetch_array($quick_results,SQLSRV_FETCH_ASSOC);
-
-                    //grabbing all of these variables for the user and displaying them throughout the page
-                    $fUsername = $quick_results['FullName'];
-
-                    if ($fRating < 3){
-
-                        echo '<div class="worstReview">';
-                        // Test for getting feedback data from database - working!
-                        for( $i = 1; $i <= $fRating; $i++ ) {
-                            //echo $fRating;
-                            echo '<img src="images/star.png" width="500" height="472" alt="Star" />';
-                        }
-                        echo '<br/>';
-
-                        echo '<h4>'.$fUsername.'</h4>';
-                        echo '<span class="date">'.$fDate.'</span>';
-                        echo '<p>'.$fFeedback.'</p>';
-
-                        echo '</div>';
-
-                    }
-
-
-
-                }
-
-
-                ?>
-
-
 
                 <button id="showMoreWorstFeedback">Show More Feedback</button>
             </div>

@@ -48,7 +48,7 @@
 
         <div class="content">
             <form id="slick-login" method="post" action="post/login-post.php" autocomplete="off">
-                <input type="text" name="username" id="username" placeholder="User Name"
+                <input type="text" name="username" id="username" placeholder="Username"
                        value="<?php if (isset($error)) { echo $_POST['username']; } ?>"
                        autofocus />
                 <br/>
@@ -59,6 +59,7 @@
 
                 <input type="submit" id="logIn" value="Log In" />
             </form>
+
 
             <form action="post/login-post.php" method="post">
                 <input type="submit" name="developerMode" id="developerMode" value="Developer Mode" />

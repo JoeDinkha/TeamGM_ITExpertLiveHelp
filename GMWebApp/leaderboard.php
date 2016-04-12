@@ -4,6 +4,7 @@
  * Author: Jacob Price
  */
 session_start();
+$username = null;
 
 if( !isset($_SESSION['user']) ){
     header('Location: login.php');
@@ -26,25 +27,33 @@ else{
         //update database with given username and availability
         $query_string = "SELECT FullName, AverageRating FROM dbo.MockTable1 ORDER BY AverageRating DESC";
 
-        //run the query and store results for future use
+        // query to get username for leaderboard indication
+        $queryUsers = "SELECT Username, AverageRating FROM dbo.MockTable1 ORDER BY AverageRating DESC";
+
+        // run the query and store results for future use
         $results = sqlsrv_query($conn,$query_string);
+        $userResults = sqlsrv_query($conn, $queryUsers);
 
-        //initialize arrays to hold usernames and average ratings
-        $usernames = array();
+        // initialize arrays to hold usernames and average ratings
+        $fullnames = array();
         $average_ratings = array();
+        $usernames = array();
 
-        //push each username,average_rating pair into database
+        // push each username,average_rating pair into database
         while ($row = sqlsrv_fetch_array($results, SQLSRV_FETCH_ASSOC)){
-            array_push($usernames,$row['FullName']);
+            array_push($fullnames,$row['FullName']);
             array_push($average_ratings,$row['AverageRating']);
         }
 
+        // push each username,average_rating pair into database
+        while ($row = sqlsrv_fetch_array($userResults, SQLSRV_FETCH_ASSOC)){
+            array_push($usernames,$row['Username']);
+        }
 
         $results = sqlsrv_fetch_array($results,SQLSRV_FETCH_ASSOC);
 
 
-        //grabbing the average rating of the user and displaying them throughout the page
-
+        // grabbing the average rating of the user and displaying them throughout the page
         $avg_rating = $results['AverageRating'];
     }
 }
@@ -99,8 +108,6 @@ else{
 
 
         <div class="content">
-            <!--<h2>Leaderboard</h2>-->
-
             <table>
                 <tr>
                     <th>Rank</th>
@@ -109,13 +116,16 @@ else{
                 </tr>
 
                 <?php
+
                     // All tds retrieved from database
-                    for ($x=0; $x<count($usernames); $x++){
+                    for ($x=0; $x<count($fullnames); $x++) {
                         $name = $usernames[$x];
+
                         if ($name == $username){
                             echo "<tr id='currentUser'>";
                         }
-                        else{
+
+                        else {
                             echo "<tr>";
                         }
 
@@ -123,13 +133,15 @@ else{
                         echo '<td>'.($x+1).'</td>';
 
                         // Username
-                        echo '<td>'.$usernames[$x].'</td>';
+                        echo '<td>'.$fullnames[$x].'</td>';
 
                         // Rating
                         echo '<td>';
+
                         for( $star = 0; $star < $average_ratings[$x]; $star++ ) {
                             echo '<img src="images/star.png" width="500" height="472" alt="Star" />';
                         }
+
                         echo '</td>';
 
                         echo '</tr>';
