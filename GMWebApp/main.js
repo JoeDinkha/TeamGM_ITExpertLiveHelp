@@ -271,60 +271,71 @@ $(document).ready(function($) {
 
 
     //// Get Outlook calendar events - JS ////
-    var accessToken = 'EwBwAul3BAAUo4xeBIbHjhBxWOFekj4Xy2fhaGQAAX/SyNL9STSoqltIvbBmuXkOENfy3+o7mEh505d7izOkz9OW3BjjQOHpzzH2Op1n4nZNhwATV2Kb/SakR3wzwU0mQLETPk2NsNr7cxft+zpfVt74J/IPdNPHqUuRZUQaXCUrlzfmH0UKLhO+zewDm5N/t0wUhufg3BUQIzXQdzUFikE9NgckkJEkx4gjerx9B5yHmxkO5DeGJQGC9aZX8tla9v23U0PoXXZPMp6fGZC9Pr7QAr1JT8HU5MMH6Lg4k0g2bUTjSn0HmFMg3sdWd9ScySPIMeP1/6UcniTVri5M2pL/acz2KMmMhhO7Fdv8cH2PL81h+rOh0/nsKpfKVUUDZgAACARZLZ1imET/QAFZYfU7NGQcpt+24gdoK5P4M5e3Pj9Y/Yj8tzultRIXmwn3ORocrhmqjaqDv94x389kOyMcO9PMb9ERmei67+67WriHOnBC+wneXZh5+YfCvVEvkVUF69XfswttNB9Bim5QBgFSd6LYgESHMOpUFj8+UtcJ5BCZbSOFkv9PJSvlcolMNt0kQabVZ6Gys4BAvU+3rfsh9jiQpgHGzIzglG7IDhdV/bHkvjA2ZPft+SEo0CdBXBbGMQt6trY1TtKjFA+LiNUGAKLnqoU99gWOKugSwi8d4zoq9alAMimEwkw4zg7QpIW6VCKiAP7/kdGlXV/d1t80t1zkMJeQD4vYeDcLAgVC0qbyJlMe/4MM0Z6mTc2xrRN/L8JHK5I3AErgNlrdelGRQ8z8lEVl0Ny/19g1YjeBn1GhRCXWLpX2O+zuOGkB';
-
-    $.ajax({
-        type: "GET",
-        url: "https://outlook.office.com/api/v2.0/me/events?$select=Subject,Organizer,Start,End",
-        headers: {
-            Authorization: 'Bearer ' + accessToken
-        },
-        dataType: 'json',
-
-        success: function( result ) {
-            console.log( 'Get Calendar - Success!' );
-            console.log( result );
-
-            for(var i = 0; i < result.value.length; i++) {
-                if (result.value[i].Subject == "Office Hours") {
-                    console.log("\nSubject = " + result.value[i].Subject);
-                    console.log("Start DateTime = " + result.value[i].Start.DateTime);
-                    console.log("End DateTime = " + result.value[i].End.DateTime);
-
-                }
-            }
-        },
-
-        error: function( error ) {
-            console.log( 'Get Calendar - Error...' );
-            console.log( error );
-        }
-    });
+    // var accessToken = 'EwBwAul3BAAUo4xeBIbHjhBxWOFekj4Xy2fhaGQAAX/SyNL9STSoqltIvbBmuXkOENfy3+o7mEh505d7izOkz9OW3BjjQOHpzzH2Op1n4nZNhwATV2Kb/SakR3wzwU0mQLETPk2NsNr7cxft+zpfVt74J/IPdNPHqUuRZUQaXCUrlzfmH0UKLhO+zewDm5N/t0wUhufg3BUQIzXQdzUFikE9NgckkJEkx4gjerx9B5yHmxkO5DeGJQGC9aZX8tla9v23U0PoXXZPMp6fGZC9Pr7QAr1JT8HU5MMH6Lg4k0g2bUTjSn0HmFMg3sdWd9ScySPIMeP1/6UcniTVri5M2pL/acz2KMmMhhO7Fdv8cH2PL81h+rOh0/nsKpfKVUUDZgAACARZLZ1imET/QAFZYfU7NGQcpt+24gdoK5P4M5e3Pj9Y/Yj8tzultRIXmwn3ORocrhmqjaqDv94x389kOyMcO9PMb9ERmei67+67WriHOnBC+wneXZh5+YfCvVEvkVUF69XfswttNB9Bim5QBgFSd6LYgESHMOpUFj8+UtcJ5BCZbSOFkv9PJSvlcolMNt0kQabVZ6Gys4BAvU+3rfsh9jiQpgHGzIzglG7IDhdV/bHkvjA2ZPft+SEo0CdBXBbGMQt6trY1TtKjFA+LiNUGAKLnqoU99gWOKugSwi8d4zoq9alAMimEwkw4zg7QpIW6VCKiAP7/kdGlXV/d1t80t1zkMJeQD4vYeDcLAgVC0qbyJlMe/4MM0Z6mTc2xrRN/L8JHK5I3AErgNlrdelGRQ8z8lEVl0Ny/19g1YjeBn1GhRCXWLpX2O+zuOGkB';
+    //
+    // $.ajax({
+    //     type: "GET",
+    //     url: "https://outlook.office.com/api/v2.0/me/events?$select=Subject,Organizer,Start,End",
+    //     headers: {
+    //         Authorization: 'Bearer ' + accessToken
+    //     },
+    //     dataType: 'json',
+    //
+    //     success: function( result ) {
+    //         console.log( 'Get Calendar - Success!' );
+    //         console.log( result );
+    //
+    //         for(var i = 0; i < result.value.length; i++) {
+    //             if (result.value[i].Subject == "Office Hours") {
+    //                 console.log("\nSubject = " + result.value[i].Subject);
+    //                 console.log("Start DateTime = " + result.value[i].Start.DateTime);
+    //                 console.log("End DateTime = " + result.value[i].End.DateTime);
+    //
+    //             }
+    //         }
+    //     },
+    //
+    //     error: function( error ) {
+    //         console.log( 'Get Calendar - Error...' );
+    //         console.log( error );
+    //     }
+    // });
 
 
     //// Refresh access token - JS ////
-    var refreshToken = 'MCYWfBo3Q7kHPdGaOTJMfHwLbiD47gvqevwB4i4rqSl8ZyTqw6S2*kpdVtv6R7O1qV95yB0kBtmmxxxrXVnyAeKn2bNJ7DGFkcXlAqfbYfuenm08m7UGUgpNtIo5KhTA7LHGxU6dqBpuVtY7vDQkrlBrLHFCTUHTAP6Mtz*hSo7IddyaWcFvgGh44XqFNKGivqtt6kMtgCnB*1RRpKaV5Abe23tFCiyXGd66dn0DVHeYIBkysby6pyqimeV7aAIX4mhqAy3kJOx2hG80i!NbMxl6iHXVsHF9CxgVoIJR7SlD7fN3gPouCV!S4eLKxYdhL8T8mTspthqXXviSYVlUnCmI6hjS6UFXtuZUIJLPx8IXJFvT3V1WVrZUZJR3C7OYctMxxlSjKblilaOAMUl1g8hx2fdHaN4eD5Xlp3tWqp46f';
+    // var refreshToken = 'MCYWfBo3Q7kHPdGaOTJMfHwLbiD47gvqevwB4i4rqSl8ZyTqw6S2*kpdVtv6R7O1qV95yB0kBtmmxxxrXVnyAeKn2bNJ7DGFkcXlAqfbYfuenm08m7UGUgpNtIo5KhTA7LHGxU6dqBpuVtY7vDQkrlBrLHFCTUHTAP6Mtz*hSo7IddyaWcFvgGh44XqFNKGivqtt6kMtgCnB*1RRpKaV5Abe23tFCiyXGd66dn0DVHeYIBkysby6pyqimeV7aAIX4mhqAy3kJOx2hG80i!NbMxl6iHXVsHF9CxgVoIJR7SlD7fN3gPouCV!S4eLKxYdhL8T8mTspthqXXviSYVlUnCmI6hjS6UFXtuZUIJLPx8IXJFvT3V1WVrZUZJR3C7OYctMxxlSjKblilaOAMUl1g8hx2fdHaN4eD5Xlp3tWqp46f';
+    //
+    // $.ajax({
+    //     type: "POST",
+    //     url: "https://login.microsoftonline.com/common/oauth2/v2.0/token",
+    //     data: {
+    //         'client_id': 'df5c3f43-84b2-4444-a0e8-3022d364f53b',
+    //         'scope': 'openid https://outlook.office.com/calendars.read offline_access',
+    //         'refresh_token': refreshToken,
+    //         'redirect_uri': 'https://35.9.22.109/GMWebApp/index.php',
+    //         'grant_type': 'refresh_token', 'client_secret': 'APfpVLBgOLKhNrD7W1SpuXR}'
+    //     },
+    //
+    //     success: function( result ) {
+    //         console.log( 'Refresh Token - Success!' );
+    //         console.log( result );
+    //     },
+    //
+    //     error: function( error ) {
+    //         console.log( 'Refresh Token - Error...' );
+    //         console.log( error );
+    //     }
+    // });
 
-    $.ajax({
-        type: "POST",
-        url: "https://login.microsoftonline.com/common/oauth2/v2.0/token",
-        data: {
-            'client_id': 'df5c3f43-84b2-4444-a0e8-3022d364f53b',
-            'scope': 'openid https://outlook.office.com/calendars.read offline_access',
-            'refresh_token': refreshToken,
-            'redirect_uri': 'https://35.9.22.109/GMWebApp/index.php',
-            'grant_type': 'refresh_token', 'client_secret': 'APfpVLBgOLKhNrD7W1SpuXR}'
-        },
 
-        success: function( result ) {
-            console.log( 'Refresh Token - Success!' );
-            console.log( result );
-        },
+    function autoRefresh() {
+        $.ajax({
+            type: "POST",
+            url: "refresh_api.php"
+        });
+    }
 
-        error: function( error ) {
-            console.log( 'Refresh Token - Error...' );
-            console.log( error );
-        }
-    });
+
+    autoRefresh();
 
 });
