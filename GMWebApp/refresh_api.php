@@ -31,7 +31,7 @@
     $url = "https://login.microsoftonline.com/common/oauth2/v2.0/token";
     $content = json_encode( $data );
     echo $content;
-    echo "<p>\n\n</p>";
+    echo "<p>\n\n\n</p>";
 
 //var response = httpClient.PostAsync(BaseUri, content);
 //
