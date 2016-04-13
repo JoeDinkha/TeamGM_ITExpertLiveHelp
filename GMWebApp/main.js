@@ -165,9 +165,7 @@ $(document).ready(function($) {
         if (s.charAt(--t)=='"') s=s.substring(0,t);
         return s;
     }
-    //
-    // var resultAccessToken = '';
-    //
+
     // function retrieveAccessToken(token){
     //     resultAccessToken = token;
     //     return resultAccessToken;
@@ -199,13 +197,11 @@ $(document).ready(function($) {
 
         success: function (result) {
             console.log("Refresh token worked!");
-            console.log(result);
-            var outputStr = result.split(',')
-            var cleanOutput = stripEndQuotes(outputStr[3]);
+            var outputStr = result.split(',');
             var accessTokenLocated = outputStr[3].split(':');
-            var resultAccessToken = stripEndQuotes(accessTokenLocated[1]);
-            console.log("Access Token: \n" + resultAccessToken);
-            //retrieveAccessToken(resultAccessToken);
+            var resultAccessToken = accessTokenLocated[1];
+
+            authorizeCalendar(resultAccessToken);
 
         },
 
@@ -215,38 +211,37 @@ $(document).ready(function($) {
     });
 
 
+    function authorizeCalendar(token) {
+        $.ajax({
+            type: "GET",
+            url: "https://outlook.office.com/api/v2.0/me/events?$select=Subject,Organizer,Start,End",
+            headers: {
+                Authorization: 'Bearer ' + token
+            },
+            dataType: 'json',
 
-    // Get Outlook calendar events - JS ////
-    // var accessToken = resultAccessToken;
-    // console.log("Access Token: " + resultAccessToken);
-    //
-    // $.ajax({
-    //     type: "GET",
-    //     url: "https://outlook.office.com/api/v2.0/me/events?$select=Subject,Organizer,Start,End",
-    //     headers: {
-    //         Authorization: 'Bearer ' + accessToken
-    //     },
-    //     dataType: 'json',
-    //
-    //     success: function( result ) {
-    //         console.log( 'Get Calendar - Success!' );
-    //         console.log( result );
-    //
-    //         // for(var i = 0; i < result.value.length; i++) {
-    //         //     if (result.value[i].Subject == "Office Hours") {
-    //         //         console.log("\nSubject = " + result.value[i].Subject);
-    //         //         console.log("Start DateTime = " + result.value[i].Start.DateTime);
-    //         //         console.log("End DateTime = " + result.value[i].End.DateTime);
-    //         //
-    //         //     }
-    //         // }
-    //     },
-    //
-    //     error: function( error ) {
-    //         console.log( 'Get Calendar - Error...' );
-    //         console.log( error );
-    //     }
-    // });
+            success: function (result) {
+                console.log('Get Calendar - Success!');
+                console.log(result);
+
+                for (var i = 0; i < result.value.length; i++) {
+                    if (result.value[i].Subject == "Office Hours") {
+                        console.log("\nSubject = " + result.value[i].Subject);
+                        console.log("Start DateTime = " + result.value[i].Start.DateTime);
+                        console.log("End DateTime = " + result.value[i].End.DateTime);
+
+                    }
+                }
+            },
+
+            error: function (error) {
+                console.log('Get Calendar - Error...');
+                console.log(error);
+            }
+        });
+    }
+
+
 
 });
 

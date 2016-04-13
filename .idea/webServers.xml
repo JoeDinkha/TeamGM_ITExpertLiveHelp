@@ -2,11 +2,12 @@
 <project version="4">
   <component name="WebServers">
     <option name="servers">
-      <webServer id="b7d36868-c675-431d-bbb3-e0afbb4220d6" name="TeamGM" url="http://35.9.22.109/">
-        <fileTransfer explicitFtps="false" host="35.9.22.109" port="52743" password="dfdedfcfdfcbdfc7dfcddfc7df9bdf9c" username="dinkhajo">
+      <webServer id="2ecdfe86-c2aa-4b22-98d8-3b955a1680e7" name="GM Capstone Server" url="http://35.9.22.109/">
+        <fileTransfer host="35.9.22.109" port="52743" password="dfdedfcfdfcbdfc7dfcddfc7df9bdf9c" username="dinkhajo">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" passiveMode="true" />
           </advancedOptions>
+          <option name="port" value="52743" />
         </fileTransfer>
       </webServer>
     </option>
