@@ -37,7 +37,7 @@ $userSkype = $results['SkypeName'];
 
 
 /****** Code to calculate average rating *******/
-$query_stringCalc = "SELECT Author, StarCount, Comment, Date FROM dbo.Feedback WHERE Expert=";
+$query_stringCalc = "SELECT Author, StarCount, Comment, Date, Skill FROM dbo.Feedback WHERE Expert=";
 $query_stringCalc = $query_stringCalc."'".$userSkype."' ORDER By StarCount DESC";
 
 // Run query and store results
@@ -294,7 +294,7 @@ while ($row = sqlsrv_fetch_array($skill_results,SQLSRV_FETCH_ASSOC)){
                 <h3>Positive Feedback</h3>
 
                 <?php
-                    $query_string2 = "SELECT Author,StarCount,Comment,Date FROM dbo.Feedback WHERE Expert=";
+                    $query_string2 = "SELECT Author,StarCount,Comment,Date, Skill FROM dbo.Feedback WHERE Expert=";
                     $query_string2=$query_string2."'".$userSkype."' ORDER BY StarCount DESC, Date DESC";
 
 
@@ -307,6 +307,7 @@ while ($row = sqlsrv_fetch_array($skill_results,SQLSRV_FETCH_ASSOC)){
                         $fDate = $results2['Date'];
                         $fFeedback = $results2['Comment'];
                         $fRating = $results2['StarCount'];
+                        $fSkill = $results2['Skill'];
 
                         if ($fDate != NULL){
                             $fDate = $fDate->format( 'M d, Y' );
@@ -335,7 +336,7 @@ while ($row = sqlsrv_fetch_array($skill_results,SQLSRV_FETCH_ASSOC)){
                             echo '<h4>'.$fUsername.'</h4>';
                             echo '<span class="date">'.$fDate.'</span>';
 
-                            echo '<span class="skill">Skill: '.'Trolling'.'</span>';
+                            echo '<span class="skill">Skill: '.$fSkill.'</span>';
                             echo '<p>'.$fFeedback.'</p>';
 
                             echo '</div>';
@@ -351,7 +352,7 @@ while ($row = sqlsrv_fetch_array($skill_results,SQLSRV_FETCH_ASSOC)){
                 <h3>Negative Feedback</h3>
 
                 <?php
-                    $query_string2 = "SELECT Author,StarCount,Comment,Date FROM dbo.Feedback WHERE Expert=";
+                    $query_string2 = "SELECT Author,StarCount,Comment,Date, Skill FROM dbo.Feedback WHERE Expert=";
                     $query_string2=$query_string2."'".$userSkype."' ORDER BY StarCount, Date DESC";
 
 
@@ -364,6 +365,7 @@ while ($row = sqlsrv_fetch_array($skill_results,SQLSRV_FETCH_ASSOC)){
                         $fDate = $results2['Date'];
                         $fFeedback = $results2['Comment'];
                         $fRating = $results2['StarCount'];
+                        $fSkill = $results2['Skill'];
                         if ($fDate != NULL){
                             $fDate = $fDate->format( 'M d, Y' );
                         }
@@ -391,7 +393,7 @@ while ($row = sqlsrv_fetch_array($skill_results,SQLSRV_FETCH_ASSOC)){
                             echo '<h4>'.$fUsername.'</h4>';
                             echo '<span class="date">'.$fDate.'</span>';
 
-                            echo '<span class="skill">Skill: '.'Outlook'.'</span>';
+                            echo '<span class="skill">Skill: '.$fSkill.'</span>';
                             echo '<p>'.$fFeedback.'</p>';
 
                             echo '</div>';
