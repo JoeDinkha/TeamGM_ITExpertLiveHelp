@@ -30,12 +30,13 @@ while ($array = sqlsrv_fetch_array($results,SQLSRV_FETCH_ASSOC)){
 $index = array_search($expertise,$skillArray)+1;
 
 
-$query_expert = "SELECT SkypeName FROM dbo.Mocktable1 WHERE SUBSTRING(ExpertSkills,".$index.",1) = '1' AND Availability='1'";
+$query_expert = "SELECT SkypeName,FullName FROM dbo.Mocktable1 WHERE SUBSTRING(ExpertSkills,".$index.",1) = '1' AND Availability='1'";
 
 $values = sqlsrv_query($conn,$query_expert);
 
 $expert = sqlsrv_fetch_array($values,SQLSRV_FETCH_ASSOC);
+$result = $expert['SkypeName'].";".$expert['FullName'];
 
-echo $expert['SkypeName'];
+echo $result;
 ?>
 
