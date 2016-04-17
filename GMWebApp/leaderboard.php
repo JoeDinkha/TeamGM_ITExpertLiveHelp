@@ -25,10 +25,10 @@ else{
     //Retrieving current values in the database given a user
     if (isset($username)){
         //update database with given username and availability
-        $query_string = "SELECT FullName, AverageRating FROM dbo.MockTable1 ORDER BY AverageRating DESC";
+        $query_string = "SELECT * FROM dbo.MockTable1 ORDER BY AverageRating DESC";
 
         // query to get username for leaderboard indication
-        $queryUsers = "SELECT Username, AverageRating FROM dbo.MockTable1 ORDER BY AverageRating DESC";
+        $queryUsers = "SELECT * FROM dbo.MockTable1 ORDER BY AverageRating DESC";
 
         // run the query and store results for future use
         $results = sqlsrv_query($conn,$query_string);
@@ -38,12 +38,56 @@ else{
         $fullnames = array();
         $average_ratings = array();
         $usernames = array();
+        $skypenames = array();
+        $totalReviews = array();
 
         // push each username,average_rating pair into database
         while ($row = sqlsrv_fetch_array($results, SQLSRV_FETCH_ASSOC)){
             array_push($fullnames,$row['FullName']);
             array_push($average_ratings,$row['AverageRating']);
+            array_push($skypenames, $row['SkypeName']);
+            array_push($totalReviews, $row['TotalReviews']);
         }
+
+        
+        
+        for ($x = 0; $x < count($skypenames); $x++){
+            $skype = $skypenames[$x];
+            $query_stringCalc = "SELECT Author, StarCount, Comment, Date, Skill FROM dbo.Feedback WHERE Expert=";
+            $query_stringCalc = $query_stringCalc."'".$skype."' ORDER By StarCount DESC";
+
+// Run query and store results
+            $totalStars = 0;
+            $numFeedback = 0;
+            $results3_query = sqlsrv_query( $conn, $query_stringCalc );
+
+            while ($results3 = sqlsrv_fetch_array($results3_query, SQLSRV_FETCH_ASSOC)) {
+                $fRating = $results3['StarCount'];
+                $totalStars = $totalStars + $fRating;
+                $numFeedback++;
+            }
+
+            if ($numFeedback > 0){
+                $averageUpdate = floor($totalStars/$numFeedback);
+            }
+            else{
+                $averageUpdate = 0;
+            }
+            
+
+            // query to get username for leaderboard indication
+            $queryUpdate = "UPDATE dbo.MockTable1 SET TotalReviews ='".$numFeedback."', AverageRating = '"
+                .$averageUpdate
+                ."' WHERE SkypeName = 
+'".$skype."'";
+            $results4_query = sqlsrv_query( $conn, $queryUpdate);
+
+            
+
+
+        }
+
+        
 
         // push each username,average_rating pair into database
         while ($row = sqlsrv_fetch_array($userResults, SQLSRV_FETCH_ASSOC)){
@@ -113,6 +157,7 @@ else{
                     <th>Rank</th>
                     <th>User</th>
                     <th>Rating</th>
+                    <th># Reviews</th>
                 </tr>
 
                 <?php
@@ -143,6 +188,8 @@ else{
                         }
 
                         echo '</td>';
+                        
+                        echo '<td>'.$totalReviews[$x].'</td>';
 
                         echo '</tr>';
                     }
