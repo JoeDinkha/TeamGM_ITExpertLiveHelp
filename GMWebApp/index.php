@@ -81,25 +81,6 @@ else {
 }
 
 
-//// Feedback Query - Retrieve feedback for a user
-//$query_string2 = "SELECT Username, Date, Feedback, Rating FROM dbo.FeedbackTable"; //WHERE UID=".$userID;
-//$query_string2 = "SELECT Author,StarCount,Comment,Date FROM dbo.Feedback WHERE Expert=";
-//$query_string2=$query_string2."'".$userSkype."'";
-
-// Run query and store results
-//$results2_query = sqlsrv_query( $conn, $query_string2 );
-//$results2 = sqlsrv_fetch_array( $results2, SQLSRV_FETCH_ASSOC );
-
-// Store result variables
-//$fUsername = $results2['Author'];
-//$fDate = $results2['Date'];
-//$fFeedback = $results2['Comment'];
-//$fRating = $results2['StarCount'];
-
-// Format DateTime object
-//$fDate = $fDate->format( 'M d, Y' );
-
-
 /**************** Grab all of the skills dynamically *************/
 $query_string_skills = "SELECT * FROM dbo.SkillTable ORDER BY IndexPosition";
 $skill_results = sqlsrv_query($conn,$query_string_skills);
@@ -166,7 +147,7 @@ while ($row = sqlsrv_fetch_array($skill_results,SQLSRV_FETCH_ASSOC)){
 <body>
 <div class="container" id="index">
     <header>
-        <img src="images/Logo_of_General_Motors.png" width="2000" height="1989" alt="General Motors Logo" />
+        <img src="images/Logo_of_General_Motors.png" width="713" height="717" alt="General Motors Logo" />
         <h1>IT Expert Live Help</h1>
     </header>
 
@@ -258,8 +239,8 @@ while ($row = sqlsrv_fetch_array($skill_results,SQLSRV_FETCH_ASSOC)){
             </div>
 
 
-            <button id="leaderboard">Leaderboard</button>
-            <button id="logOut">Log Out</button>
+            <button id="leaderboard" value="Leaderboard">Leaderboard</button>
+            <button id="logOut" value="Log Out">Log Out</button>
         </div>
 
 
@@ -282,7 +263,7 @@ while ($row = sqlsrv_fetch_array($skill_results,SQLSRV_FETCH_ASSOC)){
                     </var>
                 </span>
 
-                <button id="outlookOnline">
+                <button id="outlookOnline" value="Outlook Online">
                     <a class="invisibleLink" target="_blank" href="https://bay02.calendar.live.com/calendar/calendar.aspx?rru=addevent&startdt=20160429T12%3a00%3a00Z&enddt=20160429T14%3a00%3a00Z&summary=Office+Hours&location=Online&description=IT+Expert+Live+Help&allday=false&uid=">
                         Set Office Hours in Outlook Online
                     </a>

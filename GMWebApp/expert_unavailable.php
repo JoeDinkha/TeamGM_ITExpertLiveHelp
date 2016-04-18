@@ -1,20 +1,13 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: cse498
- * Date: 2/2/16
- * Time: 7:17 PM
+ * User: zkeit
+ * Date: 2/3/2016
+ * Time: 6:27 PM
  */
 
 
-//values for database
-$expert = $_POST['Expert'];
-$author = $_POST['Author'];
-$stars = $_POST['StarCount'];
-$comments = $_POST['Comments'];
-$skill = $_POST['Skill'];
-$date = date("Y-m-d");
-echo $date;
+$expert = $_POST['expert'];
 
 $serverName = "35.9.22.109, 1433"; //serverName\instanceName
 
@@ -22,10 +15,12 @@ $serverName = "35.9.22.109, 1433"; //serverName\instanceName
 // The connection will be attempted using Windows Authentication.
 $connectionInfo = array("Database" => "db","UID"=>"priceja7","PWD"=>"teamgm16");
 $conn = sqlsrv_connect( $serverName, $connectionInfo);
-$query_string = "INSERT INTO dbo.Feedback VALUES('".$expert."','".$author."',".$stars.",'".$comments."','".$date."',
-'".$skill."')";
+
+// Change this to "update the status of the user with this name to Offline"
+$query_string = "SELECT Skills FROM dbo.SkillTable ORDER BY IndexPosition";
 
 $results = sqlsrv_query($conn,$query_string);
 
- 
+echo("SUCCESS");
 ?>
+

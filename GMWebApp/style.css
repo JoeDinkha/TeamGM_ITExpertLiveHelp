@@ -116,12 +116,15 @@ header {
 header img {
     width: 80px;
     height: auto;
+    -webkit-box-shadow: 0 0 5px 1px ghostwhite;
+    -moz-box-shadow: 0 0 5px 1px ghostwhite;
+    box-shadow: 0 0 5px 1px ghostwhite;
 }
 
 header h1 {
     display: inline-block;
     padding-left: 20px;
-    margin-bottom: 0;
+    margin: 20px 0;
     font-weight: normal;
     vertical-align: top;
 }

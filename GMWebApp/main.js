@@ -83,41 +83,111 @@ $(document).ready(function($) {
     });
 
 
-    //// 'Show More Best Feedback' button functionality ////
+    //// 'Show More Best Feedback' button ////
     $('button#showMoreBestFeedback').click( function() {
-        // Hide button
-        $(this).css({
-            display: 'none'
-        });
+        console.log( $(this).text() + ' +' );
 
-        // Make scrollable
-        $('div#calendarFeedbackBox div#bestReviews').css({
-            overflow: 'auto'
-        });
+        if( $(this).text('Show More Feedback') ) {
+            console.log( 'more' );
 
-        // Display other feedback
-        $('div#calendarFeedbackBox div#bestReviews div.bestReview:nth-child(n+5)').css({
-            display: 'block'
-        })
+            // Change button text
+            $(this).text( 'Show Less Feedback' );
+
+            // Change button positioning
+            $(this).css({
+                position: 'static',
+                'margin-bottom': 20 + 'px'
+            });
+
+            // Make scrollable
+            $('div#calendarFeedbackBox div#bestReviews').css({
+                overflow: 'auto'
+            });
+
+            // Display other feedback
+            $('div#calendarFeedbackBox div#bestReviews div.bestReview:nth-child(n+5)').css({
+                display: 'block'
+            })
+        }
+
+        else if( $(this).text('Show Less Feedback') ) {
+            console.log( 'less' );
+
+            // Change button text
+            $(this).text( 'Show More Feedback' );
+
+            // Change button positioning
+            $(this).css({
+                position: 'absolute',
+                'margin-bottom': 30 + 'px'
+            });
+
+            // Make un-scrollable
+            $('div#calendarFeedbackBox div#bestReviews').css({
+                overflow: 'hidden'
+            });
+
+            // Hide other feedback
+            $('div#calendarFeedbackBox div#bestReviews div.bestReview:nth-child(n+5)').css({
+                display: 'none'
+            })
+        }
     });
 
 
-    //// 'Show More Worst Feedback' button functionality ////
+    //// 'Show More Worst Feedback' button ////
     $('button#showMoreWorstFeedback').click( function() {
-        // Hide button
-        $(this).css({
-            display: 'none'
-        });
+        console.log( $(this).text() + ' -' );
 
-        // Make scrollable
-        $('div#calendarFeedbackBox div#worstReviews').css({
-            overflow: 'auto'
-        });
+        if( $(this).text('Show More Feedback') ) {
+            console.log( 'more' );
 
-        // Display other feedback
-        $('div#calendarFeedbackBox div#worstReviews div.worstReview:nth-child(n+5)').css({
-            display: 'block'
-        })
+            // Change button text
+            $(this).text(
+                'Show Less Feedback'
+            );
+
+            // Change button positioning
+            $(this).css({
+                position: 'static',
+                'margin-bottom': 20 + 'px'
+            });
+
+            // Make scrollable
+            $('div#calendarFeedbackBox div#worstReviews').css({
+                overflow: 'auto'
+            });
+
+            // Display other feedback
+            $('div#calendarFeedbackBox div#worstReviews div.worstReview:nth-child(n+5)').css({
+                display: 'block'
+            })
+        }
+
+        else if( $(this).text('Show Less Feedback') ) {
+            console.log( 'less' );
+
+            // Change button text
+            $(this).text(
+                'Show More Feedback'
+            );
+
+            // Change button positioning
+            $(this).css({
+                position: 'absolute',
+                'margin-bottom': 30 + 'px'
+            });
+
+            // Make un-scrollable
+            $('div#calendarFeedbackBox div#worstReviews').css({
+                overflow: 'hidden'
+            });
+
+            // Hide other feedback
+            $('div#calendarFeedbackBox div#worstReviews div.worstReview:nth-child(n+5)').css({
+                display: 'none'
+            })
+        }
     });
 
 
@@ -144,7 +214,7 @@ $(document).ready(function($) {
         url: "refresh_api.php",
 
         success: function (result) {
-            console.log("Refresh token worked!");
+            //console.log("Refresh token worked!");
             var outputStr = result.split(',');
             var accessTokenLocated = outputStr[3].split(':');
             var resultAccessToken = accessTokenLocated[1];
