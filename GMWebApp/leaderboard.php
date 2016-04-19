@@ -73,7 +73,8 @@ else{
             else{
                 $averageUpdate = 0;
             }
-            
+
+            //rounding
             if (($averageUpdate - floor($averageUpdate)) >= .5){
                 $averageUpdate = ceil($averageUpdate);
             }

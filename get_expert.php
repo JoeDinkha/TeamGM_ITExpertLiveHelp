@@ -30,7 +30,12 @@ while ($array = sqlsrv_fetch_array($results,SQLSRV_FETCH_ASSOC)){
 $index = array_search($expertise,$skillArray)+1;
 
 
-$query_expert = "SELECT SkypeName,FullName FROM dbo.Mocktable1 WHERE SUBSTRING(ExpertSkills,".$index.",1) = '1' AND Availability='1'";
+$query_expert = "SELECT SkypeName,FullName FROM dbo.Mocktable1 INNER JOIN dbo.OfficeHours ON dbo.Mocktable1.FullName=dbo.OfficeHours
+.Expert
+ WHERE SUBSTRING(ExpertSkills,
+".$index.",1) = 
+'1' AND 
+(Availability='1' OR (Time_In < GETDATE() AND Time_Out > GETDATE()))";
 
 $values = sqlsrv_query($conn,$query_expert);
 

@@ -16,7 +16,7 @@ $serverName = "35.9.22.109, 1433"; //serverName\instanceName
 $connectionInfo = array("Database" => "db","UID"=>"priceja7","PWD"=>"teamgm16");
 $fire=$_POST['Fire'];
 $conn = sqlsrv_connect( $serverName, $connectionInfo);
-$query_string = "SELECT SkypeName FROM dbo.Mocktable1 WHERE $expertise='1' AND Availability='1'";
+$query_string = "SELECT SkypeName FROM dbo.Mocktable1, dbo.OfficeHours WHERE $expertise='1' AND Availability='1'";
 
 $results = sqlsrv_query($conn,$query_string);
 

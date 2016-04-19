@@ -8,6 +8,8 @@
 
 
 $expert = $_POST['expert'];
+$in = $_POST['in_time'];
+$out = $_POST['out_time'];
 
 $serverName = "35.9.22.109, 1433"; //serverName\instanceName
 
@@ -16,13 +18,19 @@ $serverName = "35.9.22.109, 1433"; //serverName\instanceName
 $connectionInfo = array("Database" => "db","UID"=>"priceja7","PWD"=>"teamgm16");
 $conn = sqlsrv_connect( $serverName, $connectionInfo);
 
-$expert = "'".$expert."'";
+for($x = 0; $x<sizeof($in); $x++){
+    
+    if($expert=="Joe Dinkha") {
 
-// Change this to "update the status of the user with this name to Offline"
-$query_string = "UPDATE dbo.Mocktable1 SET Availability='0' WHERE SkypeName=".$expert;
+        $query_string = "INSERT INTO dbo.OfficeHours VALUES ('" . $expert . "', '" . substr($in[$x], 0, -4) . "', '" . substr($out[$x], 0, -4) . "')";
 
-$results = sqlsrv_query($conn,$query_string);
+        $results = sqlsrv_query($conn, $query_string);
+    }
 
-echo($query_string);
+}
+
+
+
+echo("SUCCESS");
 ?>
 
