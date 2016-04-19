@@ -25,10 +25,10 @@ else{
     //Retrieving current values in the database given a user
     if (isset($username)){
         //update database with given username and availability
-        $query_string = "SELECT * FROM dbo.MockTable1 ORDER BY AverageRating DESC";
+        $query_string = "SELECT * FROM dbo.MockTable1 ORDER BY AverageRating DESC, TotalReviews DESC";
 
         // query to get username for leaderboard indication
-        $queryUsers = "SELECT * FROM dbo.MockTable1 ORDER BY AverageRating DESC";
+        $queryUsers = "SELECT * FROM dbo.MockTable1 ORDER BY AverageRating DESC, TotalReviews DESC";
 
         // run the query and store results for future use
         $results = sqlsrv_query($conn,$query_string);
@@ -68,10 +68,17 @@ else{
             }
 
             if ($numFeedback > 0){
-                $averageUpdate = floor($totalStars/$numFeedback);
+                $averageUpdate = $totalStars/$numFeedback;
             }
             else{
                 $averageUpdate = 0;
+            }
+            
+            if (($averageUpdate - floor($averageUpdate)) >= .5){
+                $averageUpdate = ceil($averageUpdate);
+            }
+            else{
+                $averageUpdate = floor($averageUpdate);
             }
             
 
