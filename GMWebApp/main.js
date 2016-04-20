@@ -81,6 +81,12 @@ $(document).ready(function($) {
     $('button#leaderboard').click(function() {
         window.location.href = window.location.origin + "/GMWebApp/leaderboard.php";
     });
+    
+    
+    ////
+    $('input#overrideCheckbox').click( function() {
+        availabilityToggle.toggle( this.checked );
+    });
 
 
     //// 'Show More Best Feedback' button ////

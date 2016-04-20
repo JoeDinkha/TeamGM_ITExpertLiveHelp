@@ -169,10 +169,6 @@ div#rating img {
     height: auto;
 }
 
-div#availabilityToggle {
-    display: inline-block;
-    margin-bottom: 15px;
-}
 
 /******************* Skills *******************/
 div#profilePanel h3 {
@@ -292,16 +288,8 @@ div#calendarFeedbackBox div#calendarBox h3 {
     border-bottom: 1px solid rgba(34, 85, 158, .3);
 }
 
-/*** Outlook Online Button ***/
-div#calendarFeedbackBox div#calendarBox button#outlookOnline {
-    margin-bottom: 0;
-    margin-top: 15px;
-}
-
-div#calendarFeedbackBox div#calendarBox button#outlookOnline a {
-    color: white;
-    font-size: 16px;
-    text-decoration: none;
+/*** "Office Hours" Buttons Section ***/
+div#calendarFeedbackBox div#calendarBox div#outlookButtons {
 }
 
 /*** "Set Office Hours" Special Button ***/
@@ -360,6 +348,60 @@ div#calendarFeedbackBox div#calendarBox span.addtocalendar ul li a {
 div#calendarFeedbackBox div#calendarBox span.addtocalendar a:hover,
 div#calendarFeedbackBox div#calendarBox span.addtocalendar a:focus {
     background: #2271bc;
+}
+
+/*** Outlook Online Button ***/
+div#calendarFeedbackBox div#calendarBox button#outlookOnline {
+    margin-bottom: 0;
+    margin-top: 15px;
+}
+
+div#calendarFeedbackBox div#calendarBox button#outlookOnline a {
+    color: white;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+/*** Override Switch Section ***/
+div#calendarFeedbackBox div#calendarBox div#overrideSwitch {
+}
+
+div#calendarFeedbackBox div#calendarBox input[type=checkbox] {
+    width: 19px;
+    height: 19px;
+    margin: 15px 5px 0 0;
+    vertical-align: sub;
+
+    background: ghostwhite;
+    border: 1px solid rgba(34, 85, 158, .3);
+    border-radius: 4px;
+    outline: none;
+
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+div#calendarFeedbackBox div#calendarBox input[type=checkbox]:checked {
+    background: ghostwhite url('images/checkmark.png') no-repeat center;
+    -webkit-background-size: 10px;
+    background-size: 10px;
+}
+
+div#calendarFeedbackBox div#calendarBox input[type=checkbox]::-ms-check {
+    background: ghostwhite url('images/checkmark.png') no-repeat center;
+    -webkit-background-size: 10px;
+    background-size: 10px;
+}
+
+div#calendarFeedbackBox div#calendarBox label {
+    display: inline-block;
+    margin-top: 10px;
+}
+
+div#calendarFeedbackBox div#calendarBox div#availabilityToggle {
+    display: none;
+    margin: 15px auto 0 auto;
 }
 
 

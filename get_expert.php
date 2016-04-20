@@ -30,7 +30,7 @@ while ($array = sqlsrv_fetch_array($results,SQLSRV_FETCH_ASSOC)){
 $index = array_search($expertise,$skillArray)+1;
 
 
-$query_expert = "SELECT SkypeName,FullName FROM dbo.Mocktable1 INNER JOIN dbo.OfficeHours ON dbo.Mocktable1.FullName=dbo.OfficeHours
+$query_expert = "SELECT SkypeName,FullName FROM dbo.Mocktable1 LEFT JOIN dbo.OfficeHours ON dbo.Mocktable1.FullName=dbo.OfficeHours
 .Expert
  WHERE SUBSTRING(ExpertSkills,
 ".$index.",1) = 
