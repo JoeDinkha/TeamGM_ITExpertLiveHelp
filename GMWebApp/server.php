@@ -25,9 +25,12 @@ $username = stripslashes($username);
 $availability = $_POST['availability'];
 $availability = stripslashes($availability);
 
+$override = $_POST['override'];
+$override = stripslashes($override);
+
 if (isset($availability)){
     //update database with given username and availability
-    $query_string = "UPDATE dbo.Mocktable1 SET Availability='".$availability."' WHERE FullName='".$username."'";
+    $query_string = "UPDATE dbo.Mocktable1 SET Availability='".$availability."', Override='".$override."' WHERE FullName='".$username."'";
 
     //run the query and store results for future use
     $results = sqlsrv_query($conn,$query_string);

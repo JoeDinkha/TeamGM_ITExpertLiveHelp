@@ -35,7 +35,7 @@ $query_expert = "SELECT SkypeName,FullName FROM dbo.Mocktable1 LEFT JOIN dbo.Off
  WHERE SUBSTRING(ExpertSkills,
 ".$index.",1) = 
 '1' AND 
-(Availability='1' OR (Time_In < GETDATE() AND Time_Out > GETDATE()))";
+((Availability='1' AND Override='1') OR (Override='0' AND Time_In < GETDATE() AND Time_Out > GETDATE()))";
 
 $values = sqlsrv_query($conn,$query_expert);
 

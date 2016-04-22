@@ -27,6 +27,7 @@ $results = sqlsrv_fetch_array($results,SQLSRV_FETCH_ASSOC);
 // grabbing all of these variables for the user and displaying them throughout the page
 $username = $results['FullName'];
 $available = $results['Availability'];
+$override = $results['Override'];
 $word = $results['SkillWord'];
 $outlook = $results['SkillOutlook'];
 $powerpoint = $results['SkillPowerPoint'];
@@ -270,7 +271,15 @@ while ($row = sqlsrv_fetch_array($skill_results,SQLSRV_FETCH_ASSOC)){
                 </div>
 
                 <div id="overrideSwitch">
-                    <input id="overrideCheckbox" type="checkbox" value="Override Office Hours" />
+                    <?php
+                        if ($override == "1"){
+                            echo '<input id="overrideCheckbox" type="checkbox" value="Override Office Hours" checked="true" />';
+                        }
+                        else{
+                            echo '<input id="overrideCheckbox" type="checkbox" value="Override Office Hours" />';
+                        }
+                    ?>
+
                     <label for="overrideCheckbox">Override Office Hours</label>
 
                     <div id="availabilityToggle" class="toggle-modern"></div>

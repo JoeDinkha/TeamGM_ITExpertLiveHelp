@@ -6,6 +6,12 @@ $(document).ready(function($) {
     var availabilityToggle = $('#availabilityToggle');
     var skillSelect = $('select#skillSelect').chosen();
     var form = $('#skillForm');
+    var override = $('#overrideCheckbox')[0].checked;
+    if (override == true){
+        overrideSwitch();
+    }
+
+
     var inputsLength = 0;
 
 
@@ -50,7 +56,7 @@ $(document).ready(function($) {
         $.ajax({
             type: "POST",
             url: "server.php",
-            data: { username: username, availability: availability, ExpertSkills: experts }
+            data: { username: username, availability: availability, override: override, ExpertSkills: experts }
         });
     });
 
@@ -59,11 +65,15 @@ $(document).ready(function($) {
     availabilityToggle.on( 'toggle', function(e, active) {
         var experts = getExpertSkills();
 
-        if (active) {
+        console.log('clicked');
+        console.log('availabilty');
+
+
+        if (availability) {
             $.ajax({
                 type: "POST",
                 url: "server.php",
-                data: { username: username, availability: "1", ExpertSkills: experts }
+                data: { username: username, availability: "1", override: "1", ExpertSkills: experts }
             });
         }
 
@@ -71,7 +81,7 @@ $(document).ready(function($) {
             $.ajax({
                 type: "POST",
                 url: "server.php",
-                data: { username: username, availability: "0", ExpertSkills: experts }
+                data: { username: username, availability: "0", override: "1", ExpertSkills: experts }
             });
         }
     });
@@ -85,7 +95,28 @@ $(document).ready(function($) {
     
     ////
     $('input#overrideCheckbox').click( function() {
-        availabilityToggle.toggle( this.checked );
+        override = $('#overrideCheckbox')[0].checked;
+        console.log(override);
+        console.log(availability);
+        var experts = getExpertSkills();
+
+        if (this.checked) {
+            $.ajax({
+                type: "POST",
+                url: "server.php",
+                data: { username: username, availability: "1", override: override, ExpertSkills: experts }
+            });
+        }
+
+        else {
+            $.ajax({
+                type: "POST",
+                url: "server.php",
+                data: { username: username, availability: "0", override: override, ExpertSkills: experts }
+            });
+        }
+
+        availabilityToggle.toggle( availability );
     });
 
 
@@ -234,6 +265,17 @@ $(document).ready(function($) {
         }
     });
 
+    //Override switch function on refresh (pulls value from database)
+    function overrideSwitch() {
+        override = $('#overrideCheckbox')[0].checked;
+        console.log(override);
+        var experts = getExpertSkills();
+        console.log(availability);
+
+
+        availabilityToggle.toggle( this.checked );
+    }
+
 
     // Authorizes use of Outlook API with refresh token
     function authorizeCalendar(token) {
@@ -294,6 +336,8 @@ $(document).ready(function($) {
         else {
             availability = 0;
         }
+
+
 
         var experts = '';
 
