@@ -1,3 +1,5 @@
+
+
 $(document).ready(function($) {
 
     //// Globals ////
@@ -69,6 +71,7 @@ $(document).ready(function($) {
         console.log('availabilty');
 
 
+        //update variables in the database, post to server.php page to handle query
         if (availability) {
             $.ajax({
                 type: "POST",
@@ -100,6 +103,7 @@ $(document).ready(function($) {
         console.log(availability);
         var experts = getExpertSkills();
 
+        //post to server.php, server hands all of the queries to update the database
         if (this.checked) {
             $.ajax({
                 type: "POST",
@@ -124,7 +128,7 @@ $(document).ready(function($) {
     $('button#showMoreBestFeedback').click( function() {
         console.log( $(this).text() + ' +' );
 
-        if( $(this).text('Show More Feedback') ) {
+        if( $(this).text() == 'Show More Feedback' ) {
             console.log( 'more' );
 
             // Change button text
@@ -147,7 +151,7 @@ $(document).ready(function($) {
             })
         }
 
-        else if( $(this).text('Show Less Feedback') ) {
+        else if( $(this).text() == 'Show Less Feedback' ) {
             console.log( 'less' );
 
             // Change button text
@@ -176,7 +180,7 @@ $(document).ready(function($) {
     $('button#showMoreWorstFeedback').click( function() {
         console.log( $(this).text() + ' -' );
 
-        if( $(this).text('Show More Feedback') ) {
+        if( $(this).text() == 'Show More Feedback' ) {
             console.log( 'more' );
 
             // Change button text
@@ -201,7 +205,7 @@ $(document).ready(function($) {
             })
         }
 
-        else if( $(this).text('Show Less Feedback') ) {
+        else if( $(this).text() == 'Show Less Feedback' ) {
             console.log( 'less' );
 
             // Change button text

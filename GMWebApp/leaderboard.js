@@ -1,3 +1,7 @@
+/**
+ * Author: Jenna Sanocki
+ */
+
 $(document).ready( function($) {
 
     //// Global Vars ////

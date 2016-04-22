@@ -1,9 +1,6 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: zkeit
- * Date: 2/3/2016
- * Time: 6:27 PM
+ * Author: Zack Keith
  */
 
 
@@ -19,7 +16,9 @@ $connectionInfo = array("Database" => "db","UID"=>"priceja7","PWD"=>"teamgm16");
 $conn = sqlsrv_connect( $serverName, $connectionInfo);
 
 for($x = 0; $x<sizeof($in); $x++){
-    
+
+    //hard coded outlook to work with only joe's calendar, in future use, if you want to make it work with multiple users,
+    //you'll need a column in the sql database to grab each user's refresh token, didn't have time to implement
     if($expert=="Joe Dinkha") {
 
         $query_string = "INSERT INTO dbo.OfficeHours VALUES ('" . $expert . "', '" . substr($in[$x], 0, -4) . "', '" . substr($out[$x], 0, -4) . "')";

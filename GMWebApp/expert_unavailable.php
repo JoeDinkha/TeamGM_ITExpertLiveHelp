@@ -1,9 +1,6 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: zkeit
- * Date: 2/3/2016
- * Time: 6:27 PM
+ * Author: Zack Keith
  */
 
 

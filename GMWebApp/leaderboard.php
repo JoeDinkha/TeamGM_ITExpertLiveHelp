@@ -172,34 +172,39 @@ else{
 
                     // All tds retrieved from database
                     for ($x=0; $x<count($fullnames); $x++) {
-                        $name = $usernames[$x];
+                        if ($average_ratings[$x] > 2){
 
-                        if ($name == $username){
-                            echo "<tr id='currentUser'>";
+                            $name = $usernames[$x];
+
+                            if ($name == $username){
+                                echo "<tr id='currentUser'>";
+                            }
+
+                            else {
+                                echo "<tr>";
+                            }
+
+                            // Rank
+                            echo '<td>'.($x+1).'</td>';
+
+                            // Username
+                            echo '<td>'.$fullnames[$x].'</td>';
+
+                            // Rating
+                            echo '<td>';
+
+                            for( $star = 0; $star < $average_ratings[$x]; $star++ ) {
+                                echo '<img src="images/star.png" width="500" height="472" alt="Star" />';
+                            }
+
+                            echo '</td>';
+
+                            echo '<td>'.$totalReviews[$x].'</td>';
+
+                            echo '</tr>';
+
                         }
 
-                        else {
-                            echo "<tr>";
-                        }
-
-                        // Rank
-                        echo '<td>'.($x+1).'</td>';
-
-                        // Username
-                        echo '<td>'.$fullnames[$x].'</td>';
-
-                        // Rating
-                        echo '<td>';
-
-                        for( $star = 0; $star < $average_ratings[$x]; $star++ ) {
-                            echo '<img src="images/star.png" width="500" height="472" alt="Star" />';
-                        }
-
-                        echo '</td>';
-                        
-                        echo '<td>'.$totalReviews[$x].'</td>';
-
-                        echo '</tr>';
                     }
                 ?>
             </table>

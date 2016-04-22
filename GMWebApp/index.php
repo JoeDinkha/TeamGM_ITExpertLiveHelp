@@ -1,10 +1,19 @@
 <?php
+
+/**
+ * Author: Jacob Price (PHP)
+ * Author: Jenna Sanocki (HTML/JS)
+ * Author: Joe Dinkha (HTML/JS)
+ */
+
+//check if user has logged in properly, if not, go back to login
 session_start();
 if( !isset($_SESSION['user']) ) {
     header('Location: login.php');
     exit;
 }
 
+//grab the username
 $username = $_SESSION['user'];
 
 //server details
@@ -46,6 +55,7 @@ $totalStars = 0;
 $numFeedback = 0;
 $results3_query = sqlsrv_query( $conn, $query_stringCalc );
 
+//loop through each row in the result from the query
 while ($results3 = sqlsrv_fetch_array($results3_query, SQLSRV_FETCH_ASSOC)) {
     $fRating = $results3['StarCount'];
     $totalStars = $totalStars + $fRating;
@@ -54,7 +64,6 @@ while ($results3 = sqlsrv_fetch_array($results3_query, SQLSRV_FETCH_ASSOC)) {
 
 // Update average rating in database
 $avg_rating = null;
-//$query_updateAvgRating = "REPLACE INTO dbo.Mocktable1 (AverageRating) VALUES('" . $avg_rating . "') WHERE Username=" . "'" . $username . "'";
 
 // If user has no feedback, set average rating to 0
 if( $numFeedback <= 0 ) {
