@@ -206,7 +206,7 @@ $(document).ready(function($) {
             // Change button positioning
             $(this).css({
                 position: 'absolute',
-                'margin-button': 20 + 'px'
+                'margin-bottom': 20 + 'px'
             });
 
             // Make un-scrollable
