@@ -126,18 +126,15 @@ $(document).ready(function($) {
 
     //// 'Show More Best Feedback' button ////
     $('button#showMoreBestFeedback').click( function() {
-        console.log( $(this).text() + ' +' );
 
         if( $(this).text() == 'Show More Feedback' ) {
-            console.log( 'more' );
-
             // Change button text
             $(this).text( 'Show Less Feedback' );
 
             // Change button positioning
             $(this).css({
                 position: 'static',
-                'margin-bottom': 20 + 'px'
+                'margin-bottom': 10 + 'px'
             });
 
             // Make scrollable
@@ -152,15 +149,13 @@ $(document).ready(function($) {
         }
 
         else if( $(this).text() == 'Show Less Feedback' ) {
-            console.log( 'less' );
-
             // Change button text
             $(this).text( 'Show More Feedback' );
 
             // Change button positioning
             $(this).css({
                 position: 'absolute',
-                'margin-bottom': 30 + 'px'
+                'margin-bottom': 20 + 'px'
             });
 
             // Make un-scrollable
@@ -178,11 +173,8 @@ $(document).ready(function($) {
 
     //// 'Show More Worst Feedback' button ////
     $('button#showMoreWorstFeedback').click( function() {
-        console.log( $(this).text() + ' -' );
 
         if( $(this).text() == 'Show More Feedback' ) {
-            console.log( 'more' );
-
             // Change button text
             $(this).text(
                 'Show Less Feedback'
@@ -191,7 +183,7 @@ $(document).ready(function($) {
             // Change button positioning
             $(this).css({
                 position: 'static',
-                'margin-bottom': 20 + 'px'
+                'margin-bottom': 10 + 'px'
             });
 
             // Make scrollable
@@ -206,8 +198,6 @@ $(document).ready(function($) {
         }
 
         else if( $(this).text() == 'Show Less Feedback' ) {
-            console.log( 'less' );
-
             // Change button text
             $(this).text(
                 'Show More Feedback'
@@ -216,7 +206,7 @@ $(document).ready(function($) {
             // Change button positioning
             $(this).css({
                 position: 'absolute',
-                'margin-bottom': 30 + 'px'
+                'margin-button': 20 + 'px'
             });
 
             // Make un-scrollable
@@ -249,33 +239,31 @@ $(document).ready(function($) {
     })();
 
 
-    // Refreshing the Access Token JS
+    // Refreshing the Access Token - JS
     $.ajax({
         type: "GET",
         url: "refresh_api.php",
 
-        success: function (result) {
+        success: function( result ) {
             //console.log("Refresh token worked!");
             var outputStr = result.split(',');
             var accessTokenLocated = outputStr[3].split(':');
             var resultAccessToken = accessTokenLocated[1];
 
             authorizeCalendar(resultAccessToken);
-
         },
 
-        error: function (error) {
+        error: function() {
             console.log("Error occurred while trying to refresh the access token.")
         }
     });
 
-    //Override switch function on refresh (pulls value from database)
+
+    // Override switch function on refresh (pulls value from database)
     function overrideSwitch() {
         override = $('#overrideCheckbox')[0].checked;
-        console.log(override);
-        var experts = getExpertSkills();
-        console.log(availability);
-
+        //console.log(override);
+        //console.log(availability);
 
         availabilityToggle.toggle( this.checked );
     }
@@ -292,22 +280,21 @@ $(document).ready(function($) {
             dataType: 'json',
 
             success: function (result) {
-                console.log('Get Calendar - Success!');
-                console.log(result);
+                //console.log('Get Calendar - Success!');
+                //console.log(result);
 
                 for (var i = 0; i < result.value.length; i++) {
                     if (result.value[i].Subject == "Office Hours") {
-                        console.log("\nSubject = " + result.value[i].Subject);
-                        console.log("Start DateTime = " + result.value[i].Start.DateTime);
-                        console.log("End DateTime = " + result.value[i].End.DateTime);
-
+                        // console.log("\nSubject = " + result.value[i].Subject);
+                        // console.log("Start DateTime = " + result.value[i].Start.DateTime);
+                        // console.log("End DateTime = " + result.value[i].End.DateTime);
                     }
                 }
             },
 
-            error: function (error) {
-                console.log('Get Calendar - Error...');
-                console.log(error);
+            error: function( error ) {
+                console.log( 'Get Calendar - Error...' );
+                console.log( error );
             }
         });
     }
@@ -342,7 +329,6 @@ $(document).ready(function($) {
         }
 
 
-
         var experts = '';
 
         for(var y =0; y<columns.length;y++){
@@ -351,7 +337,5 @@ $(document).ready(function($) {
 
         return experts
     }
-
-
 
 });

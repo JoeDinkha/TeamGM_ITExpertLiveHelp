@@ -19,6 +19,8 @@ for($x = 0; $x<sizeof($in); $x++){
 
     //hard coded outlook to work with only joe's calendar, in future use, if you want to make it work with multiple users,
     //you'll need a column in the sql database to grab each user's refresh token, didn't have time to implement
+
+    // CHANGE THIS PART TO BE DYNAMIC
     if($expert=="Joe Dinkha") {
 
         $query_string = "INSERT INTO dbo.OfficeHours VALUES ('" . $expert . "', '" . substr($in[$x], 0, -4) . "', '" . substr($out[$x], 0, -4) . "')";
@@ -28,8 +30,7 @@ for($x = 0; $x<sizeof($in); $x++){
 
 }
 
-
-
 echo("SUCCESS");
+
 ?>
 

@@ -1,5 +1,8 @@
 <?php
 
+// JOEY DIESEL SAYS: Create connection to DB in this file to grab RefreshToken and PostmanToken columns
+// there is only calendars for Joe and Jenna accounts
+
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
@@ -10,10 +13,15 @@ curl_setopt_array($curl, array(
     CURLOPT_TIMEOUT => 30,
     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
     CURLOPT_CUSTOMREQUEST => "POST",
+
+    // JOEY DIESEL SAYS: See where it says &refresh_token= you need to use the $refreshtoken variable there and
+    // concatenate it into the string, make sure to not remove any part of the part where it says &redirect_uri=....
     CURLOPT_POSTFIELDS => "client_id=df5c3f43-84b2-4444-a0e8-3022d364f53b&scope=openid%20https%3A%2F%2Foutlook.office.com%2Fcalendars.read%20offline_access&refresh_token=MCYWfBo3Q7kHPdGaOTJMfHwLbiD47gvqevwB4i4rqSl8ZyTqw6S2*kpdVtv6R7O1qV95yB0kBtmmxxxrXVnyAeKn2bNJ7DGFkcXlAqfbYfuenm08m7UGUgpNtIo5KhTA7LHGxU6dqBpuVtY7vDQkrlBrLHFCTUHTAP6Mtz*hSo7IddyaWcFvgGh44XqFNKGivqtt6kMtgCnB*1RRpKaV5Abe23tFCiyXGd66dn0DVHeYIBkysby6pyqimeV7aAIX4mhqAy3kJOx2hG80i!NbMxl6iHXVsHF9CxgVoIJR7SlD7fN3gPouCV!S4eLKxYdhL8T8mTspthqXXviSYVlUnCmI6hjS6UFXtuZUIJLPx8IXJFvT3V1WVrZUZJR3C7OYctMxxlSjKblilaOAMUl1g8hx2fdHaN4eD5Xlp3tWqp46f&redirect_uri=https%3A%2F%2F35.9.22.109%2FGMWebApp%2Findex.php&grant_type=refresh_token&client_secret=APfpVLBgOLKhNrD7W1SpuXR",
     CURLOPT_HTTPHEADER => array(
         "cache-control: no-cache",
         "content-type: application/x-www-form-urlencoded",
+
+        // JOEY DIESEL SAYS: Use the $postmantoken variable here after the 'postman-token: '
         "postman-token: 780d610a-68a6-e6e5-4631-ed26a6e70555"
     ),
 ));
@@ -28,5 +36,8 @@ if ($err) {
 } else {
     echo $response;
 }
+
+// FINALLY: Change the hardcoded Joe Dinkha line in add_hours.php to work with this dynamic calendar script
+// Remove all the Joey Diesel comments lol
 
 ?>

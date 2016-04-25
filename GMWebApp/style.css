@@ -188,10 +188,6 @@ form#skillForm label {
     vertical-align: 14px;
 }
 
-form#skillForm input {
-    margin: 10px 0;
-}
-
 form#skillForm input[type=checkbox] {
     width: 20px;
     height: 20px;
@@ -215,6 +211,7 @@ form#skillForm input[type=checkbox]::-ms-check{
 }
 
 form#skillForm input[type=submit] {
+    min-width: 220px;
     margin: 20px auto;
 }
 
@@ -259,7 +256,7 @@ button#leaderboard {
 /* Log Out */
 button#logOut {
     min-width: 220px;
-    margin-top: 15px;
+    margin: 15px auto;
 }
 
 
@@ -271,7 +268,7 @@ div#calendarFeedbackBox {
 }
 
 div#calendarFeedbackBox div#calendarBox {
-    padding: 10px 20px 30px 20px;
+    padding: 10px 20px 25px 20px;
     margin-bottom: 20px;
     background: white;
     border-radius: 10px;
@@ -295,6 +292,7 @@ div#calendarFeedbackBox div#calendarBox div#outlookButtons {
 /*** "Set Office Hours" Special Button ***/
 div#calendarFeedbackBox div#calendarBox span.addtocalendar {
     width: 319px;
+    margin-top: -5px;
 }
 
 div#calendarFeedbackBox div#calendarBox span.addtocalendar a.atcb-link {
@@ -396,7 +394,7 @@ div#calendarFeedbackBox div#calendarBox input[type=checkbox]::-ms-check {
 
 div#calendarFeedbackBox div#calendarBox label {
     display: inline-block;
-    margin-top: 10px;
+    margin-top: 15px;
 }
 
 div#calendarFeedbackBox div#calendarBox div#availabilityToggle {
@@ -409,7 +407,7 @@ div#calendarFeedbackBox div#calendarBox div#availabilityToggle {
 div#calendarFeedbackBox div#bestReviews,
 div#calendarFeedbackBox div#worstReviews {
     width: 48.7%;
-    height: 630px;
+    height: 650px;
     display: inline-block;
     position: relative;
     padding: 10px 20px;
@@ -493,7 +491,6 @@ div#calendarFeedbackBox div#worstReviews div.worstReview p {
 /* "Show More Feedback" Buttons */
 div#calendarFeedbackBox div#bestReviews button,
 div#calendarFeedbackBox div#worstReviews button {
-    margin-bottom: 30px;
     position: absolute;
     bottom: 0;
     right: 22%;

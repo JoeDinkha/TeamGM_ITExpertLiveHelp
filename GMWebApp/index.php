@@ -256,43 +256,38 @@ while ($row = sqlsrv_fetch_array($skill_results,SQLSRV_FETCH_ASSOC)){
             <div id="calendarBox">
                 <h3>Calendar</h3>
 
-                <div id="outlookButtons">
-                    <span class="addtocalendar" data-calendars="Outlook">
-                        <a class="atcb-link">Set Office Hours in Outlook</a>
+                <span class="addtocalendar" data-calendars="Outlook">
+                    <a class="atcb-link">Set Office Hours in Outlook</a>
 
-                        <var class="atc_event">
-                            <var class="atc_date_start">2016-04-29 12:00:00</var>
-                            <var class="atc_date_end">2016-04-29 14:00:00</var>
-                            <var class="atc_timezone">America/Detroit</var>
-                            <var class="atc_title">IT Expert Live Help: Office Hours</var>
-                            <var class="atc_description">Availability period to assist others</var>
-                            <var class="atc_location">Online</var>
-                            <var class="atc_organizer"><?php echo $username; ?></var>
-                            <var class="atc_organizer_email"></var>
-                        </var>
-                    </span>
+                    <var class="atc_event">
+                        <var class="atc_date_start">2016-04-29 12:00:00</var>
+                        <var class="atc_date_end">2016-04-29 14:00:00</var>
+                        <var class="atc_timezone">America/Detroit</var>
+                        <var class="atc_title">IT Expert Live Help: Office Hours</var>
+                        <var class="atc_description">Availability period to assist others</var>
+                        <var class="atc_location">Online</var>
+                        <var class="atc_organizer"><?php echo $username; ?></var>
+                        <var class="atc_organizer_email"></var>
+                    </var>
+                </span>
 
-                    <button id="outlookOnline" value="Outlook Online">
-                        <a class="invisibleLink" target="_blank" href="https://bay02.calendar.live.com/calendar/calendar.aspx?rru=addevent&startdt=20160429T12%3a00%3a00Z&enddt=20160429T14%3a00%3a00Z&summary=Office+Hours&location=Online&description=IT+Expert+Live+Help&allday=false&uid=">
-                            Set Office Hours in Outlook Online
-                        </a>
-                    </button>
-                </div>
+                <button id="outlookOnline" value="Outlook Online">
+                    <a class="invisibleLink" target="_blank" href="https://bay02.calendar.live.com/calendar/calendar.aspx?rru=addevent&startdt=20160429T12%3a00%3a00Z&enddt=20160429T14%3a00%3a00Z&summary=Office+Hours&location=Online&description=IT+Expert+Live+Help&allday=false&uid=">
+                        Set Office Hours in Outlook Online
+                    </a>
+                </button>
 
-                <div id="overrideSwitch">
-                    <?php
-                        if ($override == "1"){
-                            echo '<input id="overrideCheckbox" type="checkbox" value="Override Office Hours" checked="true" />';
-                        }
-                        else{
-                            echo '<input id="overrideCheckbox" type="checkbox" value="Override Office Hours" />';
-                        }
-                    ?>
+                <?php
+                    if ($override == "1"){
+                        echo '<input id="overrideCheckbox" type="checkbox" value="Override Office Hours" checked />';
+                    }
+                    else{
+                        echo '<input id="overrideCheckbox" type="checkbox" value="Override Office Hours" />';
+                    }
+                ?>
 
-                    <label for="overrideCheckbox">Override Office Hours</label>
-
-                    <div id="availabilityToggle" class="toggle-modern"></div>
-                </div>
+                <label for="overrideCheckbox">Override Office Hours</label>
+                <div id="availabilityToggle" class="toggle-modern"></div>
             </div>
 
 
@@ -306,6 +301,7 @@ while ($row = sqlsrv_fetch_array($skill_results,SQLSRV_FETCH_ASSOC)){
 
                     // Run query and store results
                     $results2_query = sqlsrv_query( $conn, $query_string2 );
+                    $numPositiveFeedback = 0;
 
                     while ($results2= sqlsrv_fetch_array($results2_query,SQLSRV_FETCH_ASSOC)) {
                         // Store result variables
@@ -346,11 +342,15 @@ while ($row = sqlsrv_fetch_array($skill_results,SQLSRV_FETCH_ASSOC)){
                             echo '<p>'.$fFeedback.'</p>';
 
                             echo '</div>';
+
+                            $numPositiveFeedback++;
                         }
                     }
                 ?>
 
-                <button id="showMoreBestFeedback">Show More Feedback</button>
+                <?php if( $numPositiveFeedback > 3 ) { ?>
+                    <button id="showMoreBestFeedback">Show More Feedback</button>
+                <?php } ?>
             </div>
 
 
@@ -364,6 +364,7 @@ while ($row = sqlsrv_fetch_array($skill_results,SQLSRV_FETCH_ASSOC)){
 
                     // Run query and store results
                     $results2_query = sqlsrv_query( $conn, $query_string2 );
+                    $numNegativeFeedback = 0;
 
                     while ($results2= sqlsrv_fetch_array($results2_query,SQLSRV_FETCH_ASSOC)){
                         // Store result variables
@@ -403,11 +404,15 @@ while ($row = sqlsrv_fetch_array($skill_results,SQLSRV_FETCH_ASSOC)){
                             echo '<p>'.$fFeedback.'</p>';
 
                             echo '</div>';
+
+                            $numNegativeFeedback++;
                         }
                     }
                 ?>
 
-                <button id="showMoreWorstFeedback">Show More Feedback</button>
+                <?php if( $numNegativeFeedback > 3 ) { ?>
+                    <button id="showMoreWorstFeedback">Show More Feedback</button>
+                <?php } ?>
             </div>
 
         </div>
