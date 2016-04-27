@@ -70,8 +70,8 @@ $(document).ready(function($) {
     availabilityToggle.on( 'toggle', function(e, active) {
         var experts = getExpertSkills();
 
-        console.log('clicked');
-        console.log('availabilty');
+        //console.log('clicked');
+        //console.log('availabilty');
 
 
         //update variables in the database, post to server.php page to handle query
@@ -102,8 +102,8 @@ $(document).ready(function($) {
     ////
     $('input#overrideCheckbox').click( function() {
         override = $('#overrideCheckbox')[0].checked;
-        console.log(override);
-        console.log(availability);
+        //console.log(override);
+        //console.log(availability);
         var experts = getExpertSkills();
 
         //post to server.php, server hands all of the queries to update the database
@@ -312,7 +312,7 @@ $(document).ready(function($) {
 
             success: function (result) {
                 //console.log('Get Calendar - Success!');
-                console.log(result);
+                //console.log(result);
 
                 for (var i = 0; i < result.value.length; i++) {
                     if (result.value[i].Subject == "Office Hours") {
@@ -323,17 +323,17 @@ $(document).ready(function($) {
 
                         startDate = new Date(start);
                         startDate.setHours(startDate.getHours() - 4);
-                        console.log(startDate.toISOString());
+                        //console.log(startDate.toISOString());
 
                         endDate = new Date(end);
                         endDate.setHours(endDate.getHours() - 4);
-                        console.log(endDate.toISOString());
+                        //console.log(endDate.toISOString());
 
                         start_array.push(startDate.toISOString());
                         end_array.push(endDate.toISOString());
-                        console.log("\nSubject = " + result.value[i].Subject);
-                        console.log("Start DateTime = " + result.value[i].Start.DateTime);
-                        console.log("End DateTime = " + result.value[i].End.DateTime);
+                        //console.log("\nSubject = " + result.value[i].Subject);
+                        //console.log("Start DateTime = " + result.value[i].Start.DateTime);
+                        //console.log("End DateTime = " + result.value[i].End.DateTime);
                     }
                 }
                 pushHours();
