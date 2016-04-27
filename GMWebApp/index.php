@@ -68,7 +68,6 @@ $avg_rating = null;
 // If user has no feedback, set average rating to 0
 if( $numFeedback <= 0 ) {
     $avg_rating = 0;
-    //sqlsrv_query( $conn, $query_updateAvgRating );
 }
 
 // Else, calculate average rating
@@ -86,8 +85,6 @@ else {
     else {
         $avg_rating = ceil( $avg_rating );
     }
-
-    //sqlsrv_query( $conn, $query_updateAvgRating );
 }
 
 
@@ -95,13 +92,11 @@ else {
 $query_string_skills = "SELECT * FROM dbo.SkillTable ORDER BY IndexPosition";
 $skill_results = sqlsrv_query($conn,$query_string_skills);
 $skill_array = array();
+
 while ($row = sqlsrv_fetch_array($skill_results,SQLSRV_FETCH_ASSOC)){
     $temp_val = $row['Skills'];
     array_push($skill_array,$temp_val);
 }
-
-
-//echo $skill_array;
 ?>
 
 <!DOCTYPE html>
@@ -109,8 +104,8 @@ while ($row = sqlsrv_fetch_array($skill_results,SQLSRV_FETCH_ASSOC)){
 
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
     <title>GM | IT Expert Live Help</title>
 
     <!-- Stylesheets -->
@@ -164,7 +159,7 @@ while ($row = sqlsrv_fetch_array($skill_results,SQLSRV_FETCH_ASSOC)){
 
     <div class="content">
         <div id="profilePanel">
-            <img id="profilePic" src="images/team-photo-resized.png" width="1064" height="708"
+            <img id="profilePic" src="images/team-photo.png" width="1064" height="708"
                  alt="<?echo $username; ?>'s Profile Picture" />
 
             <h2 id="name"><?php echo $username; ?></h2>
@@ -272,8 +267,7 @@ while ($row = sqlsrv_fetch_array($skill_results,SQLSRV_FETCH_ASSOC)){
                 </span>
 
                 <button id="outlookOnline" value="Outlook Online">
-                    <a class="invisibleLink" target="_blank" href="https://bay02.calendar.live.com/calendar/calendar
-                    .aspx?rru=addevent&startdt=20160429T12%3a00%3a00Z&enddt=20160429T14%3a00%3a00Z&summary=Office+Hours&location=Online&description=IT+Expert+Live+Help&allday=false&uid=">
+                    <a target="_blank" href="https://bay02.calendar.live.com/calendar/calendar.aspx?rru=addevent&startdt=20160429T12%3a00%3a00Z&enddt=20160429T14%3a00%3a00Z&summary=Office+Hours&location=Online&description=IT+Expert+Live+Help&allday=false&uid=">
                         Set Office Hours in Outlook Online
                     </a>
                 </button>

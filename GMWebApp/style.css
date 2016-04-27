@@ -31,22 +31,24 @@ input {
 }
 
 button, input[type=submit] {
+    min-width: 220px;
     display: block;
-    padding: 10px 30px;
-    margin: 30px auto 20px auto;
-    font-size: 16px;
+    padding: 10px;
+    margin: 25px auto;
     cursor: pointer;
 
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-
     color: white;
+    font-size: 16px;
     font-family: "Open Sans", Arial, sans-serif;
+
     background: #22559E;
     border: 1px solid rgba(20, 20, 20, .4);
     border-radius: 4px;
     outline: none;
+
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
 
     -webkit-transition: all ease 0.3s;
     -moz-transition: all ease 0.3s;
@@ -60,12 +62,12 @@ button.remodal-confirm:hover, button.remodal-confirm:focus {
     background: #2271bc;
 }
 
-/* Override Default Button Hover */
+/* Override Button Hover for Modal */
 button.remodal-close:hover {
     background: transparent;
 }
 
-/* Placeholders */
+/*** Placeholders ***/
 input::-webkit-input-placeholder {
     color: rgba(34, 85, 158, .5);
     font-family: "Open Sans", Arial, sans-serif;
@@ -79,11 +81,13 @@ input::-moz-placeholder {
 input:-moz-placeholder {
     color: rgba(34, 85, 158, .5);
     font-family: "Open Sans", Arial, sans-serif;
+    opacity: 1;
 }
 
 input:-ms-input-placeholder {
     color: rgba(34, 85, 158, .5);
     font-family: "Open Sans", Arial, sans-serif;
+    opacity: 1;
 }
 
 /*** Container and Content ***/
@@ -101,10 +105,7 @@ div.content {
     text-align: center;
 }
 
-
-/*****************************************
-************** Profile Page **************
-******************************************/
+/*** Header ***/
 header {
     padding: 25px 15px;
     color: white;
@@ -129,7 +130,10 @@ header h1 {
     vertical-align: top;
 }
 
-/**************** Profile Panel ****************/
+
+/*****************************************
+************** Profile Page **************
+******************************************/
 div#profilePanel {
     width: 29%;
     display: inline-block;
@@ -150,69 +154,40 @@ div#profilePanel img#profilePic {
     width: 100%;
     height: auto;
     margin-top: 10px;
-    border-radius: 10px;
     border: 1px solid #22559E;
+    border-radius: 4px;
 }
 
 div#profilePanel h2#name {
-    margin: 15px 5px 0 5px;
+    margin: 12px 0 15px 0;
     font-weight: bold;
 }
 
 /*** Rating ***/
-div#rating {
-    margin: 15px 0 17px 0;
+div#profilePanel div#rating {
+    margin: 15px 0;
 }
 
-div#rating img {
+div#profilePanel div#rating img {
     width: 40px;
     height: auto;
 }
 
-
-/******************* Skills *******************/
+/*** Skills ***/
 div#profilePanel h3 {
-    padding-top: 30px;
-    margin-bottom: 20px;
+    padding-top: 22px;
+    margin-bottom: 15px;
     border-top: 1px solid rgba(34, 85, 158, .3);
 }
 
-form#skillForm {
-    padding: 0 20px 20px 20px;
+div#profilePanel form#skillForm {
+    padding: 0 20px;
     text-align: left;
     border-bottom: 1px solid rgba(34, 85, 158, .3);
 }
 
-form#skillForm label {
-    padding-left: 5px;
-    vertical-align: 14px;
-}
-
-form#skillForm input[type=checkbox] {
-    width: 20px;
-    height: 20px;
-    border: 1px solid #1A70BE;
-    outline: none;
-    cursor: pointer;
-
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-}
-
-form#skillForm input[type=checkbox]:checked {
-    background: url("images/checkmark.png") no-repeat center;
-    background-size: 10px;
-}
-
-form#skillForm input[type=checkbox]::-ms-check{
-    background: url("images/checkmark.png") no-repeat center;
-    background-size: 10px;
-}
-
-form#skillForm input[type=submit] {
-    min-width: 220px;
-    margin: 20px auto;
+div#profilePanel form#skillForm input[type=submit] {
+    margin: 15px auto 25px auto;
 }
 
 /*** Modal ***/
@@ -243,19 +218,18 @@ button.remodal-confirm {
 
 /* Close Button */
 button.remodal-close {
+    min-width: inherit;
     left: inherit;
     right: 0;
 }
 
-/* Leaderboard */
-button#leaderboard {
-    min-width: 220px;
-    margin: 25px auto 0 auto;
+/* Leaderboard Button */
+div#profilePanel button#leaderboard {
+    margin: 24px auto 0 auto;
 }
 
-/* Log Out */
-button#logOut {
-    min-width: 220px;
+/* Log Out Button */
+div#profilePanel button#logOut {
     margin: 15px auto;
 }
 
@@ -285,21 +259,16 @@ div#calendarFeedbackBox div#calendarBox h3 {
     border-bottom: 1px solid rgba(34, 85, 158, .3);
 }
 
-/*** "Office Hours" Buttons Section ***/
-div#calendarFeedbackBox div#calendarBox div#outlookButtons {
-}
-
-/*** "Set Office Hours" Special Button ***/
+/*** Outlook Button ***/
 div#calendarFeedbackBox div#calendarBox span.addtocalendar {
-    width: 319px;
-    margin-top: -5px;
+    width: 298px;
+    display: block;
+    margin: 25px auto 0 auto;
 }
 
 div#calendarFeedbackBox div#calendarBox span.addtocalendar a.atcb-link {
-    padding: 10px 30px;
-    margin: 15px auto 0 auto;
+    padding: 10px;
     text-decoration: none;
-
     color: white;
     background: #22559E;
     border: 1px solid rgba(20, 20, 20, .4);
@@ -317,32 +286,6 @@ div#calendarFeedbackBox div#calendarBox span.addtocalendar a.atcb-link:focus {
     border-bottom-right-radius: 0;
 }
 
-/* Drop-down */
-div#calendarFeedbackBox div#calendarBox span.addtocalendar ul {
-    width: 100%;
-    margin-top: -1px;
-    background: #22559E;
-    border: 1px solid rgba(20, 20, 20, .4);
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-}
-
-/* Drop-down Item */
-div#calendarFeedbackBox div#calendarBox span.addtocalendar ul li {
-    padding: 5px;
-    background: #22559E;
-}
-
-/* Drop-down Item Link */
-div#calendarFeedbackBox div#calendarBox span.addtocalendar ul li a {
-    padding: 5px 10px;
-    color: white;
-}
-
 div#calendarFeedbackBox div#calendarBox span.addtocalendar a:hover,
 div#calendarFeedbackBox div#calendarBox span.addtocalendar a:focus {
     background: #2271bc;
@@ -350,8 +293,8 @@ div#calendarFeedbackBox div#calendarBox span.addtocalendar a:focus {
 
 /*** Outlook Online Button ***/
 div#calendarFeedbackBox div#calendarBox button#outlookOnline {
-    margin-bottom: 0;
-    margin-top: 15px;
+    margin: 15px auto 0 auto;
+    padding: 10px 20px;
 }
 
 div#calendarFeedbackBox div#calendarBox button#outlookOnline a {
@@ -360,15 +303,13 @@ div#calendarFeedbackBox div#calendarBox button#outlookOnline a {
     text-decoration: none;
 }
 
-/*** Override Switch Section ***/
-div#calendarFeedbackBox div#calendarBox div#overrideSwitch {
-}
-
+/*** Override Switch Checkbox ***/
 div#calendarFeedbackBox div#calendarBox input[type=checkbox] {
-    width: 19px;
-    height: 19px;
-    margin: 15px 5px 0 0;
+    width: 20px;
+    height: 20px;
+    margin: 0 5px 0 0;
     vertical-align: sub;
+    cursor: pointer;
 
     background: ghostwhite;
     border: 1px solid rgba(34, 85, 158, .3);
@@ -382,21 +323,26 @@ div#calendarFeedbackBox div#calendarBox input[type=checkbox] {
 
 div#calendarFeedbackBox div#calendarBox input[type=checkbox]:checked {
     background: ghostwhite url('images/checkmark.png') no-repeat center;
-    -webkit-background-size: 10px;
-    background-size: 10px;
+    border-color: #22559e;
+    -webkit-background-size: 11px;
+    background-size: 11px;
 }
 
 div#calendarFeedbackBox div#calendarBox input[type=checkbox]::-ms-check {
     background: ghostwhite url('images/checkmark.png') no-repeat center;
-    -webkit-background-size: 10px;
-    background-size: 10px;
+    border-color: #22559e;
+    -webkit-background-size: 11px;
+    background-size: 11px;
 }
 
+/* Checkbox Label */
 div#calendarFeedbackBox div#calendarBox label {
     display: inline-block;
     margin-top: 15px;
+    vertical-align: text-bottom;
 }
 
+/* Override Switch */
 div#calendarFeedbackBox div#calendarBox div#availabilityToggle {
     display: none;
     margin: 15px auto 0 auto;
@@ -429,7 +375,7 @@ div#calendarFeedbackBox div#bestReviews {
     margin-right: 17px;
 }
 
-/* Feedback Headings */
+/* Headings */
 div#calendarFeedbackBox div#bestReviews h3,
 div#calendarFeedbackBox div#worstReviews h3 {
     padding-bottom: 10px;
@@ -452,7 +398,7 @@ div#calendarFeedbackBox div#worstReviews div.worstReview img {
     margin-bottom: 5px;
 }
 
-/* Names */
+/* Name */
 div#calendarFeedbackBox div#bestReviews div.bestReview h4,
 div#calendarFeedbackBox div#worstReviews div.worstReview h4 {
     display: inline-block;
@@ -494,6 +440,7 @@ div#calendarFeedbackBox div#worstReviews button {
     position: absolute;
     bottom: 0;
     right: 22%;
+    margin-bottom: 25px;
 }
 
 
@@ -587,10 +534,6 @@ div#leaderboard.container table tr#currentUser td {
     border: 1px solid #22559E;
 }
 
-.invisibleLink {
-    /*display: none;*/
-}
-
 
 /****************** Responsiveness ******************/
 @media( max-width: 1250px ) {
@@ -628,7 +571,7 @@ div#leaderboard.container table tr#currentUser td {
 @media( max-width: 1112px ) {
     header h1 {
         font-size: 2.2em;
-        line-height: 32px;
+        line-height: 42px;
     }
 
     div#profilePanel {
@@ -646,11 +589,6 @@ div#leaderboard.container table tr#currentUser td {
         width: 45px;
     }
 
-    div#availabilityToggle {
-        display: block;
-        margin: 0 auto 35px auto;
-    }
-
     /* Buttons */
     button {
         width: 100%;
@@ -660,39 +598,15 @@ div#leaderboard.container table tr#currentUser td {
         font-size: 20px;
     }
 
-    /* Outlook Button */
-    div#calendarFeedbackBox div#calendarBox span.addtocalendar {
-        width: 100%;
-        font-size: 17px;
-    }
-
-    /* Outlook Online Button */
-    div#calendarFeedbackBox div#calendarBox button#outlookOnline a {
-        font-size: 17px;
-    }
-
 
     /*** Skills ***/
     form#skillForm {
         padding: 0 10px 10px 10px;
     }
 
-    form#skillForm label {
-        padding-left: 10px;
-        vertical-align: 16px;
-    }
-
-    form#skillForm input[type=checkbox] {
-        width: 30px;
-        height: 30px;
-    }
-
-    form#skillForm input[type=checkbox]:checked {
-        background-size: 15px;
-    }
-
-    form#skillForm input[type=checkbox]::-ms-check{
-        background-size: 15px;
+    select#skillSelect {
+        width: 100%;
+        padding: 10px;
     }
 
     form#skillForm input[type=submit] {
@@ -702,7 +616,45 @@ div#leaderboard.container table tr#currentUser td {
     }
 
 
-    /*** Calendar and Feedback ***/
+    /*** Calendar ***/
+    /* Outlook Button */
+    div#calendarFeedbackBox div#calendarBox span.addtocalendar {
+        width: 100%;
+        font-size: 20px;
+    }
+
+    div#calendarFeedbackBox div#calendarBox span.addtocalendar a.atcb-link {
+        padding: 15px 10px;
+    }
+
+    /* Outlook Online Button */
+    div#calendarFeedbackBox div#calendarBox button#outlookOnline a {
+        font-size: 20px;
+    }
+
+    /*** Override Checkbox ***/
+    div#calendarFeedbackBox div#calendarBox input[type=checkbox] {
+        width: 26px;
+        height: 26px;
+    }
+
+    div#calendarFeedbackBox div#calendarBox input[type=checkbox]:checked {
+        -webkit-background-size: 14px;
+        background-size: 14px;
+    }
+
+    div#calendarFeedbackBox div#calendarBox input[type=checkbox]::-ms-check {
+        -webkit-background-size: 14px;
+        background-size: 14px;
+    }
+
+    div#availabilityToggle {
+        display: block;
+        margin: 0 auto 35px auto;
+    }
+
+
+    /*** Feedback ***/
     div#calendarFeedbackBox {
         width: 100%;
         margin: 20px 0 0 0;
@@ -746,39 +698,175 @@ div#leaderboard.container table tr#currentUser td {
     }
 }
 
+
+/*** Leaderboard ***/
+@media( max-width: 585px ) {
+    /* Table Headers */
+    div#leaderboard.container table th {
+        padding: 25px 30px;
+    }
+
+    /* Table Content */
+    div#leaderboard.container table td {
+        padding: 25px 30px;
+    }
+
+    /* Stars */
+    div#leaderboard.container table td img {
+        width: 30px;
+    }
+}
+
+/*** Leaderboard ***/
+@media( max-width: 510px ) {
+    /* Table Headers */
+    div#leaderboard.container table th {
+        padding: 20px;
+    }
+
+    /* Table Content */
+    div#leaderboard.container table td {
+        padding: 20px;
+    }
+}
+
+/*** Leaderboard ***/
+@media( max-width: 430px ) {
+    /* Table Headers */
+    div#leaderboard.container table th {
+        padding: 15px;
+    }
+
+    /* Table Content */
+    div#leaderboard.container table td {
+        padding: 15px;
+    }
+}
+
+/*** Leaderboard ***/
+@media( max-width: 385px ) {
+    /* Table Headers */
+    div#leaderboard.container table th {
+        padding: 10px;
+    }
+
+    /* Table Content */
+    div#leaderboard.container table td {
+        padding: 10px;
+    }
+}
+
+/*** Leaderboard ***/
+@media( max-width: 345px ) {
+    /* Table Headers */
+    div#leaderboard.container table th {
+        padding: 5px;
+    }
+
+    /* Table Content */
+    div#leaderboard.container table td {
+        padding: 5px;
+    }
+
+    /* Stars */
+    div#leaderboard.container table td img {
+        width: 20px;
+    }
+}
+
+
 @media( max-width: 520px ) {
+    /* Login */
+    div#login.container div.content {
+        padding: 12% 15px 25% 15px;
+    }
+
     div#index.container div.content {
         padding: 10% 15px 50% 15px;
     }
 
-    div#login.container div.content {
-        padding: 10% 15px 30% 15px;
-    }
-
-    div#login.container header h1 {
-        display: block;
-        padding-left: 0;
+    header img {
+        width: 70px;
     }
 
     header h1 {
+        display: block;
+        margin: 10px 0 -5px 0;
+        padding-left: 0;
         font-size: 26px;
-        line-height: 28px;
-        padding-left: 10px;
-    }
-
-    header img {
-        width: 60px;
-    }
-
-    select#skillSelect {
-        width: 100%;
-        padding: 10px;
+        line-height: 36px;
     }
 
     footer {
         padding: 10px;
     }
 }
+
+
+@media( max-width: 460px ) {
+    /*** Outlook Buttons ***/
+    div#calendarFeedbackBox div#calendarBox span.addtocalendar,
+    div#calendarFeedbackBox div#calendarBox button#outlookOnline a {
+        font-size: 18px;
+    }
+
+    div#calendarFeedbackBox div#calendarBox span.addtocalendar a.atcb-link {
+        padding: 17px 10px;
+    }
+
+    div#calendarFeedbackBox div#calendarBox button#outlookOnline {
+        line-height: 18px;
+    }
+}
+
+@media( max-width: 410px ) {
+    /*** Outlook Buttons ***/
+    div#calendarFeedbackBox div#calendarBox span.addtocalendar,
+    div#calendarFeedbackBox div#calendarBox button#outlookOnline a {
+        font-size: 16px;
+    }
+
+    div#calendarFeedbackBox div#calendarBox span.addtocalendar a.atcb-link {
+        padding: 18px 10px;
+    }
+
+    div#calendarFeedbackBox div#calendarBox button#outlookOnline {
+        line-height: 16px;
+    }
+}
+
+@media( max-width: 372px ) {
+    /*** Outlook Buttons ***/
+    div#calendarFeedbackBox div#calendarBox span.addtocalendar,
+    div#calendarFeedbackBox div#calendarBox button#outlookOnline a {
+        font-size: 14px;
+    }
+
+    div#calendarFeedbackBox div#calendarBox span.addtocalendar a.atcb-link {
+        padding: 19px 10px;
+    }
+
+    div#calendarFeedbackBox div#calendarBox button#outlookOnline {
+        line-height: 14px;
+    }
+}
+
+@media( max-width: 345px ) {
+    /*** Outlook Buttons ***/
+    div#calendarFeedbackBox div#calendarBox span.addtocalendar,
+    div#calendarFeedbackBox div#calendarBox button#outlookOnline a {
+        font-size: 12px;
+    }
+
+    div#calendarFeedbackBox div#calendarBox span.addtocalendar a.atcb-link {
+        padding: 20px 10px;
+    }
+
+    div#calendarFeedbackBox div#calendarBox button#outlookOnline {
+        line-height: 12px;
+    }
+}
+
 
 /*** Mobile - Landscape Orientation ***/
 @media( max-width: 740px ) and ( orientation: landscape ) {

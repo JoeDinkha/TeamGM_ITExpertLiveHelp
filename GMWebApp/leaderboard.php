@@ -50,13 +50,12 @@ else{
         }
 
         
-        
         for ($x = 0; $x < count($skypenames); $x++){
             $skype = $skypenames[$x];
             $query_stringCalc = "SELECT Author, StarCount, Comment, Date, Skill FROM dbo.Feedback WHERE Expert=";
             $query_stringCalc = $query_stringCalc."'".$skype."' ORDER By StarCount DESC";
 
-// Run query and store results
+            // Run query and store results
             $totalStars = 0;
             $numFeedback = 0;
             $results3_query = sqlsrv_query( $conn, $query_stringCalc );
@@ -81,21 +80,14 @@ else{
             else{
                 $averageUpdate = floor($averageUpdate);
             }
-            
 
             // query to get username for leaderboard indication
             $queryUpdate = "UPDATE dbo.MockTable1 SET TotalReviews ='".$numFeedback."', AverageRating = '"
                 .$averageUpdate
-                ."' WHERE SkypeName = 
-'".$skype."'";
+                ."' WHERE SkypeName = '".$skype."'";
             $results4_query = sqlsrv_query( $conn, $queryUpdate);
-
-            
-
-
         }
 
-        
 
         // push each username,average_rating pair into database
         while ($row = sqlsrv_fetch_array($userResults, SQLSRV_FETCH_ASSOC)){
@@ -103,7 +95,6 @@ else{
         }
 
         $results = sqlsrv_fetch_array($results,SQLSRV_FETCH_ASSOC);
-
 
         // grabbing the average rating of the user and displaying them throughout the page
         $avg_rating = $results['AverageRating'];
@@ -116,8 +107,8 @@ else{
 
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
     <title>GM | IT Expert Live Help - Leaderboard</title>
 
     <!-- Stylesheets -->
@@ -154,7 +145,7 @@ else{
 <body>
     <div class="container" id="leaderboard">
         <header>
-            <img src="images/Logo_of_General_Motors.png" width="2000" height="1989" alt="General Motors Logo" />
+            <img src="images/Logo_of_General_Motors.png" width="713" height="717" alt="General Motors Logo" />
             <h1>IT Expert Live Help | Leaderboard</h1>
         </header>
 
@@ -165,11 +156,10 @@ else{
                     <th>Rank</th>
                     <th>User</th>
                     <th>Rating</th>
-                    <th># Reviews</th>
+                    <th>Total Reviews</th>
                 </tr>
 
                 <?php
-
                     // All tds retrieved from database
                     for ($x=0; $x<count($fullnames); $x++) {
                         if ($average_ratings[$x] > 2){
@@ -199,12 +189,11 @@ else{
 
                             echo '</td>';
 
+                            // Total Reviews
                             echo '<td>'.$totalReviews[$x].'</td>';
 
                             echo '</tr>';
-
                         }
-
                     }
                 ?>
             </table>

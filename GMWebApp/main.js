@@ -1,23 +1,21 @@
-
-
 $(document).ready(function($) {
 
     //// Globals ////
     var username = $('h2#name')[0].innerHTML;
     var availability;
     var availabilityToggle = $('#availabilityToggle');
+
     var skillSelect = $('select#skillSelect').chosen();
     var form = $('#skillForm');
     var override = $('#overrideCheckbox')[0].checked;
 
+    var inputsLength = 0;
     var start_array = [];
     var end_array = [];
+
     if (override == true){
         overrideSwitch();
     }
-
-
-    var inputsLength = 0;
 
 
     //// Initialize availability toggle ////
@@ -70,10 +68,6 @@ $(document).ready(function($) {
     availabilityToggle.on( 'toggle', function(e, active) {
         var experts = getExpertSkills();
 
-        //console.log('clicked');
-        //console.log('availabilty');
-
-
         //update variables in the database, post to server.php page to handle query
         if (availability) {
             $.ajax({
@@ -93,17 +87,15 @@ $(document).ready(function($) {
     });
 
 
-    //// 'Leaderboard' button functionality ////
+    //// 'Leaderboard' Button Functionality ////
     $('button#leaderboard').click(function() {
         window.location.href = window.location.origin + "/GMWebApp/leaderboard.php";
     });
 
 
-    ////
+    //// Override Checkbox Functionality ////
     $('input#overrideCheckbox').click( function() {
         override = $('#overrideCheckbox')[0].checked;
-        //console.log(override);
-        //console.log(availability);
         var experts = getExpertSkills();
 
         //post to server.php, server hands all of the queries to update the database
@@ -137,7 +129,7 @@ $(document).ready(function($) {
             // Change button positioning
             $(this).css({
                 position: 'static',
-                'margin-bottom': 10 + 'px'
+                'margin-bottom': 15 + 'px'
             });
 
             // Make scrollable
@@ -158,7 +150,7 @@ $(document).ready(function($) {
             // Change button positioning
             $(this).css({
                 position: 'absolute',
-                'margin-bottom': 20 + 'px'
+                'margin-bottom': 25 + 'px'
             });
 
             // Make un-scrollable
@@ -186,7 +178,7 @@ $(document).ready(function($) {
             // Change button positioning
             $(this).css({
                 position: 'static',
-                'margin-bottom': 10 + 'px'
+                'margin-bottom': 15 + 'px'
             });
 
             // Make scrollable
@@ -209,7 +201,7 @@ $(document).ready(function($) {
             // Change button positioning
             $(this).css({
                 position: 'absolute',
-                'margin-bottom': 20 + 'px'
+                'margin-bottom': 25 + 'px'
             });
 
             // Make un-scrollable
@@ -242,26 +234,7 @@ $(document).ready(function($) {
     })();
 
 
-    // Refreshing the Access Token - JS
-    // $.ajax({
-    //     type: "GET",
-    //     url: "refresh_api.php",
-    //
-    //     success: function( result ) {
-    //         //console.log("Refresh token worked!");
-    //         var outputStr = result.split(',');
-    //         var accessTokenLocated = outputStr[3].split(':');
-    //         var resultAccessToken = accessTokenLocated[1];
-    //
-    //         authorizeCalendar(resultAccessToken);
-    //     },
-    //
-    //     error: function() {
-    //         console.log("Error occurred while trying to refresh the access token.")
-    //     }
-    // });
-
-
+    //// Refresh the Access Token ////
     $.ajax({
         type: "POST",
         url: "refresh_api.php",
@@ -277,7 +250,6 @@ $(document).ready(function($) {
 
                 authorizeCalendar(resultAccessToken);
             }
-
         },
 
         error: function() {
@@ -286,19 +258,15 @@ $(document).ready(function($) {
     });
 
 
-    // Override switch function on refresh (pulls value from database)
+    //// Override switch function on refresh (pulls value from database) ////
     function overrideSwitch() {
         override = $('#overrideCheckbox')[0].checked;
-        //console.log(override);
-        //console.log(availability);
-
         availabilityToggle.toggle( this.checked );
     }
 
 
-    // Authorizes use of Outlook API with refresh token
+    //// Authorizes use of Outlook API with refresh token ////
     function authorizeCalendar(token) {
-
         var start = '';
         var end = '';
 
@@ -316,18 +284,14 @@ $(document).ready(function($) {
 
                 for (var i = 0; i < result.value.length; i++) {
                     if (result.value[i].Subject == "Office Hours") {
-
-
                         start = result.value[i].Start.DateTime;
                         end = result.value[i].End.DateTime;
 
-                        startDate = new Date(start);
+                        var startDate = new Date(start);
                         startDate.setHours(startDate.getHours() - 4);
-                        //console.log(startDate.toISOString());
 
-                        endDate = new Date(end);
+                        var endDate = new Date(end);
                         endDate.setHours(endDate.getHours() - 4);
-                        //console.log(endDate.toISOString());
 
                         start_array.push(startDate.toISOString());
                         end_array.push(endDate.toISOString());
@@ -344,24 +308,18 @@ $(document).ready(function($) {
                 console.log( error );
             }
         });
-
-
-
     }
 
     function pushHours() {
-        //console.log('pushing..',start_array);
-        //console.log(end_array);
         $.ajax({
             type: "POST",
             url: "add_hours.php",
             data: { expert: username, in_time: start_array, out_time: end_array }
         });
-        //console.log('push sent...');
     }
 
 
-    // Retrieve expert skills
+    //// Retrieve expert skills ////
     function getExpertSkills() {
         var columns = [];
         inputsLength = $('#skillSelect option').length;
@@ -388,7 +346,6 @@ $(document).ready(function($) {
         else {
             availability = 0;
         }
-
 
         var experts = '';
 
