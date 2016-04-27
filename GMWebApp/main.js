@@ -240,9 +240,29 @@ $(document).ready(function($) {
 
 
     // Refreshing the Access Token - JS
+    // $.ajax({
+    //     type: "GET",
+    //     url: "refresh_api.php",
+    //
+    //     success: function( result ) {
+    //         //console.log("Refresh token worked!");
+    //         var outputStr = result.split(',');
+    //         var accessTokenLocated = outputStr[3].split(':');
+    //         var resultAccessToken = accessTokenLocated[1];
+    //
+    //         authorizeCalendar(resultAccessToken);
+    //     },
+    //
+    //     error: function() {
+    //         console.log("Error occurred while trying to refresh the access token.")
+    //     }
+    // });
+
+
     $.ajax({
-        type: "GET",
+        type: "POST",
         url: "refresh_api.php",
+        data: { username: username },
 
         success: function( result ) {
             //console.log("Refresh token worked!");
