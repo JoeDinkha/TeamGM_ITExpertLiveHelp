@@ -262,8 +262,8 @@ while ($row = sqlsrv_fetch_array($skill_results,SQLSRV_FETCH_ASSOC)){
                     <var class="atc_event">
                         <var class="atc_date_start">2016-04-29 12:00:00</var>
                         <var class="atc_date_end">2016-04-29 14:00:00</var>
-                        <var class="atc_timezone">America/Detroit</var>
-                        <var class="atc_title">IT Expert Live Help: Office Hours</var>
+                        <var class="atc_timezone">America/New_York</var>
+                        <var class="atc_title">Office Hours</var>
                         <var class="atc_description">Availability period to assist others</var>
                         <var class="atc_location">Online</var>
                         <var class="atc_organizer"><?php echo $username; ?></var>
@@ -272,7 +272,8 @@ while ($row = sqlsrv_fetch_array($skill_results,SQLSRV_FETCH_ASSOC)){
                 </span>
 
                 <button id="outlookOnline" value="Outlook Online">
-                    <a class="invisibleLink" target="_blank" href="https://bay02.calendar.live.com/calendar/calendar.aspx?rru=addevent&startdt=20160429T12%3a00%3a00Z&enddt=20160429T14%3a00%3a00Z&summary=Office+Hours&location=Online&description=IT+Expert+Live+Help&allday=false&uid=">
+                    <a class="invisibleLink" target="_blank" href="https://bay02.calendar.live.com/calendar/calendar
+                    .aspx?rru=addevent&startdt=20160429T12%3a00%3a00Z&enddt=20160429T14%3a00%3a00Z&summary=Office+Hours&location=Online&description=IT+Expert+Live+Help&allday=false&uid=">
                         Set Office Hours in Outlook Online
                     </a>
                 </button>

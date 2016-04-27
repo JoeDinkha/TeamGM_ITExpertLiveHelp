@@ -9,6 +9,9 @@ $(document).ready(function($) {
     var skillSelect = $('select#skillSelect').chosen();
     var form = $('#skillForm');
     var override = $('#overrideCheckbox')[0].checked;
+
+    var start_array = [];
+    var end_array = [];
     if (override == true){
         overrideSwitch();
     }
@@ -94,8 +97,8 @@ $(document).ready(function($) {
     $('button#leaderboard').click(function() {
         window.location.href = window.location.origin + "/GMWebApp/leaderboard.php";
     });
-    
-    
+
+
     ////
     $('input#overrideCheckbox').click( function() {
         override = $('#overrideCheckbox')[0].checked;
@@ -226,8 +229,8 @@ $(document).ready(function($) {
     $('#logOut').click( function() {
         window.location.href = 'post/logout-post.php';
     });
-    
-    
+
+
     //// "Add to Calendar" widget functionality ////
     (function () {
         if (window.addtocalendar)if(typeof window.addtocalendar.start == "function")return;
@@ -266,11 +269,15 @@ $(document).ready(function($) {
 
         success: function( result ) {
             //console.log("Refresh token worked!");
-            var outputStr = result.split(',');
-            var accessTokenLocated = outputStr[3].split(':');
-            var resultAccessToken = accessTokenLocated[1];
+            //console.log(result);
+            if (result){
+                var outputStr = result.split(',');
+                var accessTokenLocated = outputStr[3].split(':');
+                var resultAccessToken = accessTokenLocated[1];
 
-            authorizeCalendar(resultAccessToken);
+                authorizeCalendar(resultAccessToken);
+            }
+
         },
 
         error: function() {
@@ -291,6 +298,10 @@ $(document).ready(function($) {
 
     // Authorizes use of Outlook API with refresh token
     function authorizeCalendar(token) {
+
+        var start = '';
+        var end = '';
+
         $.ajax({
             type: "GET",
             url: "https://outlook.office.com/api/v2.0/me/events?$select=Subject,Organizer,Start,End",
@@ -301,15 +312,31 @@ $(document).ready(function($) {
 
             success: function (result) {
                 //console.log('Get Calendar - Success!');
-                //console.log(result);
+                console.log(result);
 
                 for (var i = 0; i < result.value.length; i++) {
                     if (result.value[i].Subject == "Office Hours") {
-                        // console.log("\nSubject = " + result.value[i].Subject);
-                        // console.log("Start DateTime = " + result.value[i].Start.DateTime);
-                        // console.log("End DateTime = " + result.value[i].End.DateTime);
+
+
+                        start = result.value[i].Start.DateTime;
+                        end = result.value[i].End.DateTime;
+
+                        startDate = new Date(start);
+                        startDate.setHours(startDate.getHours() - 4);
+                        console.log(startDate.toISOString());
+
+                        endDate = new Date(end);
+                        endDate.setHours(endDate.getHours() - 4);
+                        console.log(endDate.toISOString());
+
+                        start_array.push(startDate.toISOString());
+                        end_array.push(endDate.toISOString());
+                        console.log("\nSubject = " + result.value[i].Subject);
+                        console.log("Start DateTime = " + result.value[i].Start.DateTime);
+                        console.log("End DateTime = " + result.value[i].End.DateTime);
                     }
                 }
+                pushHours();
             },
 
             error: function( error ) {
@@ -317,6 +344,20 @@ $(document).ready(function($) {
                 console.log( error );
             }
         });
+
+
+
+    }
+
+    function pushHours() {
+        //console.log('pushing..',start_array);
+        //console.log(end_array);
+        $.ajax({
+            type: "POST",
+            url: "add_hours.php",
+            data: { expert: username, in_time: start_array, out_time: end_array }
+        });
+        //console.log('push sent...');
     }
 
 

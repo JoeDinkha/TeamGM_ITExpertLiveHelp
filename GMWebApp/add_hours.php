@@ -21,12 +21,10 @@ for($x = 0; $x<sizeof($in); $x++){
     //you'll need a column in the sql database to grab each user's refresh token, didn't have time to implement
 
     // CHANGE THIS PART TO BE DYNAMIC
-    if($expert=="Joe Dinkha") {
+    $query_string = "INSERT INTO dbo.OfficeHours VALUES ('" . $expert . "', '" . substr($in[$x], 0, -1) . "', '"
+        . substr($out[$x], 0, -1) . "')";
 
-        $query_string = "INSERT INTO dbo.OfficeHours VALUES ('" . $expert . "', '" . substr($in[$x], 0, -4) . "', '" . substr($out[$x], 0, -4) . "')";
-
-        $results = sqlsrv_query($conn, $query_string);
-    }
+    $results = sqlsrv_query($conn, $query_string);
 
 }
 
