@@ -73,7 +73,7 @@ else{
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GM | IT Expert Live Help - Leaderboard</title>
+    <title>GM | IT Expert Live Help - Database</title>
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="style.css" type="text/css" />
@@ -109,7 +109,7 @@ else{
 <body>
 <div class="container">
     <header>
-        <img src="images/Logo_of_General_Motors.png" width="2000" height="1989" alt="General Motors Logo" />
+        <img src="images/Logo_of_General_Motors.png" width="713" height="717" alt="General Motors Logo" />
         <h1>IT Expert Live Help - Database</h1>
     </header>
 

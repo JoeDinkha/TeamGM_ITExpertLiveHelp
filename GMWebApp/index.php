@@ -2,7 +2,7 @@
 
 /**
  * Author: Jacob Price (PHP)
- * Author: Jenna Sanocki (HTML/JS)
+ * Author: Jenna Sanocki (HTML/CSS/JS)
  * Author: Joe Dinkha (HTML/JS)
  */
 
